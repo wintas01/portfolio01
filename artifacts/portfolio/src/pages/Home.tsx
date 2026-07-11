@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, Twitter, Menu, X, ExternalLink, Download } from "lucide-react";
 
-import heroPhoto from "@assets/download_1783786835089.jpg";
-import aboutPhoto from "@/assets/about-photo.png";
+import myPhoto from "@/assets/wintas-photo.png";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
@@ -29,7 +28,7 @@ export default function Home() {
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/40">
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8 py-4 flex items-center justify-between">
-          <div className="font-bold text-xl tracking-tight">STUDIO.</div>
+          <div className="font-bold text-xl tracking-tight">WINTAS.</div>
 
           <div className="hidden md:flex items-center gap-8 font-medium text-sm">
             {navLinks.map((link) => (
@@ -120,9 +119,9 @@ export default function Home() {
             style={{ aspectRatio: "4/5" }}
           >
             <img
-              src={heroPhoto}
-              alt="Creative Professional"
-              className="w-full h-full object-cover grayscale opacity-90"
+              src={myPhoto}
+              alt="Wintas"
+              className="w-full h-full object-cover object-top"
             />
 
             <motion.div
@@ -161,7 +160,7 @@ export default function Home() {
         >
           <div className="lg:col-span-5 order-2 lg:order-1">
             <div className="aspect-[3/4] rounded-2xl overflow-hidden bg-muted max-w-sm mx-auto lg:max-w-none">
-              <img src={aboutPhoto} alt="Portrait" className="w-full h-full object-cover" />
+              <img src={myPhoto} alt="Wintas" className="w-full h-full object-cover object-top" />
             </div>
           </div>
 
@@ -322,14 +321,14 @@ export default function Home() {
       {/* Footer */}
       <footer className="py-6 sm:py-8 px-5 sm:px-8 border-t border-border">
         <div className="max-w-[1400px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-          <div className="font-bold tracking-tight text-lg sm:text-xl">STUDIO.</div>
+          <div className="font-bold tracking-tight text-lg sm:text-xl">WINTAS.</div>
           <div className="flex items-center gap-4 sm:gap-6 text-xs sm:text-sm text-muted-foreground">
             {navLinks.map((link) => (
               <a key={link} href={`#${link.toLowerCase()}`} className="hover:text-foreground transition-colors">{link}</a>
             ))}
           </div>
           <div className="text-xs sm:text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Studio. All rights reserved.
+            © {new Date().getFullYear()} Wintas. All rights reserved.
           </div>
         </div>
       </footer>
