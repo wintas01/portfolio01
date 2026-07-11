@@ -1,0 +1,26 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "3A2zDSxBhN01K8tbZfjHd"
+uri = "file://artifacts/portfolio/src/assets/project-1.png"
+type = "image"
+title = "Abstract 3D design project"
+
+[[generated]]
+id = "Q6ndZxxJpChNMtYY1YjWk"
+uri = "file://artifacts/portfolio/src/assets/project-2.png"
+type = "image"
+title = "Minimal UI wireframe project"
+
+[[generated]]
+id = "Wkm4jH5dSd7oNyIDfNa37"
+uri = "file://artifacts/portfolio/src/assets/project-3.png"
+type = "image"
+title = "Editorial branding project"
+
+[[generated]]
+id = "DRjc5gcW5-0vXLfCaVKpj"
+uri = "file://artifacts/portfolio/src/assets/about-photo.png"
+type = "image"
+title = "Creative designer portrait"
