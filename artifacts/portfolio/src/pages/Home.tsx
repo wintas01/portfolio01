@@ -1,12 +1,8 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ArrowUpRight, Mail, Twitter, Linkedin, Instagram, Dribbble, Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Mail, Twitter, Menu, X, ExternalLink, Download } from "lucide-react";
 
 import heroPhoto from "@assets/download_1783786835089.jpg";
-import project1 from "@/assets/project-1.png";
-import project2 from "@/assets/project-2.png";
-import project3 from "@/assets/project-3.png";
 import aboutPhoto from "@/assets/about-photo.png";
 
 const fadeInUp = {
@@ -18,7 +14,7 @@ const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.1 },
+    transition: { staggerChildren: 0.12 },
   },
 };
 
@@ -35,7 +31,6 @@ export default function Home() {
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8 py-4 flex items-center justify-between">
           <div className="font-bold text-xl tracking-tight">STUDIO.</div>
 
-          {/* Desktop links */}
           <div className="hidden md:flex items-center gap-8 font-medium text-sm">
             {navLinks.map((link) => (
               <a key={link} href={`#${link.toLowerCase()}`} className="hover:text-muted-foreground transition-colors">
@@ -45,10 +40,12 @@ export default function Home() {
           </div>
 
           <div className="flex items-center gap-3">
-            <button className="hidden md:block bg-foreground text-background px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-foreground/80 transition-colors">
+            <a
+              href="mailto:nnannaokechukwu1@gmail.com"
+              className="hidden md:block bg-foreground text-background px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-foreground/80 transition-colors"
+            >
               Start a project
-            </button>
-            {/* Mobile hamburger */}
+            </a>
             <button
               className="md:hidden w-10 h-10 flex items-center justify-center rounded-full border border-border"
               onClick={() => setMenuOpen(!menuOpen)}
@@ -59,7 +56,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Mobile menu */}
         <AnimatePresence>
           {menuOpen && (
             <motion.div
@@ -80,9 +76,12 @@ export default function Home() {
                     {link}
                   </a>
                 ))}
-                <button className="mt-2 bg-foreground text-background px-5 py-3 rounded-full text-sm font-semibold w-full">
+                <a
+                  href="mailto:nnannaokechukwu1@gmail.com"
+                  className="mt-2 bg-foreground text-background px-5 py-3 rounded-full text-sm font-semibold text-center"
+                >
                   Start a project
-                </button>
+                </a>
               </div>
             </motion.div>
           )}
@@ -93,7 +92,6 @@ export default function Home() {
       <section id="home" className="pt-28 sm:pt-32 pb-16 px-5 sm:px-8 max-w-[1400px] mx-auto">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-8 items-center">
 
-          {/* Text content */}
           <motion.div
             initial="hidden"
             animate="visible"
@@ -104,35 +102,13 @@ export default function Home() {
               variants={fadeInUp}
               className="text-5xl sm:text-6xl md:text-7xl lg:text-[80px] leading-[1.05] font-bold tracking-tight"
             >
-              <span className="block text-foreground">Digital</span>
-              <span className="block text-muted-foreground">Experience</span>
+              <span className="block text-foreground">Designing</span>
+              <span className="block text-muted-foreground">Digital Solutions</span>
             </motion.h1>
 
             <motion.p variants={fadeInUp} className="text-base sm:text-lg text-muted-foreground max-w-md font-light leading-relaxed">
-              Crafting refined interfaces, brands, and digital experiences for ambitious founders and creative teams.
+              From web applications and AI integrations to networking projects, I transform ideas into practical, user-focused digital products.
             </motion.p>
-
-            <motion.div variants={fadeInUp} className="flex flex-wrap items-center gap-3">
-              <Button size="lg" className="rounded-full px-6 sm:px-8 bg-foreground text-background hover:bg-foreground/90 h-12 sm:h-14 text-sm sm:text-base">
-                View projects
-              </Button>
-              <Button size="lg" variant="outline" className="rounded-full px-6 sm:px-8 h-12 sm:h-14 text-sm sm:text-base border-border">
-                Get in touch
-              </Button>
-            </motion.div>
-
-            <motion.div variants={staggerContainer} className="grid grid-cols-3 gap-4 sm:gap-8 pt-8 mt-4 border-t border-border/50">
-              {[
-                { label: "Projects completed", value: "120+" },
-                { label: "Years Experience", value: "8yr" },
-                { label: "Happy clients", value: "40+" }
-              ].map((stat, i) => (
-                <motion.div key={i} variants={fadeInUp}>
-                  <div className="text-2xl sm:text-3xl font-bold mb-1">{stat.value}</div>
-                  <div className="text-xs sm:text-sm text-muted-foreground leading-tight">{stat.label}</div>
-                </motion.div>
-              ))}
-            </motion.div>
           </motion.div>
 
           {/* Hero Image Card */}
@@ -149,7 +125,6 @@ export default function Home() {
               className="w-full h-full object-cover grayscale opacity-90"
             />
 
-            {/* Floating widget */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -161,32 +136,18 @@ export default function Home() {
                   <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse flex-shrink-0"></div>
                   <span className="text-xs font-semibold uppercase tracking-wider">Available</span>
                 </div>
-                <p className="text-xs sm:text-sm text-background/70 leading-tight">Currently taking on new projects for 2025.</p>
+                <p className="text-xs sm:text-sm text-background/70 leading-tight">Currently taking on new projects.</p>
               </div>
-              <button className="flex-shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-background/20 flex items-center justify-center hover:bg-background/30 transition-colors">
-                <ArrowUpRight size={16} />
-              </button>
+              <a
+                href="mailto:nnannaokechukwu1@gmail.com"
+                className="flex-shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-background/20 flex items-center justify-center hover:bg-background/30 transition-colors"
+              >
+                <Mail size={16} />
+              </a>
             </motion.div>
           </motion.div>
 
         </div>
-      </section>
-
-      {/* Marquee Section */}
-      <section className="py-10 border-y border-border overflow-hidden bg-card/30">
-        <motion.div
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{ repeat: Infinity, ease: "linear", duration: 25 }}
-          className="flex whitespace-nowrap"
-          style={{ width: "max-content" }}
-        >
-          {["Codify", "Flowboard", "Agentify", "TodoFusion", "Identify", "Nexus AI", "Landify",
-            "Codify", "Flowboard", "Agentify", "TodoFusion", "Identify", "Nexus AI", "Landify"].map((logo, i) => (
-            <span key={i} className="text-xl sm:text-2xl md:text-3xl font-bold text-muted-foreground/40 uppercase tracking-widest px-6 sm:px-10">
-              {logo}
-            </span>
-          ))}
-        </motion.div>
       </section>
 
       {/* About Section */}
@@ -206,33 +167,30 @@ export default function Home() {
 
           <div className="lg:col-span-7 order-1 lg:order-2 flex flex-col gap-6 sm:gap-8">
             <motion.h2 variants={fadeInUp} className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
-              Design with purpose.<br />
-              <span className="text-muted-foreground">Built with precision.</span>
+              About Me
             </motion.h2>
 
             <motion.p variants={fadeInUp} className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-              I am an independent designer focused on digital products and brand identities.
-              My approach bridges the gap between aesthetic beauty and functional architecture.
-              Every project is an opportunity to distill complexity into simple, memorable experiences.
+              I'm constantly learning, experimenting, and building projects that challenge my skills and contribute to my growth as a software engineer. My goal is to create technology that is not only visually appealing but also meaningful and impactful.
             </motion.p>
 
             <motion.div variants={fadeInUp} className="grid sm:grid-cols-2 gap-6 sm:gap-8 pt-6 sm:pt-8">
               <div>
                 <h3 className="font-semibold text-base sm:text-lg mb-3 border-b border-border pb-2">Expertise</h3>
                 <ul className="space-y-2 sm:space-y-3 text-muted-foreground text-sm sm:text-base">
-                  <li>Digital Product Design</li>
-                  <li>Brand Identity</li>
-                  <li>Design Systems</li>
-                  <li>Creative Direction</li>
+                  <li>Web Application Development</li>
+                  <li>AI Integrations</li>
+                  <li>Networking Projects</li>
+                  <li>UI/UX Design</li>
                 </ul>
               </div>
               <div>
-                <h3 className="font-semibold text-base sm:text-lg mb-3 border-b border-border pb-2">Selected Clients</h3>
+                <h3 className="font-semibold text-base sm:text-lg mb-3 border-b border-border pb-2">Focus Areas</h3>
                 <ul className="space-y-2 sm:space-y-3 text-muted-foreground text-sm sm:text-base">
-                  <li>Fintech Startups</li>
-                  <li>AI Research Labs</li>
-                  <li>E-commerce Brands</li>
-                  <li>Editorial Platforms</li>
+                  <li>Practical Digital Products</li>
+                  <li>User-Focused Experiences</li>
+                  <li>Continuous Learning</li>
+                  <li>Impactful Technology</li>
                 </ul>
               </div>
             </motion.div>
@@ -248,47 +206,61 @@ export default function Home() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
-            className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12 sm:mb-16"
+            className="mb-12 sm:mb-16"
           >
-            <div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-3">Selected Works</h2>
-              <p className="text-muted-foreground text-base sm:text-lg">A collection of recent digital and brand projects.</p>
-            </div>
-            <Button variant="outline" className="rounded-full px-6 self-start sm:self-auto flex-shrink-0">
-              View all work <ArrowRight className="ml-2 w-4 h-4" />
-            </Button>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-3">Projects</h2>
+            <p className="text-muted-foreground text-base sm:text-lg">Things I've built and places you can find my work.</p>
           </motion.div>
 
-          <div className="grid sm:grid-cols-2 gap-8 sm:gap-x-8 sm:gap-y-12 lg:gap-y-16">
-            {[
-              { img: project1, title: "Nexus Spatial", category: "Brand & 3D Design", offset: "" },
-              { img: project2, title: "Flow UI Kit", category: "Product Design", offset: "sm:mt-[-4rem]" },
-              { img: project3, title: "Editorial Standard", category: "Web & Typography", offset: "" }
-            ].map((project, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.8, delay: i * 0.1 }}
-                className={`group cursor-pointer ${project.offset}`}
-              >
-                <div className="relative overflow-hidden rounded-xl sm:rounded-2xl mb-4 sm:mb-6 bg-muted">
-                  <div className="aspect-[4/3] w-full overflow-hidden">
-                    <img
-                      src={project.img}
-                      alt={project.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                  </div>
-                  <div className="absolute top-3 right-3 sm:top-4 sm:right-4 w-10 h-10 sm:w-12 sm:h-12 bg-background/90 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
-                    <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5" />
-                  </div>
+          <div className="grid sm:grid-cols-2 gap-6 sm:gap-8">
+            {/* Pinterest */}
+            <motion.a
+              href="https://pin.it/6RYs3HQxx"
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="group flex items-center gap-5 bg-background border border-border rounded-2xl p-6 sm:p-8 hover:border-foreground/30 transition-all duration-300"
+            >
+              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#E60023] flex items-center justify-center flex-shrink-0">
+                {/* Pinterest P icon */}
+                <svg viewBox="0 0 24 24" className="w-8 h-8 fill-white" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/>
+                </svg>
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 mb-1">
+                  <h3 className="text-lg sm:text-xl font-bold">Pinterest</h3>
+                  <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
                 </div>
-                <h3 className="text-xl sm:text-2xl font-bold mb-1 group-hover:text-muted-foreground transition-colors">{project.title}</h3>
-                <p className="text-muted-foreground text-sm sm:text-base">{project.category}</p>
-              </motion.div>
-            ))}
+                <p className="text-muted-foreground text-sm sm:text-base">Browse my design inspiration and creative boards.</p>
+              </div>
+            </motion.a>
+
+            {/* VTU App */}
+            <motion.a
+              href="https://sabuss.com/ojsub3"
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+              className="group flex items-center gap-5 bg-background border border-border rounded-2xl p-6 sm:p-8 hover:border-foreground/30 transition-all duration-300"
+            >
+              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-foreground flex items-center justify-center flex-shrink-0">
+                <Download className="w-7 h-7 text-background" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 mb-1">
+                  <h3 className="text-lg sm:text-xl font-bold">VTU App</h3>
+                  <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+                </div>
+                <p className="text-muted-foreground text-sm sm:text-base">Download my VTU application — fast, simple, and reliable.</p>
+              </div>
+            </motion.a>
           </div>
         </div>
       </section>
@@ -300,58 +272,49 @@ export default function Home() {
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerContainer}
-          className="grid lg:grid-cols-2 gap-12 lg:gap-16"
+          className="max-w-2xl"
         >
-          <div>
-            <motion.h2 variants={fadeInUp} className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-none mb-5 sm:mb-6">
-              Let's create <br />
-              <span className="text-muted-foreground">together.</span>
-            </motion.h2>
-            <motion.p variants={fadeInUp} className="text-base sm:text-xl text-muted-foreground mb-8 sm:mb-12 max-w-md">
-              Available for freelance opportunities. Reach out if you want to collaborate on something great.
-            </motion.p>
+          <motion.h2 variants={fadeInUp} className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-none mb-5 sm:mb-6">
+            Let's create <br />
+            <span className="text-muted-foreground">together.</span>
+          </motion.h2>
+          <motion.p variants={fadeInUp} className="text-base sm:text-xl text-muted-foreground mb-10 sm:mb-12">
+            Available for freelance and collaboration. Reach out and let's build something great.
+          </motion.p>
 
-            <motion.div variants={fadeInUp} className="flex flex-col gap-5 sm:gap-6">
-              <a href="mailto:hello@studio.com" className="flex items-center gap-4 text-base sm:text-xl font-medium hover:text-muted-foreground transition-colors w-fit">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-border flex items-center justify-center flex-shrink-0">
-                  <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
-                </div>
-                hello@studio.com
-              </a>
-              <div className="flex gap-3 sm:gap-4 pt-2">
-                {[Twitter, Linkedin, Instagram, Dribbble].map((Icon, i) => (
-                  <a key={i} href="#" className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-card border border-border flex items-center justify-center hover:bg-foreground hover:text-background transition-colors">
-                    <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
-                  </a>
-                ))}
+          <motion.div variants={fadeInUp} className="flex flex-col gap-5">
+            {/* Email */}
+            <a
+              href="mailto:nnannaokechukwu1@gmail.com"
+              className="flex items-center gap-4 group w-fit"
+            >
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-card border border-border flex items-center justify-center group-hover:bg-foreground group-hover:text-background transition-colors flex-shrink-0">
+                <Mail className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
-            </motion.div>
-          </div>
+              <div>
+                <p className="text-xs text-muted-foreground mb-0.5 uppercase tracking-wider font-medium">Email</p>
+                <p className="text-base sm:text-lg font-semibold group-hover:text-muted-foreground transition-colors">nnannaokechukwu1@gmail.com</p>
+              </div>
+            </a>
 
-          <motion.div variants={fadeInUp} className="bg-card p-6 sm:p-8 md:p-12 rounded-2xl sm:rounded-3xl border border-border">
-            <form className="flex flex-col gap-5 sm:gap-6" onSubmit={e => e.preventDefault()}>
-              <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
-                <div className="flex flex-col gap-2">
-                  <label className="text-sm font-medium">Name</label>
-                  <input type="text" className="bg-background border border-border rounded-lg px-4 py-3 text-sm outline-none focus:border-foreground transition-colors" placeholder="John Doe" />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <label className="text-sm font-medium">Email</label>
-                  <input type="email" className="bg-background border border-border rounded-lg px-4 py-3 text-sm outline-none focus:border-foreground transition-colors" placeholder="john@example.com" />
-                </div>
+            {/* Twitter / X */}
+            <a
+              href="https://x.com/wintasblog"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-4 group w-fit"
+            >
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-card border border-border flex items-center justify-center group-hover:bg-foreground group-hover:text-background transition-colors flex-shrink-0">
+                {/* X (Twitter) icon */}
+                <svg viewBox="0 0 24 24" className="w-5 h-5 sm:w-6 sm:h-6 fill-current" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.259 5.632L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/>
+                </svg>
               </div>
-              <div className="flex flex-col gap-2">
-                <label className="text-sm font-medium">Subject</label>
-                <input type="text" className="bg-background border border-border rounded-lg px-4 py-3 text-sm outline-none focus:border-foreground transition-colors" placeholder="Project inquiry" />
+              <div>
+                <p className="text-xs text-muted-foreground mb-0.5 uppercase tracking-wider font-medium">Twitter / X</p>
+                <p className="text-base sm:text-lg font-semibold group-hover:text-muted-foreground transition-colors">@wintasblog</p>
               </div>
-              <div className="flex flex-col gap-2">
-                <label className="text-sm font-medium">Message</label>
-                <textarea rows={5} className="bg-background border border-border rounded-lg px-4 py-3 text-sm outline-none focus:border-foreground transition-colors resize-none" placeholder="Tell me about your project..."></textarea>
-              </div>
-              <Button size="lg" className="w-full rounded-lg bg-foreground text-background hover:bg-foreground/90 h-12 sm:h-14 text-sm sm:text-base mt-1">
-                Send Message
-              </Button>
-            </form>
+            </a>
           </motion.div>
         </motion.div>
       </section>
@@ -361,10 +324,9 @@ export default function Home() {
         <div className="max-w-[1400px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
           <div className="font-bold tracking-tight text-lg sm:text-xl">STUDIO.</div>
           <div className="flex items-center gap-4 sm:gap-6 text-xs sm:text-sm text-muted-foreground">
-            <a href="#home" className="hover:text-foreground transition-colors">Home</a>
-            <a href="#about" className="hover:text-foreground transition-colors">About</a>
-            <a href="#projects" className="hover:text-foreground transition-colors">Projects</a>
-            <a href="#contact" className="hover:text-foreground transition-colors">Contact</a>
+            {navLinks.map((link) => (
+              <a key={link} href={`#${link.toLowerCase()}`} className="hover:text-foreground transition-colors">{link}</a>
+            ))}
           </div>
           <div className="text-xs sm:text-sm text-muted-foreground">
             © {new Date().getFullYear()} Studio. All rights reserved.
