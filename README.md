@@ -6,7 +6,7 @@ A personal portfolio website built to showcase my projects, skills, and digital 
 
 ## 🚀 Live Preview
 
-> ([https://replit.com/@NnannaOkechukwu/Web-Showcase](https://wintas01.github.io/portfolio01/))
+> (https://wintas01.github.io/portfolio01/))
 
 ---
 
