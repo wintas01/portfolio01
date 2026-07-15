@@ -15,8 +15,8 @@ A personal portfolio website built to showcase my projects, skills, and digital 
 I'm **Wintas** — a Computer Science student, full-stack developer, and digital entrepreneur based in Nigeria. I build web apps, VTU platforms, games, and content under the **Wintas** brand.
 
 - 🎓 400-Level CS Student — Kingsley Ozumba Mbadiwe University (KOMU)
-- 💼 ICT Department Staff — KOMU
-- 📺 Content Creator — [WINTAS BLOG](https://youtube.com/@WintasBlog) (YouTube & Telegram)
+- 🎪 Content Creator- [WINTAS BLOG](https://t.me/WintasBlog) (Telegram)
+- 📺 Content Creator — [WINTAS BLOG](COMING SOON) (YouTube)
 
 ---
 
