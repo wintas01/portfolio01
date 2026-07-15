@@ -26,7 +26,7 @@ I'm **Wintas** — a Computer Science student, full-stack developer, and digital
 |---|---|---|
 | **OJ Sub (OJS)** | Nigerian VTU platform offering data, airtime & bill payments | [ojsub.com](#) |
 | **Tic Tac Toe Multiplayer** | Online real-time multiplayer game with room codes & scorekeeping | [Play Now](https://wintas01.github.io/tictactoe-multiplayer) |
-| **WINTAS BLOG** | YouTube channel focused on gaming and tutorials | [Watch](https://youtube.com/@WintasBlog) |
+| **WINTAS BLOG** | YouTube channel focused on gaming and tutorials | [Watch](Coming Soon) |
 | **WINTAS BLOG** | Telegram channel focused on Apps and tutorials | [Join] (https://t.me/WintasBlog) |
 
 ---
