@@ -4,6 +4,7 @@ import { Mail, Twitter, Menu, X, ExternalLink, Download } from "lucide-react";
 
 import myPhoto from "@/assets/wintas-photo.png";
 import aboutPhoto from "@/assets/wintas-about.png";
+import GitHubShowcase from "@/components/GitHubShowcase";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
@@ -318,6 +319,8 @@ export default function Home() {
               </div>
             </motion.a>
           </div>
+
+          <GitHubShowcase />
         </div>
       </section>
 
