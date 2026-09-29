@@ -427,7 +427,7 @@ export default function Home() {
                   WhatsApp
                 </p>
                 <p className="text-base sm:text-lg font-semibold group-hover:text-muted-foreground transition-colors">
-                  +234 708 306 6127
+                  Contact Me
                 </p>
               </div>
             </a>
