@@ -239,6 +239,16 @@ export default function Home() {
                 </ul>
               </div>
             </motion.div>
+
+            <motion.a
+              variants={fadeInUp}
+              href={`${import.meta.env.BASE_URL}Nnanna-Okechukwu-Jason-CV.pdf`}
+              download="Nnanna-Okechukwu-Jason-CV.pdf"
+              className="inline-flex items-center justify-center gap-3 self-start bg-foreground text-background px-6 py-3 rounded-full text-sm font-semibold hover:bg-foreground/80 transition-colors"
+            >
+              <Download className="w-4 h-4" />
+              DOWNLOAD CV
+            </motion.a>
           </div>
         </motion.div>
       </section>
