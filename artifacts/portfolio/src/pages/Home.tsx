@@ -34,6 +34,8 @@ const staggerContainer = {
 };
 
 const navLinks = ["Home", "About", "Projects", "Contact"];
+const projectPreviewPath = (fileName: string) =>
+  `${import.meta.env.BASE_URL}project-previews/${fileName}`;
 
 function LaptopPreview({ src, alt }: { src: string; alt: string }) {
   return (
@@ -61,7 +63,7 @@ const projects = [
     title: "Pinterest",
     description: "Browse my design inspiration and creative boards.",
     href: "https://pin.it/6RYs3HQxx",
-    preview: "/project-previews/pinterest.png",
+    preview: projectPreviewPath("pinterest.png"),
     previewAlt: "Pinterest profile and saved boards screenshot",
     icon: (
       <div className="flex h-12 w-12 flex-none items-center justify-center rounded-2xl bg-[#E60023] text-white sm:h-14 sm:w-14">
@@ -75,11 +77,11 @@ const projects = [
     title: "VTU App",
     description: "Download my VTU application — fast, simple, and reliable.",
     href: "https://sabuss.com/ojsub3",
-    preview: "/project-previews/vtu.png",
+    preview: projectPreviewPath("vtu.png"),
     previewAlt: "OJ Sub instant top-up website screenshot",
     icon: (
       <img
-        src="/project-previews/vtu-icon.jpg"
+        src={projectPreviewPath("vtu-icon.jpg")}
         alt=""
         aria-hidden="true"
         className="h-12 w-12 flex-none rounded-2xl object-cover sm:h-14 sm:w-14"
@@ -91,11 +93,11 @@ const projects = [
     description:
       "Demo platform for an automated church assistant experience and workflow.",
     href: "https://church-auto-bot-demo.vercel.app/",
-    preview: "/project-previews/church-bot.png",
+    preview: projectPreviewPath("church-bot.png"),
     previewAlt: "Church Facebook Auto Bot sign-in screen screenshot",
     icon: (
       <img
-        src="/project-previews/church-bot-icon.png"
+        src={projectPreviewPath("church-bot-icon.png")}
         alt=""
         aria-hidden="true"
         className="h-12 w-12 flex-none rounded-2xl object-cover sm:h-14 sm:w-14"
