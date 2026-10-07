@@ -3,10 +3,8 @@ import { motion } from "framer-motion";
 import {
   Code2,
   ExternalLink,
-  GitFork,
   Github,
   MapPin,
-  Star,
   Users,
 } from "lucide-react";
 
@@ -25,30 +23,9 @@ type GitHubProfile = {
   location: string | null;
 };
 
-type GitHubRepository = {
-  id: number;
-  name: string;
-  html_url: string;
-  description: string | null;
-  language: string | null;
-  stargazers_count: number;
-  forks_count: number;
-  updated_at: string;
-  fork: boolean;
-};
-
 type GitHubData = {
   profile: GitHubProfile;
-  repositories: GitHubRepository[];
 };
-
-function formatUpdatedDate(date: string) {
-  return new Intl.DateTimeFormat("en", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  }).format(new Date(date));
-}
 
 export default function GitHubShowcase() {
   const [data, setData] = useState<GitHubData | null>(null);
@@ -60,27 +37,17 @@ export default function GitHubShowcase() {
 
     async function loadGitHubData() {
       try {
-        const [profileResponse, repositoriesResponse] = await Promise.all([
-          fetch(`https://api.github.com/users/${GITHUB_USERNAME}`, {
-            signal: controller.signal,
-          }),
-          fetch(
-            `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&direction=desc&per_page=6&type=owner`,
-            { signal: controller.signal },
-          ),
-        ]);
+        const profileResponse = await fetch(
+          `https://api.github.com/users/${GITHUB_USERNAME}`,
+          { signal: controller.signal },
+        );
 
-        if (!profileResponse.ok || !repositoriesResponse.ok) {
+        if (!profileResponse.ok) {
           throw new Error("GitHub data request failed");
         }
 
         const profile = (await profileResponse.json()) as GitHubProfile;
-        const repositories = (await repositoriesResponse.json()) as GitHubRepository[];
-
-        setData({
-          profile,
-          repositories: repositories.filter((repository) => !repository.fork),
-        });
+        setData({ profile });
       } catch (requestError) {
         if (requestError instanceof DOMException && requestError.name === "AbortError") {
           return;
@@ -225,63 +192,11 @@ export default function GitHubShowcase() {
           </div>
           <p className="text-xs text-muted-foreground mt-4">
             {error
-              ? "Live repository details are unavailable right now, but the contribution graph and profile link remain available."
-              : "Repository data refreshes when this page loads."}
+              ? "GitHub profile details are unavailable right now, but the contribution graph and profile link remain available."
+              : "Contribution activity is shown from GitHub."}
           </p>
         </div>
       </div>
-
-      {loading ? (
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
-          {[0, 1, 2].map((item) => (
-            <div
-              key={item}
-              className="h-40 rounded-2xl border border-border bg-background animate-pulse"
-            />
-          ))}
-        </div>
-      ) : data && data.repositories.length > 0 ? (
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
-          {data.repositories.map((repository) => (
-            <a
-              key={repository.id}
-              href={repository.html_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group rounded-2xl border border-border bg-background p-5 hover:border-foreground/30 transition-colors"
-            >
-              <div className="flex items-start justify-between gap-3">
-                <h4 className="font-semibold truncate group-hover:underline underline-offset-4">
-                  {repository.name}
-                </h4>
-                <ExternalLink className="w-4 h-4 shrink-0 text-muted-foreground group-hover:text-foreground transition-colors" />
-              </div>
-              <p className="text-sm text-muted-foreground leading-relaxed mt-3 min-h-[3rem] line-clamp-2">
-                {repository.description || "A project from my GitHub workspace."}
-              </p>
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-muted-foreground mt-5">
-                {repository.language && (
-                  <span className="inline-flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-foreground" />
-                    {repository.language}
-                  </span>
-                )}
-                <span className="inline-flex items-center gap-1">
-                  <Star className="w-3.5 h-3.5" />
-                  {repository.stargazers_count}
-                </span>
-                <span className="inline-flex items-center gap-1">
-                  <GitFork className="w-3.5 h-3.5" />
-                  {repository.forks_count}
-                </span>
-              </div>
-              <p className="text-xs text-muted-foreground/75 mt-4">
-                Updated {formatUpdatedDate(repository.updated_at)}
-              </p>
-            </a>
-          ))}
-        </div>
-      ) : null}
     </motion.div>
   );
 }

@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, Twitter, Menu, X, ExternalLink, Download } from "lucide-react";
+import {
+  ArrowUpRight,
+  Download,
+  Mail,
+  Menu,
+  Twitter,
+  X,
+} from "lucide-react";
 
 import myPhoto from "@/assets/wintas-photo.png";
 import aboutPhoto from "@/assets/wintas-about.png";
@@ -27,6 +34,75 @@ const staggerContainer = {
 };
 
 const navLinks = ["Home", "About", "Projects", "Contact"];
+
+function LaptopPreview({ src, alt }: { src: string; alt: string }) {
+  return (
+    <div className="bg-[#f1f2f4] px-4 pt-6 sm:px-5 sm:pt-7">
+      <div className="mx-auto w-[94%] max-w-[520px]">
+        <div className="aspect-[16/10] overflow-hidden rounded-t-xl border-[7px] border-b-0 border-[#17191d] bg-[#17191d] shadow-[0_12px_28px_rgba(15,23,42,0.16)]">
+          <img
+            src={src}
+            alt={alt}
+            loading="lazy"
+            className="h-full w-full object-cover object-left-top"
+          />
+        </div>
+        <div className="relative mx-auto h-2.5 w-[108%] -translate-x-[4%] rounded-b-lg border-b border-[#777b82] bg-gradient-to-b from-[#d9dbe0] via-[#b8bbc1] to-[#92969d]">
+          <div className="absolute left-1/2 top-0 h-1 w-16 -translate-x-1/2 rounded-b-md bg-[#a4a7ad]" />
+        </div>
+        <div className="mx-auto h-1 w-[88%] rounded-b-full bg-[#777b82]" />
+      </div>
+    </div>
+  );
+}
+
+const projects = [
+  {
+    title: "Pinterest",
+    description: "Browse my design inspiration and creative boards.",
+    href: "https://pin.it/6RYs3HQxx",
+    preview: "/project-previews/pinterest.png",
+    previewAlt: "Pinterest profile and saved boards screenshot",
+    icon: (
+      <div className="flex h-12 w-12 flex-none items-center justify-center rounded-2xl bg-[#E60023] text-white sm:h-14 sm:w-14">
+        <svg viewBox="0 0 24 24" className="h-6 w-6 fill-current" aria-hidden="true">
+          <path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z" />
+        </svg>
+      </div>
+    ),
+  },
+  {
+    title: "VTU App",
+    description: "Download my VTU application — fast, simple, and reliable.",
+    href: "https://sabuss.com/ojsub3",
+    preview: "/project-previews/vtu.png",
+    previewAlt: "OJ Sub instant top-up website screenshot",
+    icon: (
+      <img
+        src="/project-previews/vtu-icon.jpg"
+        alt=""
+        aria-hidden="true"
+        className="h-12 w-12 flex-none rounded-2xl object-cover sm:h-14 sm:w-14"
+      />
+    ),
+  },
+  {
+    title: "Church Auto Bot",
+    description:
+      "Demo platform for an automated church assistant experience and workflow.",
+    href: "https://church-auto-bot-demo.vercel.app/",
+    preview: "/project-previews/church-bot.png",
+    previewAlt: "Church Facebook Auto Bot sign-in screen screenshot",
+    icon: (
+      <img
+        src="/project-previews/church-bot-icon.png"
+        alt=""
+        aria-hidden="true"
+        className="h-12 w-12 flex-none rounded-2xl object-cover sm:h-14 sm:w-14"
+      />
+    ),
+  },
+];
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -55,7 +131,7 @@ export default function Home() {
               href="mailto:nnannaokechukwu1@gmail.com"
               className="hidden md:block bg-foreground text-background px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-foreground/80 transition-colors"
             >
-              Start a project
+              HIRE ME
             </a>
             <button
               className="md:hidden w-10 h-10 flex items-center justify-center rounded-full border border-border"
@@ -91,7 +167,7 @@ export default function Home() {
                   href="mailto:nnannaokechukwu1@gmail.com"
                   className="mt-2 bg-foreground text-background px-5 py-3 rounded-full text-sm font-semibold text-center"
                 >
-                  Start a project
+                  HIRE ME
                 </a>
               </div>
             </motion.div>
@@ -271,63 +347,45 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="grid sm:grid-cols-2 gap-6 sm:gap-8">
-            {/* Pinterest */}
-            <motion.a
-              href="https://pin.it/6RYs3HQxx"
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-              className="group flex items-center gap-5 bg-background border border-border rounded-2xl p-6 sm:p-8 hover:border-foreground/30 transition-all duration-300"
-            >
-              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#E60023] flex items-center justify-center flex-shrink-0">
-                {/* Pinterest P icon */}
-                <svg
-                  viewBox="0 0 24 24"
-                  className="w-8 h-8 fill-white"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z" />
-                </svg>
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-1">
-                  <h3 className="text-lg sm:text-xl font-bold">Pinterest</h3>
-                  <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
-                </div>
-                <p className="text-muted-foreground text-sm sm:text-base">
-                  Browse my design inspiration and creative boards.
-                </p>
-              </div>
-            </motion.a>
+          <div className="grid gap-6 sm:grid-cols-2 sm:gap-7 xl:grid-cols-3">
+            {projects.map((project, index) => (
+              <motion.article
+                key={project.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.65, delay: index * 0.1 }}
+                className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-background transition-all duration-300 hover:-translate-y-1 hover:border-foreground/25 hover:shadow-[0_18px_45px_rgba(15,23,42,0.08)]"
+              >
+                <LaptopPreview src={project.preview} alt={project.previewAlt} />
 
-            {/* VTU App */}
-            <motion.a
-              href="https://sabuss.com/ojsub3"
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.1 }}
-              className="group flex items-center gap-5 bg-background border border-border rounded-2xl p-6 sm:p-8 hover:border-foreground/30 transition-all duration-300"
-            >
-              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-foreground flex items-center justify-center flex-shrink-0">
-                <Download className="w-7 h-7 text-background" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-1">
-                  <h3 className="text-lg sm:text-xl font-bold">VTU App</h3>
-                  <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+                <div className="flex flex-1 flex-col p-5 sm:p-6">
+                  <div className="flex items-start gap-4">
+                    {project.icon}
+                    <div className="min-w-0">
+                      <h3 className="text-lg font-bold sm:text-xl">
+                        {project.title}
+                      </h3>
+                      <p className="mt-1 text-sm leading-relaxed text-muted-foreground sm:text-base">
+                        {project.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="mt-6 border-t border-border pt-4">
+                    <a
+                      href={project.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-sm font-semibold text-background transition-colors hover:bg-foreground/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2"
+                    >
+                      Visit Page
+                      <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                    </a>
+                  </div>
                 </div>
-                <p className="text-muted-foreground text-sm sm:text-base">
-                  Download my VTU application — fast, simple, and reliable.
-                </p>
-              </div>
-            </motion.a>
+              </motion.article>
+            ))}
           </div>
 
           <GitHubShowcase />
