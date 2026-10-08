@@ -133,7 +133,7 @@ export default function Home() {
               href="mailto:nnannaokechukwu1@gmail.com"
               className="hidden md:block bg-foreground text-background px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-foreground/80 transition-colors"
             >
-              HIRE ME
+              Let's Talk
             </a>
             <button
               className="md:hidden w-10 h-10 flex items-center justify-center rounded-full border border-border"
@@ -169,7 +169,7 @@ export default function Home() {
                   href="mailto:nnannaokechukwu1@gmail.com"
                   className="mt-2 bg-foreground text-background px-5 py-3 rounded-full text-sm font-semibold text-center"
                 >
-                  HIRE ME
+                  Let's Talk
                 </a>
               </div>
             </motion.div>
