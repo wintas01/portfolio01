@@ -104,6 +104,22 @@ const projects = [
       />
     ),
   },
+  {
+    title: "KOMU Website",
+    description:
+      "Team redesign of the official Kingsley Ozumba Mbadiwe University website.",
+    href: "https://komu.edu.ng/",
+    preview: projectPreviewPath("komu.png"),
+    previewAlt: "Kingsley Ozumba Mbadiwe University homepage screenshot",
+    icon: (
+      <img
+        src={projectPreviewPath("komu-icon.png")}
+        alt=""
+        aria-hidden="true"
+        className="h-12 w-12 flex-none rounded-2xl border border-border object-cover sm:h-14 sm:w-14"
+      />
+    ),
+  },
 ];
 
 export default function Home() {
@@ -349,7 +365,7 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="grid gap-6 sm:grid-cols-2 sm:gap-7 xl:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2 sm:gap-7">
             {projects.map((project, index) => (
               <motion.article
                 key={project.title}
