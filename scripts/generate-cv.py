@@ -151,18 +151,6 @@ story += project_block(
     f"Demo: {link('church-auto-bot-demo.vercel.app')}{SEP}Source: private repository, walkthrough available on request",
 )
 story += project_block(
-    "Date Planner",
-    f"Web app{SEP}TypeScript",
-    ["Built an app that helps couples plan and arrange dates."],
-    f"Source Code: {link('github.com/wintas01/Date-Planner')}",
-)
-story += project_block(
-    "Multiplayer Tic-Tac-Toe",
-    f"Browser game{SEP}HTML",
-    ["Built a multiplayer tic-tac-toe game playable in the browser."],
-    f"Source Code: {link('github.com/wintas01/tic-ta-toe')}",
-)
-story += project_block(
     "Portfolio Website",
     f"Personal showcase site{SEP}TypeScript",
     ["Designed and published a portfolio showcasing web applications, AI integrations, and networking projects."],
