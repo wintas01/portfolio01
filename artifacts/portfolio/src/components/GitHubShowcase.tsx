@@ -5,6 +5,7 @@ import {
   ExternalLink,
   Github,
   MapPin,
+  RefreshCw,
   Users,
 } from "lucide-react";
 
@@ -27,10 +28,36 @@ type GitHubData = {
   profile: GitHubProfile;
 };
 
+type ContributionDay = {
+  date: string;
+  count: number;
+  level: number;
+};
+
+type ContributionsResponse = {
+  total?: {
+    lastYear?: number;
+  };
+  contributions: ContributionDay[];
+};
+
+const CONTRIBUTION_LEVEL_CLASSES = [
+  "bg-muted-foreground/10",
+  "bg-green-200 dark:bg-green-900",
+  "bg-green-400 dark:bg-green-700",
+  "bg-green-500 dark:bg-green-600",
+  "bg-green-700 dark:bg-green-500",
+];
+
 export default function GitHubShowcase() {
   const [data, setData] = useState<GitHubData | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [contributionDays, setContributionDays] = useState<ContributionDay[] | null>(null);
+  const [contributionTotal, setContributionTotal] = useState(0);
+  const [contributionsLoading, setContributionsLoading] = useState(true);
+  const [contributionsError, setContributionsError] = useState(false);
+  const [contributionsUpdatedAt, setContributionsUpdatedAt] = useState<Date | null>(null);
+  const [refreshKey, setRefreshKey] = useState(0);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -52,7 +79,6 @@ export default function GitHubShowcase() {
         if (requestError instanceof DOMException && requestError.name === "AbortError") {
           return;
         }
-        setError(true);
       } finally {
         if (!controller.signal.aborted) {
           setLoading(false);
@@ -63,6 +89,65 @@ export default function GitHubShowcase() {
     loadGitHubData();
     return () => controller.abort();
   }, []);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function loadContributions() {
+      setContributionsLoading(true);
+      try {
+        const response = await fetch(
+          `https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=last&refresh=${Date.now()}`,
+          { signal: controller.signal, cache: "no-store" },
+        );
+        if (!response.ok) {
+          throw new Error("GitHub contribution data request failed");
+        }
+
+        const result = (await response.json()) as ContributionsResponse;
+        if (
+          !Array.isArray(result.contributions) ||
+          !result.contributions.every(
+            (day) =>
+              typeof day.date === "string" &&
+              Number.isFinite(day.count) &&
+              Number.isFinite(day.level),
+          )
+        ) {
+          throw new Error("GitHub contribution data was invalid");
+        }
+
+        setContributionDays(result.contributions);
+        setContributionTotal(
+          result.total?.lastYear ??
+            result.contributions.reduce((total, day) => total + day.count, 0),
+        );
+        setContributionsUpdatedAt(new Date());
+        setContributionsError(false);
+      } catch (requestError) {
+        if (requestError instanceof DOMException && requestError.name === "AbortError") {
+          return;
+        }
+        setContributionsError(true);
+      } finally {
+        if (!controller.signal.aborted) {
+          setContributionsLoading(false);
+        }
+      }
+    }
+
+    void loadContributions();
+    const refreshInterval = window.setInterval(() => {
+      if (document.visibilityState === "visible") {
+        void loadContributions();
+      }
+    }, 30 * 60 * 1000);
+
+    return () => {
+      controller.abort();
+      window.clearInterval(refreshInterval);
+    };
+  }, [refreshKey]);
 
   return (
     <motion.div
@@ -169,32 +254,89 @@ export default function GitHubShowcase() {
             <div>
               <p className="font-semibold">Contribution activity</p>
               <p className="text-sm text-muted-foreground mt-1">
-                Updated directly from GitHub
+                {contributionDays
+                  ? `${contributionTotal} contributions in the last year`
+                  : "Live from GitHub"}
               </p>
             </div>
-            <a
-              href={`${GITHUB_PROFILE_URL}?tab=overview`}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="View GitHub contribution activity"
-              className="w-9 h-9 rounded-full border border-border flex items-center justify-center hover:bg-card transition-colors"
-            >
-              <ExternalLink className="w-4 h-4" />
-            </a>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setRefreshKey((key) => key + 1)}
+                disabled={contributionsLoading}
+                aria-label="Refresh contribution activity"
+                title="Refresh contribution activity"
+                className="w-9 h-9 rounded-full border border-border flex items-center justify-center hover:bg-card transition-colors disabled:opacity-50"
+              >
+                <RefreshCw
+                  className={`w-4 h-4 ${contributionsLoading ? "animate-spin" : ""}`}
+                />
+              </button>
+              <a
+                href={`${GITHUB_PROFILE_URL}?tab=overview`}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="View GitHub contribution activity"
+                className="w-9 h-9 rounded-full border border-border flex items-center justify-center hover:bg-card transition-colors"
+              >
+                <ExternalLink className="w-4 h-4" />
+              </a>
+            </div>
           </div>
           <div className="rounded-xl border border-border bg-card p-3 sm:p-5 overflow-x-auto">
-            <img
-              src={`https://ghchart.rshah.org/${GITHUB_USERNAME}`}
-              alt={`GitHub contribution graph for ${GITHUB_USERNAME}`}
-              className="min-w-[680px] w-full h-auto"
-              loading="lazy"
-            />
+            {contributionDays ? (
+              <div className="min-w-[680px]">
+                <div
+                  role="img"
+                  aria-label={`GitHub contributions for ${GITHUB_USERNAME}: ${contributionTotal} in the last year`}
+                  className="grid w-max grid-flow-col grid-rows-7 gap-[3px]"
+                  style={{
+                    gridAutoColumns: "10px",
+                    gridTemplateRows: "repeat(7, 10px)",
+                  }}
+                >
+                  {contributionDays.map((day) => {
+                    const level = Math.min(
+                      Math.max(Math.round(day.level), 0),
+                      CONTRIBUTION_LEVEL_CLASSES.length - 1,
+                    );
+                    return (
+                      <span
+                        key={day.date}
+                        title={`${day.count} contribution${day.count === 1 ? "" : "s"} on ${new Date(`${day.date}T00:00:00`).toLocaleDateString()}`}
+                        className={`rounded-[2px] ${CONTRIBUTION_LEVEL_CLASSES[level]}`}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+            ) : (
+              <p className="py-8 text-sm text-muted-foreground">
+                {contributionsLoading
+                  ? "Loading contribution activity…"
+                  : "Contribution activity is unavailable right now."}
+              </p>
+            )}
           </div>
-          <p className="text-xs text-muted-foreground mt-4">
-            {error
-              ? "GitHub profile details are unavailable right now, but the contribution graph and profile link remain available."
-              : "Contribution activity is shown from GitHub."}
-          </p>
+          <div className="mt-4 flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
+            <p>
+              {contributionsError
+                ? "Couldn’t refresh activity. Showing the last available data."
+                : contributionsUpdatedAt
+                  ? `Last checked ${contributionsUpdatedAt.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}`
+                  : "Contribution activity is loaded from GitHub."}
+            </p>
+            <div className="flex items-center gap-1.5" aria-hidden="true">
+              <span>Less</span>
+              {CONTRIBUTION_LEVEL_CLASSES.map((colorClass, index) => (
+                <span
+                  key={index}
+                  className={`h-2.5 w-2.5 rounded-[2px] ${colorClass}`}
+                />
+              ))}
+              <span>More</span>
+            </div>
+          </div>
         </div>
       </div>
     </motion.div>
