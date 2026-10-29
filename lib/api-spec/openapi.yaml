@@ -10,6 +10,8 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: github
+    description: GitHub contribution activity
 paths:
   /healthz:
     get:
@@ -24,6 +26,38 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /github/contributions:
+    get:
+      operationId: getGithubContributions
+      tags: [github]
+      summary: Get GitHub contribution activity
+      description: Returns anonymized daily contribution counts for the selected year
+      parameters:
+        - name: year
+          in: query
+          required: true
+          schema:
+            type: integer
+            minimum: 2015
+      responses:
+        "200":
+          description: Contribution activity
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GithubContributions"
+        "400":
+          description: Invalid year
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+        "502":
+          description: GitHub contribution data is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
 components:
   schemas:
     HealthStatus:
@@ -33,4 +67,41 @@ components:
           type: string
       required:
         - status
+    GithubContributionDay:
+      type: object
+      properties:
+        date:
+          type: string
+          pattern: '^\d{4}-\d{2}-\d{2}$'
+        count:
+          type: integer
+          minimum: 0
+        level:
+          type: integer
+          minimum: 0
+          maximum: 4
+      required:
+        - date
+        - count
+        - level
+    GithubContributions:
+      type: object
+      properties:
+        total:
+          type: integer
+          minimum: 0
+        contributions:
+          type: array
+          items:
+            $ref: "#/components/schemas/GithubContributionDay"
+      required:
+        - total
+        - contributions
+    ApiError:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
 

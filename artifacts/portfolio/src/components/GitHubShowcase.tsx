@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
+  ChevronDown,
   Code2,
   ExternalLink,
   Github,
@@ -11,6 +12,12 @@ import {
 
 const GITHUB_USERNAME = "wintas01";
 const GITHUB_PROFILE_URL = `https://github.com/${GITHUB_USERNAME}`;
+const CURRENT_YEAR = new Date().getFullYear();
+const CONTRIBUTIONS_API_BASE_URL = (
+  import.meta.env.VITE_GITHUB_CONTRIBUTIONS_API_URL ?? ""
+).replace(/\/+$/, "");
+const CONTRIBUTIONS_DOCS_URL =
+  "https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/managing-contribution-settings-on-your-profile/viewing-contributions-on-your-profile";
 
 type GitHubProfile = {
   name: string | null;
@@ -35,18 +42,16 @@ type ContributionDay = {
 };
 
 type ContributionsResponse = {
-  total?: {
-    lastYear?: number;
-  };
+  total: number;
   contributions: ContributionDay[];
 };
 
-const CONTRIBUTION_LEVEL_CLASSES = [
-  "bg-muted-foreground/10",
-  "bg-green-200 dark:bg-green-900",
-  "bg-green-400 dark:bg-green-700",
-  "bg-green-500 dark:bg-green-600",
-  "bg-green-700 dark:bg-green-500",
+const CONTRIBUTION_LEVEL_COLORS = [
+  "#161b22",
+  "#0e4429",
+  "#006d32",
+  "#26a641",
+  "#39d353",
 ];
 
 export default function GitHubShowcase() {
@@ -54,6 +59,7 @@ export default function GitHubShowcase() {
   const [loading, setLoading] = useState(true);
   const [contributionDays, setContributionDays] = useState<ContributionDay[] | null>(null);
   const [contributionTotal, setContributionTotal] = useState(0);
+  const [selectedYear, setSelectedYear] = useState(CURRENT_YEAR);
   const [contributionsLoading, setContributionsLoading] = useState(true);
   const [contributionsError, setContributionsError] = useState(false);
   const [contributionsUpdatedAt, setContributionsUpdatedAt] = useState<Date | null>(null);
@@ -97,7 +103,7 @@ export default function GitHubShowcase() {
       setContributionsLoading(true);
       try {
         const response = await fetch(
-          `https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=last&refresh=${Date.now()}`,
+          `${CONTRIBUTIONS_API_BASE_URL}/api/github/contributions?year=${selectedYear}`,
           { signal: controller.signal, cache: "no-store" },
         );
         if (!response.ok) {
@@ -106,10 +112,12 @@ export default function GitHubShowcase() {
 
         const result = (await response.json()) as ContributionsResponse;
         if (
+          !Number.isFinite(result.total) ||
           !Array.isArray(result.contributions) ||
           !result.contributions.every(
             (day) =>
               typeof day.date === "string" &&
+              /^\d{4}-\d{2}-\d{2}$/.test(day.date) &&
               Number.isFinite(day.count) &&
               Number.isFinite(day.level),
           )
@@ -118,10 +126,7 @@ export default function GitHubShowcase() {
         }
 
         setContributionDays(result.contributions);
-        setContributionTotal(
-          result.total?.lastYear ??
-            result.contributions.reduce((total, day) => total + day.count, 0),
-        );
+        setContributionTotal(result.total);
         setContributionsUpdatedAt(new Date());
         setContributionsError(false);
       } catch (requestError) {
@@ -147,17 +152,20 @@ export default function GitHubShowcase() {
       controller.abort();
       window.clearInterval(refreshInterval);
     };
-  }, [refreshKey]);
+  }, [refreshKey, selectedYear]);
 
+  const leadingEmptyDays = contributionDays?.length
+    ? new Date(`${contributionDays[0].date}T00:00:00Z`).getUTCDay()
+    : 0;
   const contributionWeekCount = contributionDays
-    ? Math.ceil(contributionDays.length / 7)
+    ? Math.ceil((leadingEmptyDays + contributionDays.length) / 7)
     : 0;
   const contributionMonthsByWeek = new Map<number, string>();
   contributionDays?.forEach((day, index) => {
     const date = new Date(`${day.date}T00:00:00Z`);
     if (date.getUTCDate() === 1) {
       contributionMonthsByWeek.set(
-        Math.floor(index / 7),
+        Math.floor((leadingEmptyDays + index) / 7),
         date.toLocaleString("en-US", { month: "short", timeZone: "UTC" }),
       );
     }
@@ -263,16 +271,14 @@ export default function GitHubShowcase() {
           )}
         </div>
 
-        <div className="rounded-2xl bg-background border border-border p-5 sm:p-8 overflow-hidden">
-          <div className="flex items-center justify-between gap-4 mb-5">
-            <div>
-              <p className="font-semibold">Contribution activity</p>
-              <p className="text-sm text-muted-foreground mt-1">
-                {contributionDays
-                  ? `${contributionTotal} contributions in the last year`
-                  : "Live from GitHub"}
-              </p>
-            </div>
+        <div className="rounded-xl border border-[#30363d] bg-[#0d1117] p-4 text-[#f0f6fc] sm:p-6 overflow-hidden">
+          <div className="flex flex-wrap items-center justify-between gap-4 mb-5">
+            <p className="text-base font-semibold">
+              {contributionTotal} contribution{contributionTotal === 1 ? "" : "s"}{" "}
+              {selectedYear === CURRENT_YEAR
+                ? "in the last year"
+                : `in ${selectedYear}`}
+            </p>
             <div className="flex items-center gap-2">
               <button
                 type="button"
@@ -280,90 +286,160 @@ export default function GitHubShowcase() {
                 disabled={contributionsLoading}
                 aria-label="Refresh contribution activity"
                 title="Refresh contribution activity"
-                className="w-9 h-9 rounded-full border border-border flex items-center justify-center hover:bg-card transition-colors disabled:opacity-50"
+                className="flex h-9 w-9 items-center justify-center rounded-md border border-[#30363d] text-[#8b949e] transition-colors hover:bg-[#161b22] hover:text-[#f0f6fc] disabled:opacity-50"
               >
                 <RefreshCw
                   className={`w-4 h-4 ${contributionsLoading ? "animate-spin" : ""}`}
                 />
               </button>
+              <div className="relative">
+                <label className="sr-only" htmlFor="contribution-year">
+                  Contribution year
+                </label>
+                <select
+                  id="contribution-year"
+                  value={selectedYear}
+                  onChange={(event) => {
+                    setSelectedYear(Number(event.target.value));
+                    setContributionDays(null);
+                    setContributionTotal(0);
+                    setContributionsError(false);
+                  }}
+                  className="h-9 appearance-none rounded-md border border-[#1f6feb] bg-[#0969da] py-0 pl-4 pr-9 text-sm font-medium text-white outline-none transition-colors hover:bg-[#0757bd] focus:ring-2 focus:ring-[#58a6ff]"
+                >
+                  {Array.from(
+                    { length: CURRENT_YEAR - 2014 },
+                    (_, index) => CURRENT_YEAR - index,
+                  ).map((year) => (
+                    <option
+                      key={year}
+                      value={year}
+                      className="bg-[#0d1117] text-[#f0f6fc]"
+                    >
+                      {year}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDown
+                  aria-hidden="true"
+                  className="pointer-events-none absolute right-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-white"
+                />
+              </div>
               <a
                 href={`${GITHUB_PROFILE_URL}?tab=overview`}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="View GitHub contribution activity"
-                className="w-9 h-9 rounded-full border border-border flex items-center justify-center hover:bg-card transition-colors"
+                aria-label="View GitHub profile"
+                title="View GitHub profile"
+                className="flex h-9 w-9 items-center justify-center rounded-md border border-[#30363d] text-[#8b949e] transition-colors hover:bg-[#161b22] hover:text-[#f0f6fc]"
               >
                 <ExternalLink className="w-4 h-4" />
               </a>
             </div>
           </div>
-          <div className="rounded-xl border border-border bg-card p-3 sm:p-5 overflow-x-auto">
+          <div className="overflow-x-auto rounded-lg border border-[#30363d] px-3 py-4 sm:px-5 sm:py-5">
             {contributionDays ? (
-              <div className="min-w-[680px]">
-                <div
-                  aria-hidden="true"
-                  className="mb-2 w-max text-[10px] leading-none text-muted-foreground"
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: `repeat(${contributionWeekCount}, 10px)`,
-                    columnGap: "3px",
-                  }}
-                >
-                  {Array.from({ length: contributionWeekCount }, (_, weekIndex) => (
-                    <span key={weekIndex} className="whitespace-nowrap">
-                      {contributionMonthsByWeek.get(weekIndex) ?? ""}
-                    </span>
-                  ))}
+              <div className="w-max">
+                <div className="mb-2 flex items-end gap-3">
+                  <span aria-hidden="true" className="w-8 shrink-0" />
+                  <div
+                    aria-hidden="true"
+                    className="text-xs leading-none text-[#8b949e]"
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: `repeat(${contributionWeekCount}, 11px)`,
+                      columnGap: "3px",
+                    }}
+                  >
+                    {Array.from({ length: contributionWeekCount }, (_, weekIndex) => (
+                      <span key={weekIndex} className="whitespace-nowrap">
+                        {contributionMonthsByWeek.get(weekIndex) ?? ""}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <div
-                  role="img"
-                  aria-label={`GitHub contributions for ${GITHUB_USERNAME}: ${contributionTotal} in the last year`}
-                  className="grid w-max grid-flow-col grid-rows-7 gap-[3px]"
-                  style={{
-                    gridAutoColumns: "10px",
-                    gridTemplateRows: "repeat(7, 10px)",
-                  }}
-                >
-                  {contributionDays.map((day) => {
-                    const level = Math.min(
-                      Math.max(Math.round(day.level), 0),
-                      CONTRIBUTION_LEVEL_CLASSES.length - 1,
-                    );
-                    return (
-                      <span
-                        key={day.date}
-                        title={`${day.count} contribution${day.count === 1 ? "" : "s"} on ${new Date(`${day.date}T00:00:00`).toLocaleDateString()}`}
-                        className={`rounded-[2px] ${CONTRIBUTION_LEVEL_CLASSES[level]}`}
-                      />
-                    );
-                  })}
+                <div className="flex gap-3">
+                  <div
+                    aria-hidden="true"
+                    className="grid w-8 shrink-0 grid-rows-7 gap-[3px] text-[10px] leading-[11px] text-[#8b949e]"
+                  >
+                    <span />
+                    <span>Mon</span>
+                    <span />
+                    <span>Wed</span>
+                    <span />
+                    <span>Fri</span>
+                    <span />
+                  </div>
+                  <div
+                    role="img"
+                    aria-label={`GitHub contributions for ${GITHUB_USERNAME}: ${contributionTotal} ${selectedYear === CURRENT_YEAR ? "in the last year" : `in ${selectedYear}`}`}
+                    className="grid w-max grid-flow-col grid-rows-7 gap-[3px]"
+                    style={{
+                      gridAutoColumns: "11px",
+                      gridTemplateRows: "repeat(7, 11px)",
+                    }}
+                  >
+                    {Array.from({ length: leadingEmptyDays }, (_, index) => (
+                      <span key={`leading-${index}`} aria-hidden="true" />
+                    ))}
+                    {contributionDays.map((day) => {
+                      const level = Math.min(
+                        Math.max(Math.round(day.level), 0),
+                        CONTRIBUTION_LEVEL_COLORS.length - 1,
+                      );
+                      return (
+                        <span
+                          key={day.date}
+                          title={`${day.count} contribution${day.count === 1 ? "" : "s"} on ${new Date(`${day.date}T00:00:00Z`).toLocaleDateString()}`}
+                          className="rounded-[2px] transition-colors"
+                          style={{ backgroundColor: CONTRIBUTION_LEVEL_COLORS[level] }}
+                        />
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             ) : (
-              <p className="py-8 text-sm text-muted-foreground">
+              <p className="py-8 text-sm text-[#8b949e]">
                 {contributionsLoading
                   ? "Loading contribution activity…"
                   : "Contribution activity is unavailable right now."}
               </p>
             )}
-          </div>
-          <div className="mt-4 flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
-            <p>
-              {contributionsError
-                ? "Couldn’t refresh activity. Showing the last available data."
-                : contributionsUpdatedAt
-                  ? `Last checked ${contributionsUpdatedAt.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}`
-                  : "Contribution activity is loaded from GitHub."}
-            </p>
-            <div className="flex items-center gap-1.5" aria-hidden="true">
-              <span>Less</span>
-              {CONTRIBUTION_LEVEL_CLASSES.map((colorClass, index) => (
-                <span
-                  key={index}
-                  className={`h-2.5 w-2.5 rounded-[2px] ${colorClass}`}
-                />
-              ))}
-              <span>More</span>
+            <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-xs text-[#8b949e]">
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+                <a
+                  href={CONTRIBUTIONS_DOCS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline-offset-2 hover:text-[#58a6ff] hover:underline"
+                >
+                  Learn how we count contributions
+                </a>
+                <span aria-live="polite">
+                  {contributionsError
+                    ? "Couldn’t refresh activity."
+                    : contributionsUpdatedAt
+                      ? `Last checked ${contributionsUpdatedAt.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}`
+                      : "Loading live activity"}
+                </span>
+              </div>
+              <div
+                role="img"
+                aria-label="Contribution levels from less to more"
+                className="flex items-center gap-1.5 whitespace-nowrap"
+              >
+                <span>Less</span>
+                {CONTRIBUTION_LEVEL_COLORS.map((color, index) => (
+                  <span
+                    key={index}
+                    className="h-3 w-3 rounded-[3px] border border-white/5"
+                    style={{ backgroundColor: color }}
+                  />
+                ))}
+                <span>More</span>
+              </div>
             </div>
           </div>
         </div>

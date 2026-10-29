@@ -24,6 +24,7 @@ jobs:
       - run: pnpm --filter @workspace/portfolio run build
         env:
           BASE_PATH: /portfolio01/
+          VITE_GITHUB_CONTRIBUTIONS_API_URL: ${{ vars.PORTFOLIO_API_BASE_URL }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: artifacts/portfolio/dist/public
