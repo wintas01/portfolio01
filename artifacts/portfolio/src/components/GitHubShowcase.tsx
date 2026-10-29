@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import {
   ChevronDown,
@@ -64,6 +64,15 @@ export default function GitHubShowcase() {
   const [contributionsError, setContributionsError] = useState(false);
   const [contributionsUpdatedAt, setContributionsUpdatedAt] = useState<Date | null>(null);
   const [refreshKey, setRefreshKey] = useState(0);
+  const graphScrollRef = useRef<HTMLDivElement>(null);
+
+  // On narrow screens the graph scrolls; start at the most recent weeks.
+  useEffect(() => {
+    const graph = graphScrollRef.current;
+    if (graph) {
+      graph.scrollLeft = graph.scrollWidth;
+    }
+  }, [contributionDays]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -168,6 +177,25 @@ export default function GitHubShowcase() {
         Math.floor((leadingEmptyDays + index) / 7),
         date.toLocaleString("en-US", { month: "short", timeZone: "UTC" }),
       );
+    }
+  });
+  // Label the partial first month too, as GitHub does, when there's room before the next label.
+  if (contributionDays?.length && !contributionMonthsByWeek.has(0)) {
+    const nextLabelledWeek = Math.min(...contributionMonthsByWeek.keys());
+    if (nextLabelledWeek >= 3) {
+      contributionMonthsByWeek.set(
+        0,
+        new Date(`${contributionDays[0].date}T00:00:00Z`).toLocaleString("en-US", {
+          month: "short",
+          timeZone: "UTC",
+        }),
+      );
+    }
+  }
+  // Drop a label that starts too close to the right edge to fit.
+  contributionMonthsByWeek.forEach((_, weekIndex) => {
+    if (weekIndex > contributionWeekCount - 2) {
+      contributionMonthsByWeek.delete(weekIndex);
     }
   });
 
@@ -337,67 +365,58 @@ export default function GitHubShowcase() {
               </a>
             </div>
           </div>
-          <div className="overflow-x-auto rounded-lg border border-[#30363d] px-3 py-4 sm:px-5 sm:py-5">
+          <div className="rounded-lg border border-[#30363d] px-3 py-4 sm:px-5 sm:py-5">
             {contributionDays ? (
-              <div className="w-max">
-                <div className="mb-2 flex items-end gap-3">
-                  <span aria-hidden="true" className="w-8 shrink-0" />
-                  <div
-                    aria-hidden="true"
-                    className="text-xs leading-none text-[#8b949e]"
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: `repeat(${contributionWeekCount}, 11px)`,
-                      columnGap: "3px",
-                    }}
-                  >
-                    {Array.from({ length: contributionWeekCount }, (_, weekIndex) => (
-                      <span key={weekIndex} className="whitespace-nowrap">
-                        {contributionMonthsByWeek.get(weekIndex) ?? ""}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <div className="flex gap-3">
-                  <div
-                    aria-hidden="true"
-                    className="grid w-8 shrink-0 grid-rows-7 gap-[3px] text-[10px] leading-[11px] text-[#8b949e]"
-                  >
-                    <span />
-                    <span>Mon</span>
-                    <span />
-                    <span>Wed</span>
-                    <span />
-                    <span>Fri</span>
-                    <span />
-                  </div>
-                  <div
-                    role="img"
-                    aria-label={`GitHub contributions for ${GITHUB_USERNAME}: ${contributionTotal} ${selectedYear === CURRENT_YEAR ? "in the last year" : `in ${selectedYear}`}`}
-                    className="grid w-max grid-flow-col grid-rows-7 gap-[3px]"
-                    style={{
-                      gridAutoColumns: "11px",
-                      gridTemplateRows: "repeat(7, 11px)",
-                    }}
-                  >
-                    {Array.from({ length: leadingEmptyDays }, (_, index) => (
-                      <span key={`leading-${index}`} aria-hidden="true" />
-                    ))}
-                    {contributionDays.map((day) => {
-                      const level = Math.min(
-                        Math.max(Math.round(day.level), 0),
-                        CONTRIBUTION_LEVEL_COLORS.length - 1,
-                      );
-                      return (
-                        <span
-                          key={day.date}
-                          title={`${day.count} contribution${day.count === 1 ? "" : "s"} on ${new Date(`${day.date}T00:00:00Z`).toLocaleDateString()}`}
-                          className="rounded-[2px] transition-colors"
-                          style={{ backgroundColor: CONTRIBUTION_LEVEL_COLORS[level] }}
-                        />
-                      );
-                    })}
-                  </div>
+              <div ref={graphScrollRef} className="overflow-x-auto pb-1">
+                <div
+                  role="img"
+                  aria-label={`GitHub contributions for ${GITHUB_USERNAME}: ${contributionTotal} ${selectedYear === CURRENT_YEAR ? "in the last year" : `in ${selectedYear}`}`}
+                  className="min-w-[560px] text-[#8b949e]"
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: `auto repeat(${contributionWeekCount}, minmax(0, 1fr))`,
+                    gap: "3px",
+                  }}
+                >
+                  {Array.from({ length: contributionWeekCount }, (_, weekIndex) => (
+                    <span
+                      key={`month-${weekIndex}`}
+                      aria-hidden="true"
+                      className="mb-1 whitespace-nowrap text-xs leading-none"
+                      style={{ gridColumn: weekIndex + 2, gridRow: 1 }}
+                    >
+                      {contributionMonthsByWeek.get(weekIndex) ?? ""}
+                    </span>
+                  ))}
+                  {["Mon", "Wed", "Fri"].map((label, index) => (
+                    <span
+                      key={label}
+                      aria-hidden="true"
+                      className="pr-2 text-[10px] leading-none self-center"
+                      style={{ gridColumn: 1, gridRow: index * 2 + 3 }}
+                    >
+                      {label}
+                    </span>
+                  ))}
+                  {contributionDays.map((day, index) => {
+                    const position = leadingEmptyDays + index;
+                    const level = Math.min(
+                      Math.max(Math.round(day.level), 0),
+                      CONTRIBUTION_LEVEL_COLORS.length - 1,
+                    );
+                    return (
+                      <span
+                        key={day.date}
+                        title={`${day.count} contribution${day.count === 1 ? "" : "s"} on ${new Date(`${day.date}T00:00:00Z`).toLocaleDateString(undefined, { timeZone: "UTC" })}`}
+                        className="aspect-square w-full rounded-[2px] outline outline-1 -outline-offset-1 outline-white/5 transition-colors"
+                        style={{
+                          gridColumn: Math.floor(position / 7) + 2,
+                          gridRow: (position % 7) + 2,
+                          backgroundColor: CONTRIBUTION_LEVEL_COLORS[level],
+                        }}
+                      />
+                    );
+                  })}
                 </div>
               </div>
             ) : (
