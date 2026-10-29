@@ -16,6 +16,8 @@ from reportlab.platypus import Paragraph
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "artifacts/portfolio/public/Nnanna-Okechukwu-Jason-CV.pdf"
 PHOTO = ROOT / "artifacts/portfolio/src/assets/wintas-about.png"
+ICONS = ROOT / "scripts/cv-assets"
+LOGOS = ROOT / "artifacts/portfolio/public"
 
 INK = HexColor("#111111")
 TEXT = HexColor("#2B2B2B")
@@ -59,6 +61,19 @@ def link(url, text=None):
 def dot(c, x, y, r):
     c.setFillColor(INK)
     c.circle(x, y, r, stroke=0, fill=1)
+
+
+def icon_item(c, x, y, icon, text, url=None, size=8):
+    """Draw an icon followed by text on baseline y; return the x after it."""
+    c.drawImage(ImageReader(str(ICONS / f"{icon}.png")), x, y - 1.6, 9, 9, mask="auto")
+    x += 13
+    c.setFont("Helvetica", size)
+    c.setFillColor(INK)
+    c.drawString(x, y, text)
+    w = c.stringWidth(text, "Helvetica", size)
+    if url:
+        c.linkURL(url, (x, y - 2, x + w, y + size), relative=0)
+    return x + w + 16
 
 
 def heading(c, x, y, text):
@@ -112,30 +127,19 @@ def header(c):
 
     spaced(c, RIGHT_X, bar_y + 11, "SOFTWARE BUILDER  /  FULL-STACK DEVELOPER", "Helvetica", 8.4, 2.6)
 
-    contact = ParagraphStyle("contact", parent=body, fontSize=8, leading=12, textColor=INK)
-    y = para(
-        c,
-        '<b>e:</b> <a href="mailto:nnannaokechukwu1@gmail.com" color="#111111">nnannaokechukwu1@gmail.com</a>'
-        f"{SEP}<b>p:</b> 07083066127{SEP}Imo State, Nigeria",
-        contact,
-        RIGHT_X,
-        bar_y - 12,
-        RIGHT_W,
-    )
-    para(
-        c,
-        f"<b>w:</b> {link('wintas01.github.io/portfolio01')}{SEP}<b>gh:</b> {link('github.com/wintas01')}",
-        contact,
-        RIGHT_X,
-        y - 2,
-        RIGHT_W,
-    )
+    y = bar_y - 20
+    x = icon_item(c, RIGHT_X, y, "mail", "nnannaokechukwu1@gmail.com", "mailto:nnannaokechukwu1@gmail.com")
+    x = icon_item(c, x, y, "whatsapp", "0708 306 6127", "https://wa.me/2347083066127")
+    icon_item(c, x, y, "pin", "Imo State, Nigeria")
+    y -= 15
+    x = icon_item(c, RIGHT_X, y, "globe", "wintas01.github.io/portfolio01", "https://wintas01.github.io/portfolio01/")
+    icon_item(c, x, y, "github", "github.com/wintas01", "https://github.com/wintas01")
     return bar_y - 62
 
 
 def objective(c, y):
     text = (
-        "Fast-moving software builder focused on web applications, AI integrations, and rapid "
+        "Computer Science graduate (2026) and fast-moving software builder focused on web applications, AI integrations, and rapid "
         "prototyping. Skilled at writing effective AI prompts and applying machine learning tools "
         "to turn product ideas into working, deployed apps. Experienced working in a team on a "
         "live university website, and eager to contribute to early-stage builds, open-source "
@@ -180,7 +184,7 @@ def left_column(c, y):
     c.setLineWidth(1)
     c.line(LEFT_X + 2, y + 2, LEFT_X + 2, y - 44)
     dot(c, LEFT_X + 2, y - 3, 2.8)
-    spaced(c, LEFT_X + 14, y - 6, "IN PROGRESS", "Helvetica", 7.4, 1.4, TEXT)
+    spaced(c, LEFT_X + 14, y - 6, "GRADUATED 2026", "Helvetica", 7.4, 1.4, TEXT)
     spaced(c, LEFT_X + 14, y - 19, "B.SC. COMPUTER SCIENCE", "Helvetica-Bold", 7.4, 1.2)
     edu = ParagraphStyle("edu", parent=body, fontSize=8, leading=10.5, textColor=MUTED)
     para(c, "Kingsley Ozumba Mbadiwe University, Ideato", edu, LEFT_X + 14, y - 24, LEFT_W - 14)
@@ -188,6 +192,7 @@ def left_column(c, y):
 
 PROJECTS = [
     (
+        "project-previews/komu-icon.png",
         "TEAM PROJECT  —  FULL-STACK DEVELOPER",
         "KOMU WEBSITE REDESIGN",
         "Redesign of the official website of Kingsley Ozumba Mbadiwe University.",
@@ -198,6 +203,7 @@ PROJECTS = [
         f"Live: {link('komu.edu.ng')}",
     ),
     (
+        "project-previews/vtu-icon.jpg",
         "INSTANT TOP-UP WEB APP",
         "OJ SUB VTU PLATFORM",
         "Nigerian VTU platform for everyday payments and top-ups.",
@@ -209,6 +215,7 @@ PROJECTS = [
         f"Live: {link('sabuss.com/ojsub3')}",
     ),
     (
+        "project-previews/church-bot-icon.png",
         "CLOUDFLARE AI API  ·  SUPABASE  ·  VERCEL",
         "CHURCH FACEBOOK AUTO BOT",
         "Automated content platform that keeps a church's Facebook Page active.",
@@ -220,6 +227,7 @@ PROJECTS = [
         f"Demo: {link('church-auto-bot-demo.vercel.app')}  ·  Source: private, walkthrough on request",
     ),
     (
+        "favicon.png",
         "TYPESCRIPT",
         "PORTFOLIO WEBSITE",
         "Personal site showcasing web applications, AI integrations, and networking projects.",
@@ -231,9 +239,10 @@ PROJECTS = [
 
 def right_column(c, y):
     y = heading(c, RIGHT_X, y, "PROJECTS")
-    for kicker, title, desc, bullets, links in PROJECTS:
-        spaced(c, RIGHT_X, y, kicker, "Helvetica", 7.2, 1.3, TEXT)
-        spaced(c, RIGHT_X, y - 13, title, "Helvetica-Bold", 7.8, 1.6)
+    for logo, kicker, title, desc, bullets, links in PROJECTS:
+        c.drawImage(ImageReader(str(LOGOS / logo)), RIGHT_X, y - 17, 22, 22, preserveAspectRatio=True, mask="auto")
+        spaced(c, RIGHT_X + 30, y, kicker, "Helvetica", 7.2, 1.3, TEXT)
+        spaced(c, RIGHT_X + 30, y - 13, title, "Helvetica-Bold", 7.8, 1.6)
         y = para(c, desc, body, RIGHT_X, y - 19, RIGHT_W) - 2
         for b in bullets:
             dot(c, RIGHT_X + 6, y - 4.2, 1.3)
