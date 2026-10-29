@@ -149,6 +149,20 @@ export default function GitHubShowcase() {
     };
   }, [refreshKey]);
 
+  const contributionWeekCount = contributionDays
+    ? Math.ceil(contributionDays.length / 7)
+    : 0;
+  const contributionMonthsByWeek = new Map<number, string>();
+  contributionDays?.forEach((day, index) => {
+    const date = new Date(`${day.date}T00:00:00Z`);
+    if (date.getUTCDate() === 1) {
+      contributionMonthsByWeek.set(
+        Math.floor(index / 7),
+        date.toLocaleString("en-US", { month: "short", timeZone: "UTC" }),
+      );
+    }
+  });
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 24 }}
@@ -286,6 +300,21 @@ export default function GitHubShowcase() {
           <div className="rounded-xl border border-border bg-card p-3 sm:p-5 overflow-x-auto">
             {contributionDays ? (
               <div className="min-w-[680px]">
+                <div
+                  aria-hidden="true"
+                  className="mb-2 w-max text-[10px] leading-none text-muted-foreground"
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: `repeat(${contributionWeekCount}, 10px)`,
+                    columnGap: "3px",
+                  }}
+                >
+                  {Array.from({ length: contributionWeekCount }, (_, weekIndex) => (
+                    <span key={weekIndex} className="whitespace-nowrap">
+                      {contributionMonthsByWeek.get(weekIndex) ?? ""}
+                    </span>
+                  ))}
+                </div>
                 <div
                   role="img"
                   aria-label={`GitHub contributions for ${GITHUB_USERNAME}: ${contributionTotal} in the last year`}
