@@ -16,6 +16,8 @@ const CURRENT_YEAR = new Date().getFullYear();
 const CONTRIBUTIONS_API_BASE_URL = (
   import.meta.env.VITE_GITHUB_CONTRIBUTIONS_API_URL ?? ""
 ).replace(/\/+$/, "");
+// Public fallback that reads the same calendar shown on the GitHub profile.
+const PUBLIC_CONTRIBUTIONS_API_URL = `https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}`;
 const CONTRIBUTIONS_DOCS_URL =
   "https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/managing-contribution-settings-on-your-profile/viewing-contributions-on-your-profile";
 
@@ -53,6 +55,76 @@ const CONTRIBUTION_LEVEL_COLORS = [
   "#26a641",
   "#39d353",
 ];
+
+function isValidContributions(result: unknown): result is ContributionsResponse {
+  const candidate = result as ContributionsResponse | null;
+  return (
+    !!candidate &&
+    Number.isFinite(candidate.total) &&
+    Array.isArray(candidate.contributions) &&
+    candidate.contributions.every(
+      (day) =>
+        typeof day.date === "string" &&
+        /^\d{4}-\d{2}-\d{2}$/.test(day.date) &&
+        Number.isFinite(day.count) &&
+        Number.isFinite(day.level),
+    )
+  );
+}
+
+async function fetchOwnContributions(
+  year: number,
+  signal: AbortSignal,
+): Promise<ContributionsResponse> {
+  const response = await fetch(
+    `${CONTRIBUTIONS_API_BASE_URL}/api/github/contributions?year=${year}`,
+    { signal, cache: "no-store" },
+  );
+  if (!response.ok) {
+    throw new Error("GitHub contribution data request failed");
+  }
+
+  const result: unknown = await response.json();
+  if (!isValidContributions(result)) {
+    throw new Error("GitHub contribution data was invalid");
+  }
+  return result;
+}
+
+type PublicContributionsResponse = {
+  total: Record<string, number>;
+  contributions: ContributionDay[];
+};
+
+async function fetchPublicContributions(
+  year: number,
+  signal: AbortSignal,
+): Promise<ContributionsResponse> {
+  const yearKey = year === CURRENT_YEAR ? "last" : String(year);
+  const response = await fetch(`${PUBLIC_CONTRIBUTIONS_API_URL}?y=${yearKey}`, {
+    signal,
+    cache: "no-store",
+  });
+  if (!response.ok) {
+    throw new Error("Public GitHub contribution data request failed");
+  }
+
+  const result = (await response.json()) as PublicContributionsResponse;
+  const today = new Date().toISOString().slice(0, 10);
+  const contributions = (result.contributions ?? [])
+    .filter((day) => day.date <= today)
+    .sort((a, b) => a.date.localeCompare(b.date));
+  const normalized = {
+    total:
+      result.total?.[year === CURRENT_YEAR ? "lastYear" : String(year)] ??
+      contributions.reduce((sum, day) => sum + day.count, 0),
+    contributions,
+  };
+  if (!isValidContributions(normalized)) {
+    throw new Error("Public GitHub contribution data was invalid");
+  }
+  return normalized;
+}
 
 export default function GitHubShowcase() {
   const [data, setData] = useState<GitHubData | null>(null);
@@ -111,27 +183,15 @@ export default function GitHubShowcase() {
     async function loadContributions() {
       setContributionsLoading(true);
       try {
-        const response = await fetch(
-          `${CONTRIBUTIONS_API_BASE_URL}/api/github/contributions?year=${selectedYear}`,
-          { signal: controller.signal, cache: "no-store" },
-        );
-        if (!response.ok) {
-          throw new Error("GitHub contribution data request failed");
-        }
-
-        const result = (await response.json()) as ContributionsResponse;
-        if (
-          !Number.isFinite(result.total) ||
-          !Array.isArray(result.contributions) ||
-          !result.contributions.every(
-            (day) =>
-              typeof day.date === "string" &&
-              /^\d{4}-\d{2}-\d{2}$/.test(day.date) &&
-              Number.isFinite(day.count) &&
-              Number.isFinite(day.level),
-          )
-        ) {
-          throw new Error("GitHub contribution data was invalid");
+        let result: ContributionsResponse;
+        try {
+          result = await fetchOwnContributions(selectedYear, controller.signal);
+        } catch (ownApiError) {
+          if (controller.signal.aborted) {
+            throw ownApiError;
+          }
+          // The static GitHub Pages build has no API server of its own.
+          result = await fetchPublicContributions(selectedYear, controller.signal);
         }
 
         setContributionDays(result.contributions);
