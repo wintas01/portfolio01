@@ -196,23 +196,41 @@ def left_column(c, y):
 PROJECTS = [
     (
         "project-previews/komu-icon.png",
+        "FULL-STACK  —  FRONTEND & BACKEND",
+        "KOMU E-LIBRARY",
+        [
+            "Built the frontend and backend of the university's e-library for e-books, journals, and theses.",
+            "Search across 19+ research databases, available on campus and remotely, 24/7.",
+        ],
+        f"Live: {link('komu-elibrary.vercel.app')}",
+    ),
+    (
+        "project-previews/komu-icon.png",
         "TEAM PROJECT  —  FULL-STACK DEVELOPER",
         "KOMU WEBSITE REDESIGN",
-        "Redesign of the official website of Kingsley Ozumba Mbadiwe University.",
         [
-            "Worked as a full-stack developer in the team that redesigned the university's website.",
+            "Full-stack developer in the team that redesigned the official KOMU university website.",
             "Contributed to both the frontend and the backend of the new site, which is now live.",
         ],
         f"Live: {link('komu.edu.ng')}",
     ),
     (
+        "project-previews/tixora-icon.png",
+        "EVENT TICKETING PLATFORM",
+        "TIXORA",
+        [
+            "Ticketing platform to find concerts, parties, dinners, and shows and book in seconds.",
+            "Checkout by card, bank transfer, or USSD, with a QR ticket issued right after payment.",
+            "One scan at the door: no paper tickets, no queues, no fakes.",
+        ],
+        "Launching soon",
+    ),
+    (
         "project-previews/vtu-icon.jpg",
         "INSTANT TOP-UP WEB APP",
         "OJ SUB VTU PLATFORM",
-        "Nigerian VTU platform for everyday payments and top-ups.",
         [
-            "Built a platform for buying cheap mobile data and airtime and paying electricity "
-            "bills, TV subscriptions, and educational fees.",
+            "Built a VTU platform for cheap data and airtime, electricity bills, TV, and school fees.",
             "Added a marketplace where users can sell items, with an installable app version.",
         ],
         f"Live: {link('sabuss.com/ojsub3')}",
@@ -221,11 +239,9 @@ PROJECTS = [
         "project-previews/church-bot-icon.png",
         "CLOUDFLARE AI API  ·  SUPABASE  ·  VERCEL",
         "CHURCH FACEBOOK AUTO BOT",
-        "Automated content platform that keeps a church's Facebook Page active.",
         [
-            "Generates posts and images with AI and publishes them automatically to a Facebook Page.",
-            "Uses the Cloudflare AI API for text and image generation and Supabase for the database.",
-            "Hosted on Vercel, removing the need for manual daily posting.",
+            "Generates posts and images with the Cloudflare AI API and auto-publishes them to Facebook.",
+            "Stores content in Supabase and runs on Vercel, so no manual daily posting is needed.",
         ],
         f"Demo: {link('church-auto-bot-demo.vercel.app')}  ·  Source: private, walkthrough on request",
     ),
@@ -233,8 +249,7 @@ PROJECTS = [
         "favicon.png",
         "TYPESCRIPT",
         "PORTFOLIO WEBSITE",
-        "Personal site showcasing web applications, AI integrations, and networking projects.",
-        ["Designed and published the portfolio, with live project previews and GitHub activity."],
+        ["Designed and published this portfolio, with live project previews and GitHub activity."],
         f"Live: {link('wintas01.github.io/portfolio01')}  ·  Source: {link('github.com/wintas01/portfolio01')}",
     ),
 ]
@@ -242,15 +257,15 @@ PROJECTS = [
 
 def right_column(c, y):
     y = heading(c, RIGHT_X, y, "PROJECTS")
-    for logo, kicker, title, desc, bullets, links in PROJECTS:
+    for logo, kicker, title, bullets, links in PROJECTS:
         c.drawImage(ImageReader(str(LOGOS / logo)), RIGHT_X, y - 17, 22, 22, preserveAspectRatio=True, mask="auto")
         spaced(c, RIGHT_X + 30, y, kicker, "Helvetica", 7.2, 1.3, TEXT)
         spaced(c, RIGHT_X + 30, y - 13, title, "Helvetica-Bold", 7.8, 1.6)
-        y = para(c, desc, body, RIGHT_X, y - 19, RIGHT_W) - 2
+        y -= 22
         for b in bullets:
             dot(c, RIGHT_X + 6, y - 4.2, 1.3)
             y = para(c, b, body, RIGHT_X + 14, y, RIGHT_W - 14) - 1
-        y = para(c, links, meta, RIGHT_X, y - 2, RIGHT_W) - 20
+        y = para(c, links, meta, RIGHT_X, y - 2, RIGHT_W) - 13
     para(
         c,
         f"More projects on GitHub: {link('github.com/wintas01')}  ·  References available on request.",
