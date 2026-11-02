@@ -77,6 +77,7 @@ const projects = [
       "Event ticketing platform: find concerts and parties, pay your way, and enter with a QR code.",
     preview: projectPreviewPath("tixora.png"),
     previewAlt: "Tixora event ticketing homepage screenshot",
+    previewFit: "contain" as const,
     icon: (
       <img
         src={projectPreviewPath("tixora-icon.png")}
@@ -366,7 +367,7 @@ export default function Home() {
 
             <motion.a
               variants={fadeInUp}
-              href={`${import.meta.env.BASE_URL}Nnanna-Okechukwu-Jason-CV.pdf?v=2026-11-02`}
+              href={`${import.meta.env.BASE_URL}Nnanna-Okechukwu-Jason-CV.pdf?v=2026-11-02b`}
               download="Nnanna-Okechukwu-Jason-CV.pdf"
               className="inline-flex items-center justify-center gap-3 self-start bg-foreground text-background px-6 py-3 rounded-full text-sm font-semibold hover:bg-foreground/80 transition-colors"
             >
