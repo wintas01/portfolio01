@@ -124,8 +124,9 @@ const projects = [
     title: "VTU App",
     description: "Download my VTU application — fast, simple, and reliable.",
     href: "https://sabuss.com/ojsub3",
-    preview: projectPreviewPath("vtu.png"),
-    previewAlt: "OJ Sub instant top-up website screenshot",
+    preview: projectPreviewPath("vtu-mockup.png"),
+    previewAlt: "OJ Sub services page on an iMac mockup",
+    framed: true,
     icon: (
       <img
         src={projectPreviewPath("vtu-icon.jpg")}
