@@ -70,14 +70,30 @@ function LaptopPreview({
   );
 }
 
+// For screenshots that already come framed in a device mockup.
+function MockupPreview({ src, alt }: { src: string; alt: string }) {
+  return (
+    <div className="bg-[#f1f2f4] px-4 pt-6 sm:px-5 sm:pt-7">
+      <div className="mx-auto aspect-[16/10.6] w-[94%] max-w-[520px]">
+        <img
+          src={src}
+          alt={alt}
+          loading="lazy"
+          className="h-full w-full object-contain object-bottom"
+        />
+      </div>
+    </div>
+  );
+}
+
 const projects = [
   {
     title: "Tixora",
     description:
       "Event ticketing platform: find concerts and parties, pay your way, and enter with a QR code.",
-    preview: projectPreviewPath("tixora.png"),
-    previewAlt: "Tixora event ticketing homepage screenshot",
-    previewFit: "contain" as const,
+    preview: projectPreviewPath("tixora-mockup.png"),
+    previewAlt: "Tixora event ticketing homepage on an iMac mockup",
+    framed: true,
     icon: (
       <img
         src={projectPreviewPath("tixora-icon.png")}
@@ -92,8 +108,9 @@ const projects = [
     description:
       "University e-library for e-books, journals, theses and research databases. I built the frontend and backend.",
     href: "https://komu-elibrary.vercel.app/",
-    preview: projectPreviewPath("komu-elibrary.png"),
-    previewAlt: "KOMU E-Library homepage screenshot",
+    preview: projectPreviewPath("komu-elibrary-mockup.png"),
+    previewAlt: "KOMU E-Library homepage on an iMac mockup",
+    framed: true,
     icon: (
       <img
         src={projectPreviewPath("komu-icon.png")}
@@ -406,11 +423,18 @@ export default function Home() {
                 transition={{ duration: 0.65, delay: index * 0.1 }}
                 className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-background transition-all duration-300 hover:-translate-y-1 hover:border-foreground/25 hover:shadow-[0_18px_45px_rgba(15,23,42,0.08)]"
               >
-                <LaptopPreview
-                  src={project.preview}
-                  alt={project.previewAlt}
-                  fit={project.previewFit}
-                />
+                {project.framed ? (
+                  <MockupPreview
+                    src={project.preview}
+                    alt={project.previewAlt}
+                  />
+                ) : (
+                  <LaptopPreview
+                    src={project.preview}
+                    alt={project.previewAlt}
+                    fit={project.previewFit}
+                  />
+                )}
 
                 <div className="flex flex-1 flex-col p-5 sm:p-6">
                   <div className="flex items-start gap-4">
