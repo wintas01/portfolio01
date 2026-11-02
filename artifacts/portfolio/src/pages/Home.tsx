@@ -37,15 +37,7 @@ const navLinks = ["Home", "About", "Projects", "Contact"];
 const projectPreviewPath = (fileName: string) =>
   `${import.meta.env.BASE_URL}project-previews/${fileName}`;
 
-function LaptopPreview({
-  src,
-  alt,
-  fit = "cover",
-}: {
-  src: string;
-  alt: string;
-  fit?: "cover" | "contain";
-}) {
+function LaptopPreview({ src, alt }: { src: string; alt: string }) {
   return (
     <div className="bg-[#f1f2f4] px-4 pt-6 sm:px-5 sm:pt-7">
       <div className="mx-auto w-[94%] max-w-[520px]">
@@ -54,11 +46,7 @@ function LaptopPreview({
             src={src}
             alt={alt}
             loading="lazy"
-            className={
-              fit === "contain"
-                ? "h-full w-full object-contain"
-                : "h-full w-full object-cover object-left-top"
-            }
+            className="h-full w-full object-cover object-left-top"
           />
         </div>
         <div className="relative mx-auto h-2.5 w-[108%] -translate-x-[4%] rounded-b-lg border-b border-[#777b82] bg-gradient-to-b from-[#d9dbe0] via-[#b8bbc1] to-[#92969d]">
@@ -157,9 +145,9 @@ const projects = [
     description:
       "Team redesign of the official Kingsley Ozumba Mbadiwe University website.",
     href: "https://komu.edu.ng/",
-    preview: projectPreviewPath("komu.png"),
-    previewAlt: "Kingsley Ozumba Mbadiwe University homepage screenshot",
-    previewFit: "contain" as const,
+    preview: projectPreviewPath("komu-mockup.png"),
+    previewAlt: "Kingsley Ozumba Mbadiwe University homepage on an iMac mockup",
+    framed: true,
     icon: (
       <img
         src={projectPreviewPath("komu-icon.png")}
@@ -433,7 +421,6 @@ export default function Home() {
                   <LaptopPreview
                     src={project.preview}
                     alt={project.previewAlt}
-                    fit={project.previewFit}
                   />
                 )}
 
