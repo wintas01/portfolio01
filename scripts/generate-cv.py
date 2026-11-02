@@ -125,7 +125,7 @@ def header(c):
     c.setFont("Helvetica-Bold", 25)
     c.drawString(RIGHT_X + c.stringWidth(first, "Helvetica", 25), top - 92, "Jason")
 
-    spaced(c, RIGHT_X, bar_y + 11, "SOFTWARE BUILDER  /  FULL-STACK DEVELOPER", "Helvetica", 8.4, 2.6)
+    spaced(c, RIGHT_X, bar_y + 11, "FULL-STACK DEVELOPER  /  AI INTEGRATION", "Helvetica", 8.4, 2.6)
 
     y = bar_y - 20
     x = icon_item(c, RIGHT_X, y, "mail", "nnannaokechukwu1@gmail.com", "mailto:nnannaokechukwu1@gmail.com")
@@ -139,11 +139,11 @@ def header(c):
 
 def objective(c, y):
     text = (
-        "Computer Science graduate (2026) and fast-moving software builder focused on web applications, AI integrations, and rapid "
-        "prototyping. Skilled at writing effective AI prompts and applying machine learning tools "
-        "to turn product ideas into working, deployed apps. Experienced working in a team on a "
-        "live university website, and eager to contribute to early-stage builds, open-source "
-        "projects, and collaborative teams."
+        "Computer Science graduate (2026) and full-stack developer who builds with AI. Delivered a "
+        "university e-library and website, a ticketing platform, a VTU payments app, and an AI "
+        "content bot, using AI as a core part of how I design, write, and ship software. Experienced "
+        "integrating LLM APIs into real products and working in a team on a live university website; "
+        "eager to join teams building useful, polished software."
     )
     bottom = para(c, text, summary, LEFT_X + 18, y, W - LEFT_X - 18 - 42)
     c.setFillColor(ACCENT)
@@ -156,9 +156,9 @@ def left_column(c, y):
     groups = [
         ("PROFESSIONAL", [
             "Full-stack web development",
-            "AI API integration",
+            "AI integration (LLM APIs)",
+            "AI-assisted development",
             "Prompt engineering",
-            "Rapid prototyping",
             "Team collaboration",
         ]),
         ("TECHNICAL", [
