@@ -256,8 +256,9 @@ export default function Home() {
               variants={fadeInUp}
               className="text-base sm:text-lg text-muted-foreground max-w-md font-light leading-relaxed"
             >
-              From web applications and AI integrations to networking projects,
-              I transform ideas into practical, user-focused digital products.
+              I build full-stack web apps and AI-powered products, from
+              university platforms to ticketing and payments, and I use AI
+              tools to ship them fast.
             </motion.p>
           </motion.div>
 
@@ -337,10 +338,12 @@ export default function Home() {
               variants={fadeInUp}
               className="text-base sm:text-lg text-muted-foreground leading-relaxed"
             >
-              I'm constantly learning, experimenting, and building projects that
-              challenge my skills and contribute to my growth as a software
-              engineer. My goal is to create technology that is not only
-              visually appealing but also meaningful and impactful.
+              I'm a Computer Science graduate (2026) and full-stack developer
+              who builds with AI. I've delivered a university e-library and
+              website, a ticketing platform, a VTU payments app, and an AI
+              content bot, using AI as a core part of how I design, write, and
+              ship software. My goal is technology that is useful, polished,
+              and built to last.
             </motion.p>
 
             <motion.div
@@ -352,9 +355,9 @@ export default function Home() {
                   Expertise
                 </h3>
                 <ul className="space-y-2 sm:space-y-3 text-muted-foreground text-sm sm:text-base">
-                  <li>Web Application Development</li>
-                  <li>AI Integrations</li>
-                  <li>Networking Projects</li>
+                  <li>Full-Stack Web Development</li>
+                  <li>AI Integration (LLM APIs)</li>
+                  <li>AI-Assisted Development &amp; Prompting</li>
                   <li>UI/UX Design</li>
                 </ul>
               </div>
@@ -373,7 +376,7 @@ export default function Home() {
 
             <motion.a
               variants={fadeInUp}
-              href={`${import.meta.env.BASE_URL}Nnanna-Okechukwu-Jason-CV.pdf?v=2026-11-02b`}
+              href={`${import.meta.env.BASE_URL}Nnanna-Okechukwu-Jason-CV.pdf?v=2026-11-02c`}
               download="Nnanna-Okechukwu-Jason-CV.pdf"
               className="inline-flex items-center justify-center gap-3 self-start bg-foreground text-background px-6 py-3 rounded-full text-sm font-semibold hover:bg-foreground/80 transition-colors"
             >
