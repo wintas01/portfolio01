@@ -182,12 +182,15 @@ def left_column(c, y):
     y = heading(c, LEFT_X, y - 6, "EDUCATION")
     c.setStrokeColor(INK)
     c.setLineWidth(1)
-    c.line(LEFT_X + 2, y + 2, LEFT_X + 2, y - 44)
+    c.line(LEFT_X + 2, y + 2, LEFT_X + 2, y - 50)
     dot(c, LEFT_X + 2, y - 3, 2.8)
     spaced(c, LEFT_X + 14, y - 6, "GRADUATED 2026", "Helvetica", 7.4, 1.4, TEXT)
     spaced(c, LEFT_X + 14, y - 19, "B.SC. COMPUTER SCIENCE", "Helvetica-Bold", 7.4, 1.2)
+    # University logo beside its name.
+    logo = ImageReader(str(LOGOS / "project-previews/komu-icon.png"))
+    c.drawImage(logo, LEFT_X + 14, y - 50, 24, 24, preserveAspectRatio=True, mask="auto")
     edu = ParagraphStyle("edu", parent=body, fontSize=8, leading=10.5, textColor=MUTED)
-    para(c, "Kingsley Ozumba Mbadiwe University, Ideato", edu, LEFT_X + 14, y - 24, LEFT_W - 14)
+    para(c, "Kingsley Ozumba Mbadiwe University, Ideato", edu, LEFT_X + 44, y - 25, LEFT_W - 44)
 
 
 PROJECTS = [
