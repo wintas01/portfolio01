@@ -72,6 +72,21 @@ function LaptopPreview({
 
 const projects = [
   {
+    title: "Tixora",
+    description:
+      "Event ticketing platform: find concerts and parties, pay your way, and enter with a QR code.",
+    preview: projectPreviewPath("tixora.png"),
+    previewAlt: "Tixora event ticketing homepage screenshot",
+    icon: (
+      <img
+        src={projectPreviewPath("tixora-icon.png")}
+        alt=""
+        aria-hidden="true"
+        className="h-12 w-12 flex-none rounded-2xl object-cover sm:h-14 sm:w-14"
+      />
+    ),
+  },
+  {
     title: "Pinterest",
     description: "Browse my design inspiration and creative boards.",
     href: "https://pin.it/6RYs3HQxx",
@@ -378,7 +393,7 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="grid gap-6 sm:grid-cols-2 sm:gap-7">
+          <div className="grid gap-6 sm:grid-cols-2 sm:gap-7 xl:grid-cols-3">
             {projects.map((project, index) => (
               <motion.article
                 key={project.title}
@@ -408,15 +423,21 @@ export default function Home() {
                   </div>
 
                   <div className="mt-6 border-t border-border pt-4">
-                    <a
-                      href={project.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-sm font-semibold text-background transition-colors hover:bg-foreground/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2"
-                    >
-                      Visit Page
-                      <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-                    </a>
+                    {project.href ? (
+                      <a
+                        href={project.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-sm font-semibold text-background transition-colors hover:bg-foreground/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2"
+                      >
+                        Visit Page
+                        <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                      </a>
+                    ) : (
+                      <span className="inline-flex min-h-11 w-full cursor-default items-center justify-center rounded-full border border-border px-5 text-sm font-semibold text-muted-foreground">
+                        Coming Soon
+                      </span>
+                    )}
                   </div>
                 </div>
               </motion.article>
