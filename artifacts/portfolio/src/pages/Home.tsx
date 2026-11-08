@@ -95,7 +95,7 @@ const projects = [
     title: "KOMU E-Library",
     description:
       "University e-library for e-books, journals, theses and research databases. I built the frontend and backend.",
-    href: "https://komu-elibrary.vercel.app/",
+    href: "https://komudigital.ng/",
     preview: projectPreviewPath("komu-elibrary-mockup.png"),
     previewAlt: "KOMU E-Library homepage on an iMac mockup",
     framed: true,
