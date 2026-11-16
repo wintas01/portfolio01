@@ -163,7 +163,7 @@ const projects = [
     badge: "Portfolio template",
     description:
       "Free, open-source portfolio template with a particle field, kinetic text and a pinned scroll gallery. One HTML file, with a setup guide.",
-    href: "https://wintas01.github.io/portfolio-template-1/",
+    href: "https://wintas01.github.io/portfolio01/templates/neon/",
     linkLabel: "Live Demo",
     codeHref: "https://github.com/wintas01/portfolio-template-1",
     preview: projectPreviewPath("neon-template-mockup.png"),
@@ -183,7 +183,7 @@ const projects = [
     badge: "Portfolio template",
     description:
       "Free cinematic scroll portfolio template — a recreated concept with a starry-sky reveal and a 3D project ribbon, rebuilt in plain HTML, CSS and JS.",
-    href: "https://wintas01.github.io/portfolio-template-2/",
+    href: "https://wintas01.github.io/portfolio01/templates/echo/",
     linkLabel: "Live Demo",
     codeHref: "https://github.com/wintas01/portfolio-template-2",
     preview: projectPreviewPath("echo-template-mockup.png"),
