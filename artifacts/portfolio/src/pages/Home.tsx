@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowUpRight,
+  Code,
   Download,
   Mail,
   Menu,
@@ -151,6 +152,46 @@ const projects = [
     icon: (
       <img
         src={projectPreviewPath("komu-icon.png")}
+        alt=""
+        aria-hidden="true"
+        className="h-12 w-12 flex-none rounded-2xl border border-border object-cover sm:h-14 sm:w-14"
+      />
+    ),
+  },
+  {
+    title: "Neon Portfolio",
+    badge: "Portfolio template",
+    description:
+      "Free, open-source portfolio template with a particle field, kinetic text and a pinned scroll gallery. One HTML file, with a setup guide.",
+    href: "https://wintas01.github.io/portfolio-template-1/",
+    linkLabel: "Live Demo",
+    codeHref: "https://github.com/wintas01/portfolio-template-1",
+    preview: projectPreviewPath("neon-template-mockup.png"),
+    previewAlt: "Neon portfolio template hero on an iMac mockup",
+    framed: true,
+    icon: (
+      <img
+        src={projectPreviewPath("neon-template-icon.png")}
+        alt=""
+        aria-hidden="true"
+        className="h-12 w-12 flex-none rounded-2xl object-cover sm:h-14 sm:w-14"
+      />
+    ),
+  },
+  {
+    title: "ECHO Portfolio",
+    badge: "Portfolio template",
+    description:
+      "Free cinematic scroll portfolio template — a recreated concept with a starry-sky reveal and a 3D project ribbon, rebuilt in plain HTML, CSS and JS.",
+    href: "https://wintas01.github.io/portfolio-template-2/",
+    linkLabel: "Live Demo",
+    codeHref: "https://github.com/wintas01/portfolio-template-2",
+    preview: projectPreviewPath("echo-template-mockup.png"),
+    previewAlt: "ECHO portfolio template hero on an iMac mockup",
+    framed: true,
+    icon: (
+      <img
+        src={projectPreviewPath("echo-template-icon.png")}
         alt=""
         aria-hidden="true"
         className="h-12 w-12 flex-none rounded-2xl border border-border object-cover sm:h-14 sm:w-14"
@@ -431,6 +472,11 @@ export default function Home() {
                   <div className="flex items-start gap-4">
                     {project.icon}
                     <div className="min-w-0">
+                      {"badge" in project && project.badge ? (
+                        <span className="mb-1.5 inline-flex items-center rounded-full border border-border bg-muted px-2.5 py-0.5 text-xs font-semibold text-muted-foreground">
+                          {project.badge}
+                        </span>
+                      ) : null}
                       <h3 className="text-lg font-bold sm:text-xl">
                         {project.title}
                       </h3>
@@ -440,7 +486,7 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="mt-6 border-t border-border pt-4">
+                  <div className="mt-6 flex gap-3 border-t border-border pt-4">
                     {project.href ? (
                       <a
                         href={project.href}
@@ -448,7 +494,9 @@ export default function Home() {
                         rel="noopener noreferrer"
                         className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-sm font-semibold text-background transition-colors hover:bg-foreground/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2"
                       >
-                        Visit Page
+                        {"linkLabel" in project && project.linkLabel
+                          ? project.linkLabel
+                          : "Visit Page"}
                         <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
                       </a>
                     ) : (
@@ -456,6 +504,17 @@ export default function Home() {
                         Coming Soon
                       </span>
                     )}
+                    {"codeHref" in project && project.codeHref ? (
+                      <a
+                        href={project.codeHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-border px-5 text-sm font-semibold text-foreground transition-colors hover:border-foreground/40 hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2"
+                      >
+                        View Code
+                        <Code className="h-4 w-4" aria-hidden="true" />
+                      </a>
+                    ) : null}
                   </div>
                 </div>
               </motion.article>
