@@ -9,6 +9,7 @@ import {
   RefreshCw,
   Users,
 } from "lucide-react";
+import { useI18n } from "@/i18n";
 
 const GITHUB_USERNAME = "wintas01";
 const GITHUB_PROFILE_URL = `https://github.com/${GITHUB_USERNAME}`;
@@ -127,6 +128,7 @@ async function fetchPublicContributions(
 }
 
 export default function GitHubShowcase() {
+  const { t, locale } = useI18n();
   const [data, setData] = useState<GitHubData | null>(null);
   const [loading, setLoading] = useState(true);
   const [contributionDays, setContributionDays] = useState<ContributionDay[] | null>(null);
@@ -235,7 +237,7 @@ export default function GitHubShowcase() {
     if (date.getUTCDate() === 1) {
       contributionMonthsByWeek.set(
         Math.floor((leadingEmptyDays + index) / 7),
-        date.toLocaleString("en-US", { month: "short", timeZone: "UTC" }),
+        date.toLocaleString(locale, { month: "short", timeZone: "UTC" }),
       );
     }
   });
@@ -245,7 +247,7 @@ export default function GitHubShowcase() {
     if (nextLabelledWeek >= 3) {
       contributionMonthsByWeek.set(
         0,
-        new Date(`${contributionDays[0].date}T00:00:00Z`).toLocaleString("en-US", {
+        new Date(`${contributionDays[0].date}T00:00:00Z`).toLocaleString(locale, {
           month: "short",
           timeZone: "UTC",
         }),
@@ -270,14 +272,13 @@ export default function GitHubShowcase() {
       <div className="flex flex-col gap-2 mb-6">
         <div className="flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-muted-foreground font-semibold">
           <Github className="w-4 h-4" />
-          Live on GitHub
+          {t.github.eyebrow}
         </div>
         <h3 className="text-2xl sm:text-3xl font-bold tracking-tight">
-          Open-source work and contributions
+          {t.github.heading}
         </h3>
         <p className="text-muted-foreground max-w-2xl">
-          Follow my latest repositories and see what I&apos;ve been contributing
-          to on GitHub.
+          {t.github.intro}
         </p>
       </div>
 
@@ -294,7 +295,7 @@ export default function GitHubShowcase() {
               <div>
                 <img
                   src={data.profile.avatar_url}
-                  alt={`${data.profile.login} GitHub avatar`}
+                  alt={t.github.avatarAlt(data.profile.login)}
                   className="w-16 h-16 rounded-full object-cover border-2 border-background/30 mb-5"
                 />
                 <h4 className="text-xl font-bold">
@@ -319,11 +320,11 @@ export default function GitHubShowcase() {
                 )}
                 <span className="inline-flex items-center gap-1.5">
                   <Code2 className="w-3.5 h-3.5" />
-                  {data.profile.public_repos} public repos
+                  {t.github.publicRepos(data.profile.public_repos)}
                 </span>
                 <span className="inline-flex items-center gap-1.5">
                   <Users className="w-3.5 h-3.5" />
-                  {data.profile.followers} followers
+                  {t.github.followers(data.profile.followers)}
                 </span>
               </div>
             </>
@@ -331,9 +332,9 @@ export default function GitHubShowcase() {
             <div className="flex flex-col justify-between h-full gap-8">
               <div>
                 <Github className="w-10 h-10 mb-5" />
-                <h4 className="text-xl font-bold">Visit my GitHub profile</h4>
+                <h4 className="text-xl font-bold">{t.github.visitProfile}</h4>
                 <p className="text-sm text-background/70 mt-2">
-                  GitHub data is temporarily unavailable here.
+                  {t.github.unavailable}
                 </p>
               </div>
               <a
@@ -342,7 +343,7 @@ export default function GitHubShowcase() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-sm font-semibold hover:opacity-70 transition-opacity"
               >
-                Open GitHub <ExternalLink className="w-4 h-4" />
+                {t.github.openGithub} <ExternalLink className="w-4 h-4" />
               </a>
             </div>
           )}
@@ -354,7 +355,7 @@ export default function GitHubShowcase() {
               rel="noopener noreferrer"
               className="mt-8 inline-flex items-center gap-2 text-sm font-semibold hover:opacity-70 transition-opacity"
             >
-              View full profile <ExternalLink className="w-4 h-4" />
+              {t.github.viewFullProfile} <ExternalLink className="w-4 h-4" />
             </a>
           )}
         </div>
@@ -362,18 +363,18 @@ export default function GitHubShowcase() {
         <div className="rounded-xl border border-[#30363d] bg-[#0d1117] p-4 text-[#f0f6fc] sm:p-6 overflow-hidden">
           <div className="flex flex-wrap items-center justify-between gap-4 mb-5">
             <p className="text-base font-semibold">
-              {contributionTotal} contribution{contributionTotal === 1 ? "" : "s"}{" "}
-              {selectedYear === CURRENT_YEAR
-                ? "in the last year"
-                : `in ${selectedYear}`}
+              {t.github.contributions(
+                contributionTotal,
+                selectedYear === CURRENT_YEAR ? null : selectedYear,
+              )}
             </p>
             <div className="flex items-center gap-2">
               <button
                 type="button"
                 onClick={() => setRefreshKey((key) => key + 1)}
                 disabled={contributionsLoading}
-                aria-label="Refresh contribution activity"
-                title="Refresh contribution activity"
+                aria-label={t.github.refresh}
+                title={t.github.refresh}
                 className="flex h-9 w-9 items-center justify-center rounded-md border border-[#30363d] text-[#8b949e] transition-colors hover:bg-[#161b22] hover:text-[#f0f6fc] disabled:opacity-50"
               >
                 <RefreshCw
@@ -382,7 +383,7 @@ export default function GitHubShowcase() {
               </button>
               <div className="relative">
                 <label className="sr-only" htmlFor="contribution-year">
-                  Contribution year
+                  {t.github.yearLabel}
                 </label>
                 <select
                   id="contribution-year"
@@ -417,8 +418,8 @@ export default function GitHubShowcase() {
                 href={`${GITHUB_PROFILE_URL}?tab=overview`}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="View GitHub profile"
-                title="View GitHub profile"
+                aria-label={t.github.viewProfile}
+                title={t.github.viewProfile}
                 className="flex h-9 w-9 items-center justify-center rounded-md border border-[#30363d] text-[#8b949e] transition-colors hover:bg-[#161b22] hover:text-[#f0f6fc]"
               >
                 <ExternalLink className="w-4 h-4" />
@@ -430,7 +431,7 @@ export default function GitHubShowcase() {
               <div ref={graphScrollRef} className="overflow-x-auto pb-1">
                 <div
                   role="img"
-                  aria-label={`GitHub contributions for ${GITHUB_USERNAME}: ${contributionTotal} ${selectedYear === CURRENT_YEAR ? "in the last year" : `in ${selectedYear}`}`}
+                  aria-label={`${t.github.graphLabel(GITHUB_USERNAME)}: ${t.github.contributions(contributionTotal, selectedYear === CURRENT_YEAR ? null : selectedYear)}`}
                   className="min-w-[560px] text-[#8b949e]"
                   style={{
                     display: "grid",
@@ -448,7 +449,7 @@ export default function GitHubShowcase() {
                       {contributionMonthsByWeek.get(weekIndex) ?? ""}
                     </span>
                   ))}
-                  {["Mon", "Wed", "Fri"].map((label, index) => (
+                  {t.github.weekdays.map((label, index) => (
                     <span
                       key={label}
                       aria-hidden="true"
@@ -467,7 +468,7 @@ export default function GitHubShowcase() {
                     return (
                       <span
                         key={day.date}
-                        title={`${day.count} contribution${day.count === 1 ? "" : "s"} on ${new Date(`${day.date}T00:00:00Z`).toLocaleDateString(undefined, { timeZone: "UTC" })}`}
+                        title={t.github.dayTitle(day.count, new Date(`${day.date}T00:00:00Z`).toLocaleDateString(locale, { timeZone: "UTC" }))}
                         className="aspect-square w-full rounded-[2px] outline outline-1 -outline-offset-1 outline-white/5 transition-colors"
                         style={{
                           gridColumn: Math.floor(position / 7) + 2,
@@ -482,8 +483,8 @@ export default function GitHubShowcase() {
             ) : (
               <p className="py-8 text-sm text-[#8b949e]">
                 {contributionsLoading
-                  ? "Loading contribution activity…"
-                  : "Contribution activity is unavailable right now."}
+                  ? t.github.loading
+                  : t.github.activityUnavailable}
               </p>
             )}
             <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-xs text-[#8b949e]">
@@ -494,22 +495,27 @@ export default function GitHubShowcase() {
                   rel="noopener noreferrer"
                   className="underline-offset-2 hover:text-[#58a6ff] hover:underline"
                 >
-                  Learn how we count contributions
+                  {t.github.learnCount}
                 </a>
                 <span aria-live="polite">
                   {contributionsError
-                    ? "Couldn’t refresh activity."
+                    ? t.github.couldntRefresh
                     : contributionsUpdatedAt
-                      ? `Last checked ${contributionsUpdatedAt.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}`
-                      : "Loading live activity"}
+                      ? t.github.lastChecked(
+                          contributionsUpdatedAt.toLocaleTimeString(locale, {
+                            hour: "numeric",
+                            minute: "2-digit",
+                          }),
+                        )
+                      : t.github.loadingLive}
                 </span>
               </div>
               <div
                 role="img"
-                aria-label="Contribution levels from less to more"
+                aria-label={t.github.levels}
                 className="flex items-center gap-1.5 whitespace-nowrap"
               >
-                <span>Less</span>
+                <span>{t.github.less}</span>
                 {CONTRIBUTION_LEVEL_COLORS.map((color, index) => (
                   <span
                     key={index}
@@ -517,7 +523,7 @@ export default function GitHubShowcase() {
                     style={{ backgroundColor: color }}
                   />
                 ))}
-                <span>More</span>
+                <span>{t.github.more}</span>
               </div>
             </div>
           </div>

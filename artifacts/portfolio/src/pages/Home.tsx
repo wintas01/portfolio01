@@ -13,6 +13,8 @@ import {
 import myPhoto from "@/assets/wintas-photo.png";
 import aboutPhoto from "@/assets/wintas-about.png";
 import GitHubShowcase from "@/components/GitHubShowcase";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { useI18n, type Dictionary } from "@/i18n";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
@@ -34,7 +36,7 @@ const staggerContainer = {
   },
 };
 
-const navLinks = ["Home", "About", "Projects", "Contact"];
+const navLinks = ["home", "about", "projects", "contact"] as const;
 const projectPreviewPath = (fileName: string) =>
   `${import.meta.env.BASE_URL}project-previews/${fileName}`;
 
@@ -75,8 +77,21 @@ function MockupPreview({ src, alt }: { src: string; alt: string }) {
   );
 }
 
-const projects = [
+const projects: Array<{
+  key: keyof Dictionary["projects"]["descriptions"];
+  title: string;
+  badge?: string;
+  description: string;
+  href?: string;
+  linkLabel?: string;
+  codeHref?: string;
+  preview: string;
+  previewAlt: string;
+  framed?: boolean;
+  icon: React.ReactNode;
+}> = [
   {
+    key: "tixora",
     title: "Tixora",
     description:
       "Event ticketing platform: find concerts and parties, pay your way, and enter with a QR code.",
@@ -93,6 +108,7 @@ const projects = [
     ),
   },
   {
+    key: "komuLibrary",
     title: "KOMU E-Library",
     description:
       "University e-library for e-books, journals, theses and research databases. I built the frontend and backend.",
@@ -110,6 +126,7 @@ const projects = [
     ),
   },
   {
+    key: "vtu",
     title: "VTU App",
     description: "Download my VTU application — fast, simple, and reliable.",
     href: "https://sabuss.com/ojsub3",
@@ -126,6 +143,7 @@ const projects = [
     ),
   },
   {
+    key: "churchBot",
     title: "Church Auto Bot",
     description:
       "Demo platform for an automated church assistant experience and workflow.",
@@ -142,6 +160,7 @@ const projects = [
     ),
   },
   {
+    key: "komuWebsite",
     title: "KOMU Website",
     description:
       "Team redesign of the official Kingsley Ozumba Mbadiwe University website.",
@@ -159,6 +178,7 @@ const projects = [
     ),
   },
   {
+    key: "neon",
     title: "Neon Portfolio",
     badge: "Portfolio template",
     description:
@@ -179,6 +199,7 @@ const projects = [
     ),
   },
   {
+    key: "echo",
     title: "ECHO Portfolio",
     badge: "Portfolio template",
     description:
@@ -202,6 +223,7 @@ const projects = [
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { t, language } = useI18n();
 
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-foreground selection:text-background font-sans overflow-x-hidden">
@@ -214,25 +236,26 @@ export default function Home() {
             {navLinks.map((link) => (
               <a
                 key={link}
-                href={`#${link.toLowerCase()}`}
+                href={`#${link}`}
                 className="hover:text-muted-foreground transition-colors"
               >
-                {link}
+                {t.nav[link]}
               </a>
             ))}
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <LanguageSwitcher />
             <a
               href="mailto:nnannaokechukwu1@gmail.com"
               className="hidden md:block bg-foreground text-background px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-foreground/80 transition-colors"
             >
-              Let's Talk
+              {t.nav.letsTalk}
             </a>
             <button
               className="md:hidden w-10 h-10 flex items-center justify-center rounded-full border border-border"
               onClick={() => setMenuOpen(!menuOpen)}
-              aria-label="Toggle menu"
+              aria-label={t.nav.toggleMenu}
             >
               {menuOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
@@ -252,18 +275,18 @@ export default function Home() {
                 {navLinks.map((link) => (
                   <a
                     key={link}
-                    href={`#${link.toLowerCase()}`}
+                    href={`#${link}`}
                     className="text-lg font-medium hover:text-muted-foreground transition-colors"
                     onClick={() => setMenuOpen(false)}
                   >
-                    {link}
+                    {t.nav[link]}
                   </a>
                 ))}
                 <a
                   href="mailto:nnannaokechukwu1@gmail.com"
                   className="mt-2 bg-foreground text-background px-5 py-3 rounded-full text-sm font-semibold text-center"
                 >
-                  Let's Talk
+                  {t.nav.letsTalk}
                 </a>
               </div>
             </motion.div>
@@ -287,9 +310,9 @@ export default function Home() {
               variants={fadeInUp}
               className="text-5xl sm:text-6xl md:text-7xl lg:text-[80px] leading-[1.05] font-bold tracking-tight"
             >
-              <span className="block text-foreground">Designing</span>
+              <span className="block text-foreground">{t.hero.line1}</span>
               <span className="block text-muted-foreground">
-                Digital Solutions
+                {t.hero.line2}
               </span>
             </motion.h1>
 
@@ -297,9 +320,7 @@ export default function Home() {
               variants={fadeInUp}
               className="text-base sm:text-lg text-muted-foreground max-w-md font-light leading-relaxed"
             >
-              I build full-stack web apps and AI-powered products, from
-              university platforms to ticketing and payments, and I use AI
-              tools to ship them fast.
+              {t.hero.intro}
             </motion.p>
           </motion.div>
 
@@ -327,15 +348,16 @@ export default function Home() {
                 <div className="flex items-center gap-2 mb-1">
                   <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse flex-shrink-0"></div>
                   <span className="text-xs font-semibold uppercase tracking-wider">
-                    Available
+                    {t.hero.available}
                   </span>
                 </div>
                 <p className="text-xs sm:text-sm text-background/70 leading-tight">
-                  Currently taking on new projects.
+                  {t.hero.availableText}
                 </p>
               </div>
               <a
                 href="mailto:nnannaokechukwu1@gmail.com"
+                aria-label={t.contact.email}
                 className="flex-shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-background/20 flex items-center justify-center hover:bg-background/30 transition-colors"
               >
                 <Mail size={16} />
@@ -372,19 +394,14 @@ export default function Home() {
               variants={fadeInUp}
               className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight"
             >
-              About Me
+              {t.about.title}
             </motion.h2>
 
             <motion.p
               variants={fadeInUp}
               className="text-base sm:text-lg text-muted-foreground leading-relaxed"
             >
-              I'm a Computer Science graduate (2026) and full-stack developer
-              who builds with AI. I've delivered a university e-library and
-              website, a ticketing platform, a VTU payments app, and an AI
-              content bot, using AI as a core part of how I design, write, and
-              ship software. My goal is technology that is useful, polished,
-              and built to last.
+              {t.about.body}
             </motion.p>
 
             <motion.div
@@ -393,24 +410,22 @@ export default function Home() {
             >
               <div>
                 <h3 className="font-semibold text-base sm:text-lg mb-3 border-b border-border pb-2">
-                  Expertise
+                  {t.about.expertise}
                 </h3>
                 <ul className="space-y-2 sm:space-y-3 text-muted-foreground text-sm sm:text-base">
-                  <li>Full-Stack Web Development</li>
-                  <li>AI Integration (LLM APIs)</li>
-                  <li>AI-Assisted Development &amp; Prompting</li>
-                  <li>UI/UX Design</li>
+                  {t.about.expertiseItems.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
                 </ul>
               </div>
               <div>
                 <h3 className="font-semibold text-base sm:text-lg mb-3 border-b border-border pb-2">
-                  Focus Areas
+                  {t.about.focus}
                 </h3>
                 <ul className="space-y-2 sm:space-y-3 text-muted-foreground text-sm sm:text-base">
-                  <li>Practical Digital Products</li>
-                  <li>User-Focused Experiences</li>
-                  <li>Continuous Learning</li>
-                  <li>Impactful Technology</li>
+                  {t.about.focusItems.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
                 </ul>
               </div>
             </motion.div>
@@ -422,7 +437,7 @@ export default function Home() {
               className="inline-flex items-center justify-center gap-3 self-start bg-foreground text-background px-6 py-3 rounded-full text-sm font-semibold hover:bg-foreground/80 transition-colors"
             >
               <Download className="w-4 h-4" />
-              DOWNLOAD CV
+              {t.about.downloadCv}
             </motion.a>
           </div>
         </motion.div>
@@ -439,10 +454,10 @@ export default function Home() {
             className="mb-12 sm:mb-16"
           >
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-3">
-              Projects
+              {t.projects.title}
             </h2>
             <p className="text-muted-foreground text-base sm:text-lg">
-              Things I've built and places you can find my work.
+              {t.projects.subtitle}
             </p>
           </motion.div>
 
@@ -459,12 +474,20 @@ export default function Home() {
                 {project.framed ? (
                   <MockupPreview
                     src={project.preview}
-                    alt={project.previewAlt}
+                    alt={
+                      language === "en"
+                        ? project.previewAlt
+                        : t.projects.previewAlt(project.title)
+                    }
                   />
                 ) : (
                   <LaptopPreview
                     src={project.preview}
-                    alt={project.previewAlt}
+                    alt={
+                      language === "en"
+                        ? project.previewAlt
+                        : t.projects.previewAlt(project.title)
+                    }
                   />
                 )}
 
@@ -472,16 +495,16 @@ export default function Home() {
                   <div className="flex items-start gap-4">
                     {project.icon}
                     <div className="min-w-0">
-                      {"badge" in project && project.badge ? (
+                      {project.badge ? (
                         <span className="mb-1.5 inline-flex items-center rounded-full border border-border bg-muted px-2.5 py-0.5 text-xs font-semibold text-muted-foreground">
-                          {project.badge}
+                          {t.projects.templateBadge}
                         </span>
                       ) : null}
                       <h3 className="text-lg font-bold sm:text-xl">
                         {project.title}
                       </h3>
                       <p className="mt-1 text-sm leading-relaxed text-muted-foreground sm:text-base">
-                        {project.description}
+                        {t.projects.descriptions[project.key]}
                       </p>
                     </div>
                   </div>
@@ -494,24 +517,24 @@ export default function Home() {
                         rel="noopener noreferrer"
                         className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-sm font-semibold text-background transition-colors hover:bg-foreground/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2"
                       >
-                        {"linkLabel" in project && project.linkLabel
-                          ? project.linkLabel
-                          : "Visit Page"}
+                        {project.linkLabel
+                          ? t.projects.liveDemo
+                          : t.projects.visitPage}
                         <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
                       </a>
                     ) : (
                       <span className="inline-flex min-h-11 w-full cursor-default items-center justify-center rounded-full border border-border px-5 text-sm font-semibold text-muted-foreground">
-                        Coming Soon
+                        {t.projects.comingSoon}
                       </span>
                     )}
-                    {"codeHref" in project && project.codeHref ? (
+                    {project.codeHref ? (
                       <a
                         href={project.codeHref}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-border px-5 text-sm font-semibold text-foreground transition-colors hover:border-foreground/40 hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2"
                       >
-                        View Code
+                        {t.projects.viewCode}
                         <Code className="h-4 w-4" aria-hidden="true" />
                       </a>
                     ) : null}
@@ -541,15 +564,16 @@ export default function Home() {
             variants={fadeInUp}
             className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-none mb-5 sm:mb-6"
           >
-            Let's create <br />
-            <span className="text-muted-foreground">together.</span>
+            {t.contact.titleLine1} <br />
+            <span className="text-muted-foreground">
+              {t.contact.titleLine2}
+            </span>
           </motion.h2>
           <motion.p
             variants={fadeInUp}
             className="text-base sm:text-xl text-muted-foreground mb-10 sm:mb-12"
           >
-            Available for freelance and collaboration. Reach out and let's build
-            something great.
+            {t.contact.body}
           </motion.p>
 
           <motion.div variants={fadeInUp} className="flex flex-col gap-5">
@@ -563,7 +587,7 @@ export default function Home() {
               </div>
               <div>
                 <p className="text-xs text-muted-foreground mb-0.5 uppercase tracking-wider font-medium">
-                  Email
+                  {t.contact.email}
                 </p>
                 <p className="text-base sm:text-lg font-semibold group-hover:text-muted-foreground transition-colors">
                   nnannaokechukwu1@gmail.com
@@ -615,10 +639,10 @@ export default function Home() {
               </div>
               <div>
                 <p className="text-xs text-muted-foreground mb-0.5 uppercase tracking-wider font-medium">
-                  WhatsApp
+                  {t.contact.whatsapp}
                 </p>
                 <p className="text-base sm:text-lg font-semibold group-hover:text-muted-foreground transition-colors">
-                  Contact Me
+                  {t.contact.contactMe}
                 </p>
               </div>
             </a>
@@ -636,15 +660,15 @@ export default function Home() {
             {navLinks.map((link) => (
               <a
                 key={link}
-                href={`#${link.toLowerCase()}`}
+                href={`#${link}`}
                 className="hover:text-foreground transition-colors"
               >
-                {link}
+                {t.nav[link]}
               </a>
             ))}
           </div>
           <div className="text-xs sm:text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Wintas. All rights reserved.
+            © {new Date().getFullYear()} Wintas. {t.footer.rights}
           </div>
         </div>
       </footer>
