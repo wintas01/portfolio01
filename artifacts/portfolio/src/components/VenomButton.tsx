@@ -46,8 +46,12 @@ export default function VenomButton({
   children,
   className = "",
   wrapperClassName = "",
+  target,
+  rel,
 }: {
   href: string;
+  target?: string;
+  rel?: string;
   children: ReactNode;
   className?: string;
   wrapperClassName?: string;
@@ -470,7 +474,7 @@ export default function VenomButton({
         />
         <canvas ref={fibreRef} className="absolute" />
       </div>
-      <a ref={buttonRef} href={href} className={`relative ${className}`}>
+      <a ref={buttonRef} href={href} target={target} rel={rel} className={`relative ${className}`}>
         {children}
       </a>
     </div>

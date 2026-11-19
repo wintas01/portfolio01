@@ -109,6 +109,8 @@ const publicPath = (file: string) => `${import.meta.env.BASE_URL}${file}`;
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { t, language } = useI18n();
+  // "Let's Talk" and WhatsApp open a chat with a greeting in the visitor's language.
+  const whatsappHref = `https://wa.me/2347083066127?text=${encodeURIComponent(t.nav.whatsappGreeting)}`;
   // The CV downloads in the visitor's language. All CVs are built from
   // src/data/projects.json by scripts/cv/generate_cv_translations.py.
   const cvFileName =
@@ -146,7 +148,9 @@ export default function Home() {
           <div className="flex items-center gap-1.5 sm:gap-3">
             <LanguageSwitcher />
             <VenomButton
-              href="mailto:nnannaokechukwu1@gmail.com"
+              href={whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
               wrapperClassName="order-first md:order-none"
               className="block whitespace-nowrap bg-foreground text-background px-3.5 max-[359px]:px-2.5 py-2 text-xs sm:px-5 sm:py-2.5 sm:text-sm rounded-full font-semibold transition-shadow hover:shadow-[0_10px_24px_-8px_rgba(0,0,0,0.55)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2"
             >
@@ -183,7 +187,9 @@ export default function Home() {
                   </a>
                 ))}
                 <a
-                  href="mailto:nnannaokechukwu1@gmail.com"
+                  href={whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="mt-2 bg-foreground text-background px-5 py-3 rounded-full text-sm font-semibold text-center"
                 >
                   {t.nav.letsTalk}
@@ -533,7 +539,7 @@ export default function Home() {
 
             {/* WhatsApp */}
             <a
-              href="https://wa.me/2347083066127"
+              href={whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-4 group w-fit"

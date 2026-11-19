@@ -65,6 +65,7 @@ const en = {
     contact: "Contact",
     letsTalk: "Let's Talk",
     toggleMenu: "Toggle menu",
+    whatsappGreeting: "Hi Wintas! I saw your portfolio and I'd like to talk about a project.",
   },
   hero: {
     line1: "Designing",
@@ -166,6 +167,7 @@ const fr: Dictionary = {
     contact: "Contact",
     letsTalk: "Discutons",
     toggleMenu: "Ouvrir ou fermer le menu",
+    whatsappGreeting: "Bonjour Wintas ! J'ai vu votre portfolio et j'aimerais discuter d'un projet.",
   },
   hero: {
     line1: "Concevoir",
@@ -265,6 +267,7 @@ const es: Dictionary = {
     contact: "Contacto",
     letsTalk: "Hablemos",
     toggleMenu: "Abrir o cerrar el menú",
+    whatsappGreeting: "¡Hola, Wintas! Vi tu portafolio y me gustaría hablar sobre un proyecto.",
   },
   hero: {
     line1: "Diseñando",
@@ -364,6 +367,7 @@ const pt: Dictionary = {
     contact: "Contato",
     letsTalk: "Vamos falar",
     toggleMenu: "Abrir ou fechar o menu",
+    whatsappGreeting: "Olá, Wintas! Vi seu portfólio e gostaria de conversar sobre um projeto.",
   },
   hero: {
     line1: "Criando",
@@ -463,6 +467,7 @@ const de: Dictionary = {
     contact: "Kontakt",
     letsTalk: "Kontakt",
     toggleMenu: "Menü öffnen oder schließen",
+    whatsappGreeting: "Hallo Wintas! Ich habe Ihr Portfolio gesehen und würde gern über ein Projekt sprechen.",
   },
   hero: {
     line1: "Ich gestalte",
@@ -562,6 +567,7 @@ const ar: Dictionary = {
     contact: "تواصل",
     letsTalk: "لنتحدث",
     toggleMenu: "فتح القائمة أو إغلاقها",
+    whatsappGreeting: "مرحبًا Wintas! اطلعتُ على معرض أعمالك وأودّ التحدث معك بشأن مشروع.",
   },
   hero: {
     line1: "أصمّم",
@@ -659,6 +665,7 @@ const zh: Dictionary = {
     contact: "联系",
     letsTalk: "聊一聊",
     toggleMenu: "打开或关闭菜单",
+    whatsappGreeting: "你好，Wintas！我看了你的作品集，想和你聊聊一个项目。",
   },
   hero: {
     line1: "设计",
@@ -756,6 +763,7 @@ const ja: Dictionary = {
     contact: "お問い合わせ",
     letsTalk: "相談する",
     toggleMenu: "メニューを開閉",
+    whatsappGreeting: "こんにちは、Wintasさん！ポートフォリオを拝見しました。プロジェクトについてご相談したいです。",
   },
   hero: {
     line1: "デザインする、",
@@ -853,6 +861,7 @@ const ko: Dictionary = {
     contact: "연락처",
     letsTalk: "문의하기",
     toggleMenu: "메뉴 열기/닫기",
+    whatsappGreeting: "안녕하세요, Wintas님! 포트폴리오를 보고 프로젝트에 대해 이야기하고 싶어 연락드립니다.",
   },
   hero: {
     line1: "디지털 솔루션을",
@@ -950,6 +959,7 @@ const hi: Dictionary = {
     contact: "संपर्क",
     letsTalk: "बात करें",
     toggleMenu: "मेन्यू खोलें या बंद करें",
+    whatsappGreeting: "नमस्ते Wintas! आपका पोर्टफ़ोलियो देखा, एक प्रोजेक्ट के बारे में बात करनी है।",
   },
   hero: {
     line1: "डिज़ाइन करता हूँ",
