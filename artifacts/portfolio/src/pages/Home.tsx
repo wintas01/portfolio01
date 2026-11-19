@@ -301,9 +301,9 @@ export default function Home() {
       {/* Hero Section */}
       <section
         id="home"
-        className="pt-28 sm:pt-32 pb-16 px-5 sm:px-8 max-w-[1400px] mx-auto"
+        className="pt-28 sm:pt-32 lg:pt-28 pb-16 px-5 sm:px-8 max-w-[1400px] mx-auto lg:flex lg:min-h-[100svh] lg:items-center"
       >
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-8 items-center">
+        <div className="grid w-full lg:grid-cols-[1.15fr_0.85fr] gap-10 lg:gap-12 items-center">
           <motion.div
             initial="hidden"
             animate="visible"
@@ -333,7 +333,7 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-            className="relative bg-card rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden border border-border"
+            className="relative bg-card rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden border border-border lg:h-[min(calc(100svh-9rem),760px)] lg:w-auto lg:justify-self-end"
             style={{ aspectRatio: "4/5" }}
           >
             <img
