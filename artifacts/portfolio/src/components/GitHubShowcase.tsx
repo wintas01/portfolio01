@@ -10,6 +10,7 @@ import {
   Users,
 } from "lucide-react";
 import { useI18n } from "@/i18n";
+import ContributionSnakeGrid from "@/components/ContributionSnakeGrid";
 
 const GITHUB_USERNAME = "wintas01";
 const GITHUB_PROFILE_URL = `https://github.com/${GITHUB_USERNAME}`;
@@ -429,56 +430,21 @@ export default function GitHubShowcase() {
           <div className="rounded-lg border border-[#30363d] px-3 py-4 sm:px-5 sm:py-5">
             {contributionDays ? (
               <div ref={graphScrollRef} dir="ltr" className="overflow-x-auto pb-1">
-                <div
-                  role="img"
-                  aria-label={`${t.github.graphLabel(GITHUB_USERNAME)}: ${t.github.contributions(contributionTotal, selectedYear === CURRENT_YEAR ? null : selectedYear)}`}
-                  className="min-w-[560px] text-[#8b949e]"
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: `auto repeat(${contributionWeekCount}, minmax(0, 1fr))`,
-                    gap: "3px",
-                  }}
-                >
-                  {Array.from({ length: contributionWeekCount }, (_, weekIndex) => (
-                    <span
-                      key={`month-${weekIndex}`}
-                      aria-hidden="true"
-                      className="mb-1 whitespace-nowrap text-xs leading-none"
-                      style={{ gridColumn: weekIndex + 2, gridRow: 1 }}
-                    >
-                      {contributionMonthsByWeek.get(weekIndex) ?? ""}
-                    </span>
-                  ))}
-                  {t.github.weekdays.map((label, index) => (
-                    <span
-                      key={label}
-                      aria-hidden="true"
-                      className="pr-2 text-[10px] leading-none self-center"
-                      style={{ gridColumn: 1, gridRow: index * 2 + 3 }}
-                    >
-                      {label}
-                    </span>
-                  ))}
-                  {contributionDays.map((day, index) => {
-                    const position = leadingEmptyDays + index;
-                    const level = Math.min(
-                      Math.max(Math.round(day.level), 0),
-                      CONTRIBUTION_LEVEL_COLORS.length - 1,
-                    );
-                    return (
-                      <span
-                        key={day.date}
-                        title={t.github.dayTitle(day.count, new Date(`${day.date}T00:00:00Z`).toLocaleDateString(locale, { timeZone: "UTC" }))}
-                        className="aspect-square w-full rounded-[2px] outline outline-1 -outline-offset-1 outline-white/5 transition-colors"
-                        style={{
-                          gridColumn: Math.floor(position / 7) + 2,
-                          gridRow: (position % 7) + 2,
-                          backgroundColor: CONTRIBUTION_LEVEL_COLORS[level],
-                        }}
-                      />
-                    );
-                  })}
-                </div>
+                <ContributionSnakeGrid
+                  days={contributionDays}
+                  leadingEmptyDays={leadingEmptyDays}
+                  weekCount={contributionWeekCount}
+                  monthsByWeek={contributionMonthsByWeek}
+                  weekdays={t.github.weekdays}
+                  colors={CONTRIBUTION_LEVEL_COLORS}
+                  ariaLabel={`${t.github.graphLabel(GITHUB_USERNAME)}: ${t.github.contributions(contributionTotal, selectedYear === CURRENT_YEAR ? null : selectedYear)}`}
+                  dayTitle={(day) =>
+                    t.github.dayTitle(
+                      day.count,
+                      new Date(`${day.date}T00:00:00Z`).toLocaleDateString(locale, { timeZone: "UTC" }),
+                    )
+                  }
+                />
               </div>
             ) : (
               <p className="py-8 text-sm text-[#8b949e]">
