@@ -14,6 +14,7 @@ import myPhoto from "@/assets/wintas-photo.png";
 import aboutPhoto from "@/assets/wintas-about.png";
 import GitHubShowcase from "@/components/GitHubShowcase";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import VenomButton from "@/components/VenomButton";
 import { useI18n, type Dictionary } from "@/i18n";
 
 const fadeInUp = {
@@ -230,7 +231,9 @@ export default function Home() {
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/40">
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8 py-4 flex items-center justify-between">
-          <div className="font-bold text-xl tracking-tight">WINTAS.</div>
+          <div dir="ltr" className="font-bold text-xl tracking-tight">
+            WINTAS.
+          </div>
 
           <div className="hidden md:flex items-center gap-8 font-medium text-sm">
             {navLinks.map((link) => (
@@ -246,12 +249,13 @@ export default function Home() {
 
           <div className="flex items-center gap-2 sm:gap-3">
             <LanguageSwitcher />
-            <a
+            <VenomButton
               href="mailto:nnannaokechukwu1@gmail.com"
-              className="hidden md:block bg-foreground text-background px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-foreground/80 transition-colors"
+              wrapperClassName="hidden md:block"
+              className="block bg-foreground text-background px-5 py-2.5 rounded-full text-sm font-semibold transition-shadow hover:shadow-[0_10px_24px_-8px_rgba(0,0,0,0.55)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2"
             >
               {t.nav.letsTalk}
-            </a>
+            </VenomButton>
             <button
               className="md:hidden w-10 h-10 flex items-center justify-center rounded-full border border-border"
               onClick={() => setMenuOpen(!menuOpen)}
@@ -652,8 +656,8 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="py-6 sm:py-8 px-5 sm:px-8 border-t border-border">
-        <div className="max-w-[1400px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-          <div className="font-bold tracking-tight text-lg sm:text-xl">
+        <div className="max-w-[1400px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-start">
+          <div dir="ltr" className="font-bold tracking-tight text-lg sm:text-xl">
             WINTAS.
           </div>
           <div className="flex items-center gap-4 sm:gap-6 text-xs sm:text-sm text-muted-foreground">

@@ -428,7 +428,7 @@ export default function GitHubShowcase() {
           </div>
           <div className="rounded-lg border border-[#30363d] px-3 py-4 sm:px-5 sm:py-5">
             {contributionDays ? (
-              <div ref={graphScrollRef} className="overflow-x-auto pb-1">
+              <div ref={graphScrollRef} dir="ltr" className="overflow-x-auto pb-1">
                 <div
                   role="img"
                   aria-label={`${t.github.graphLabel(GITHUB_USERNAME)}: ${t.github.contributions(contributionTotal, selectedYear === CURRENT_YEAR ? null : selectedYear)}`}

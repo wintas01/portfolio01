@@ -124,3 +124,15 @@
     @apply font-sans antialiased bg-background text-foreground;
   }
 }
+
+/* Fonts for non-Latin languages (loaded on demand from i18n.tsx). Inter stays
+   first so Latin text such as names and "GitHub" keeps the site's look. */
+html[lang="ar"] { --app-font-sans: 'Inter', 'Noto Sans Arabic', sans-serif; }
+html[lang="zh"] { --app-font-sans: 'Inter', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+html[lang="ja"] { --app-font-sans: 'Inter', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif; }
+html[lang="ko"] { --app-font-sans: 'Inter', 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; }
+html[lang="hi"] { --app-font-sans: 'Inter', 'Noto Sans Devanagari', sans-serif; }
+
+/* Arabic and CJK headings look cramped with the tight Latin tracking. */
+html[lang="ar"] h1, html[lang="ar"] h2, html[lang="ar"] h3,
+html[lang="hi"] h1, html[lang="hi"] h2, html[lang="hi"] h3 { letter-spacing: 0; line-height: 1.25; }

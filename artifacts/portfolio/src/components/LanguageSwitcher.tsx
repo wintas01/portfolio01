@@ -70,7 +70,7 @@ export default function LanguageSwitcher({
   };
 
   return (
-    <div ref={rootRef} className={`relative ${className}`}>
+    <div ref={rootRef} className={`relative z-10 ${className}`}>
       <button
         ref={buttonRef}
         type="button"
@@ -107,7 +107,7 @@ export default function LanguageSwitcher({
             exit={{ opacity: 0, y: -6, scale: 0.97 }}
             transition={{ duration: 0.16, ease: "easeOut" }}
             onKeyDown={handleMenuKeyDown}
-            className="absolute right-0 top-full z-50 mt-2 w-48 origin-top-right rounded-2xl border border-border bg-card p-1.5 shadow-[0_18px_45px_rgba(15,23,42,0.14)]"
+            className="absolute end-0 top-full z-50 mt-2 w-48 origin-top-right rtl:origin-top-left rounded-2xl border border-border bg-card p-1.5 shadow-[0_18px_45px_rgba(15,23,42,0.14)]"
           >
             {LANGUAGES.map((entry, index) => {
               const selected = entry.code === language;
@@ -121,10 +121,11 @@ export default function LanguageSwitcher({
                   role="menuitemradio"
                   aria-checked={selected}
                   lang={entry.code}
+                  dir={entry.dir}
                   tabIndex={index === activeIndex ? 0 : -1}
                   onClick={() => choose(entry.code)}
                   onMouseEnter={() => setActiveIndex(index)}
-                  className={`flex w-full items-center justify-between rounded-xl px-3.5 py-2.5 text-left text-sm font-semibold outline-none transition-colors focus-visible:bg-muted ${
+                  className={`flex w-full items-center justify-between rounded-xl px-3.5 py-2.5 text-start text-sm font-semibold outline-none transition-colors focus-visible:bg-muted ${
                     selected ? "bg-muted text-foreground" : "text-foreground/80 hover:bg-muted"
                   }`}
                 >

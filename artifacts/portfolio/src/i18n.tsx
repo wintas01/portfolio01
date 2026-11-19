@@ -15,12 +15,37 @@ import {
  */
 
 export const LANGUAGES = [
-  { code: "en", label: "English", locale: "en-US" },
-  { code: "fr", label: "Français", locale: "fr-FR" },
-  { code: "es", label: "Español", locale: "es-ES" },
-  { code: "pt", label: "Português", locale: "pt-BR" },
-  { code: "de", label: "Deutsch", locale: "de-DE" },
+  { code: "en", label: "English", locale: "en-US", dir: "ltr" },
+  { code: "fr", label: "Français", locale: "fr-FR", dir: "ltr" },
+  { code: "es", label: "Español", locale: "es-ES", dir: "ltr" },
+  { code: "pt", label: "Português", locale: "pt-BR", dir: "ltr" },
+  { code: "de", label: "Deutsch", locale: "de-DE", dir: "ltr" },
+  { code: "ar", label: "العربية", locale: "ar", dir: "rtl" },
+  { code: "zh", label: "中文（简体）", locale: "zh-CN", dir: "ltr" },
+  { code: "ja", label: "日本語", locale: "ja-JP", dir: "ltr" },
+  { code: "ko", label: "한국어", locale: "ko-KR", dir: "ltr" },
+  { code: "hi", label: "हिन्दी", locale: "hi-IN", dir: "ltr" },
 ] as const;
+
+// Inter has no Arabic, CJK or Devanagari letters, so these load a matching
+// Noto font, only when a visitor picks that language.
+const EXTRA_FONTS: Partial<Record<LanguageCode, string>> = {
+  ar: "Noto+Sans+Arabic:wght@400;500;600;700",
+  zh: "Noto+Sans+SC:wght@400;500;700",
+  ja: "Noto+Sans+JP:wght@400;500;700",
+  ko: "Noto+Sans+KR:wght@400;500;700",
+  hi: "Noto+Sans+Devanagari:wght@400;500;600;700",
+};
+
+function loadFontFor(language: LanguageCode) {
+  const family = EXTRA_FONTS[language];
+  if (!family || document.getElementById(`font-${language}`)) return;
+  const link = document.createElement("link");
+  link.id = `font-${language}`;
+  link.rel = "stylesheet";
+  link.href = `https://fonts.googleapis.com/css2?family=${family}&display=swap`;
+  document.head.appendChild(link);
+}
 
 export type LanguageCode = (typeof LANGUAGES)[number]["code"];
 
@@ -573,7 +598,545 @@ const de: Dictionary = {
   },
 };
 
-const dictionaries: Record<LanguageCode, Dictionary> = { en, fr, es, pt, de };
+const ar: Dictionary = {
+  meta: {
+    title: "Wintas | مطوّر Full-Stack مدعوم بالذكاء الاصطناعي",
+  },
+  language: {
+    label: "اللغة",
+  },
+  nav: {
+    home: "الرئيسية",
+    about: "نبذة عني",
+    projects: "المشاريع",
+    contact: "تواصل",
+    letsTalk: "لنتحدث",
+    toggleMenu: "فتح القائمة أو إغلاقها",
+  },
+  hero: {
+    line1: "أصمّم",
+    line2: "حلولًا رقمية",
+    intro:
+      "أبني تطبيقات ويب متكاملة (Full-Stack) ومنتجات مدعومة بالذكاء الاصطناعي، من المنصات الجامعية إلى حجز التذاكر والمدفوعات، وأستخدم أدوات الذكاء الاصطناعي لإطلاقها بسرعة.",
+    available: "متاح",
+    availableText: "أستقبل مشاريع جديدة حاليًا.",
+  },
+  about: {
+    title: "نبذة عني",
+    body: "أنا خريج علوم الحاسوب (2026) ومطوّر Full-Stack أبني بالذكاء الاصطناعي. سلّمتُ مكتبة إلكترونية وموقعًا لجامعة، ومنصة لحجز التذاكر، وتطبيقًا لمدفوعات VTU، وروبوت محتوى بالذكاء الاصطناعي، مع جعل الذكاء الاصطناعي جزءًا أساسيًا من طريقتي في تصميم البرمجيات وكتابتها وإطلاقها. هدفي تقنية مفيدة ومتقنة ومصممة لتدوم.",
+    expertise: "الخبرات",
+    expertiseItems: [
+      "تطوير الويب المتكامل (Full-Stack)",
+      "دمج الذكاء الاصطناعي (واجهات LLM)",
+      "التطوير بمساعدة الذكاء الاصطناعي وكتابة الأوامر",
+      "تصميم الواجهات وتجربة المستخدم (UI/UX)",
+    ],
+    focus: "مجالات التركيز",
+    focusItems: [
+      "منتجات رقمية عملية",
+      "تجارب تتمحور حول المستخدم",
+      "التعلّم المستمر",
+      "تقنية ذات أثر",
+    ],
+    downloadCv: "تحميل السيرة الذاتية",
+  },
+  projects: {
+    title: "المشاريع",
+    subtitle: "ما بنيته وأين تجد أعمالي.",
+    visitPage: "زيارة الموقع",
+    liveDemo: "عرض مباشر",
+    comingSoon: "قريبًا",
+    viewCode: "عرض الكود",
+    templateBadge: "قالب معرض أعمال",
+    previewAlt: (title: string) => `معاينة ${title}`,
+    descriptions: {
+      tixora:
+        "منصة لحجز تذاكر الفعاليات: اعثر على الحفلات الموسيقية والسهرات، وادفع بالطريقة التي تناسبك، وادخل برمز QR.",
+      komuLibrary:
+        "مكتبة إلكترونية جامعية للكتب الإلكترونية والمجلات العلمية والرسائل الجامعية وقواعد بيانات الأبحاث. بنيتُ الواجهتين الأمامية والخلفية.",
+      vtu: "حمّل تطبيق VTU الخاص بي — سريع وبسيط وموثوق.",
+      churchBot: "منصة تجريبية لتجربة مساعد آلي للكنائس وسير عمله.",
+      komuWebsite:
+        "إعادة تصميم جماعية للموقع الرسمي لجامعة كينغسلي أوزومبا مباديوي.",
+      neon: "قالب مجاني ومفتوح المصدر لمعرض الأعمال، فيه حقل جسيمات ونص متحرك ومعرض مثبّت أثناء التمرير. ملف HTML واحد مع دليل إعداد.",
+      echo: "قالب مجاني لمعرض الأعمال بتمرير سينمائي — فكرة مُعاد إنشاؤها مع سماء مرصّعة بالنجوم تتكشّف وشريط مشاريع ثلاثي الأبعاد، مبنية بـ HTML وCSS وJS فقط.",
+    },
+  },
+  contact: {
+    titleLine1: "لنصنع شيئًا",
+    titleLine2: "معًا.",
+    body: "متاح للعمل الحر والتعاون. تواصل معي ولنبنِ شيئًا رائعًا.",
+    email: "البريد الإلكتروني",
+    whatsapp: "واتساب",
+    contactMe: "تواصل معي",
+  },
+  footer: {
+    rights: "جميع الحقوق محفوظة.",
+  },
+  github: {
+    eyebrow: "مباشر على GitHub",
+    heading: "أعمال مفتوحة المصدر ومساهمات",
+    intro: "تابع أحدث مستودعاتي وشاهد ما أساهم فيه على GitHub.",
+    avatarAlt: (login: string) => `الصورة الرمزية لـ ${login} على GitHub`,
+    publicRepos: (n: number) => `${n} مستودع عام`,
+    followers: (n: number) => `${n} متابع`,
+    visitProfile: "زر ملفي على GitHub",
+    unavailable: "بيانات GitHub غير متاحة هنا مؤقتًا.",
+    openGithub: "فتح GitHub",
+    viewFullProfile: "عرض الملف الكامل",
+    contributions: (n: number, year: number | null) =>
+      `${n} مساهمة ${year === null ? "خلال العام الماضي" : `في ${year}`}`,
+    dayTitle: (n: number, date: string) => `${n} مساهمة في ${date}`,
+    graphLabel: (user: string) => `مساهمات ${user} على GitHub`,
+    refresh: "تحديث النشاط",
+    yearLabel: "سنة المساهمات",
+    viewProfile: "عرض ملف GitHub",
+    weekdays: ["الإثنين", "الأربعاء", "الجمعة"],
+    loading: "جارٍ تحميل النشاط…",
+    activityUnavailable: "النشاط غير متاح حاليًا.",
+    learnCount: "كيف تُحتسب المساهمات",
+    couldntRefresh: "تعذّر تحديث النشاط.",
+    lastChecked: (time: string) => `آخر تحقق: ${time}`,
+    loadingLive: "جارٍ تحميل النشاط المباشر",
+    levels: "مستويات المساهمة من الأقل إلى الأكثر",
+    less: "أقل",
+    more: "أكثر",
+  },
+};
+
+const zh: Dictionary = {
+  meta: {
+    title: "Wintas | AI 驱动的全栈开发者",
+  },
+  language: {
+    label: "语言",
+  },
+  nav: {
+    home: "首页",
+    about: "关于",
+    projects: "项目",
+    contact: "联系",
+    letsTalk: "聊一聊",
+    toggleMenu: "打开或关闭菜单",
+  },
+  hero: {
+    line1: "设计",
+    line2: "数字化解决方案",
+    intro:
+      "我开发全栈 Web 应用和 AI 驱动的产品，涵盖高校平台、票务和支付等领域，并借助 AI 工具快速交付。",
+    available: "可接项目",
+    availableText: "目前正在承接新项目。",
+  },
+  about: {
+    title: "关于我",
+    body: "我是计算机科学专业毕业生（2026 届），也是一名用 AI 进行开发的全栈开发者。我交付过高校电子图书馆和官网、票务平台、VTU 支付应用以及 AI 内容机器人，AI 是我设计、编写和交付软件的核心环节。我的目标是打造实用、精致且经久耐用的技术。",
+    expertise: "专业技能",
+    expertiseItems: [
+      "全栈 Web 开发",
+      "AI 集成（LLM API）",
+      "AI 辅助开发与提示词工程",
+      "UI/UX 设计",
+    ],
+    focus: "关注方向",
+    focusItems: [
+      "实用的数字产品",
+      "以用户为中心的体验",
+      "持续学习",
+      "有影响力的技术",
+    ],
+    downloadCv: "下载简历",
+  },
+  projects: {
+    title: "项目",
+    subtitle: "我做过的作品，以及可以找到它们的地方。",
+    visitPage: "访问网站",
+    liveDemo: "在线演示",
+    comingSoon: "即将推出",
+    viewCode: "查看代码",
+    templateBadge: "作品集模板",
+    previewAlt: (title: string) => `${title} 预览`,
+    descriptions: {
+      tixora: "活动票务平台：发现演唱会和派对，灵活支付，凭二维码入场。",
+      komuLibrary:
+        "高校电子图书馆，提供电子书、期刊、学位论文和科研数据库。前端和后端均由我开发。",
+      vtu: "下载我的 VTU 应用——快速、简单、可靠。",
+      churchBot: "教会自动化助手体验及其工作流程的演示平台。",
+      komuWebsite: "与团队一起重新设计金斯利·奥祖姆巴·姆巴迪威大学官方网站。",
+      neon: "免费开源的作品集模板，包含粒子场、动态文字和滚动固定画廊。仅一个 HTML 文件，附带设置指南。",
+      echo: "免费的电影感滚动作品集模板——重现的创意设计，带有星空展开效果和 3D 项目缎带，使用纯 HTML、CSS 和 JS 重新构建。",
+    },
+  },
+  contact: {
+    titleLine1: "让我们",
+    titleLine2: "一起创造。",
+    body: "可承接自由职业和合作项目。欢迎联系我，一起打造出色的作品。",
+    email: "邮箱",
+    whatsapp: "WhatsApp",
+    contactMe: "联系我",
+  },
+  footer: {
+    rights: "保留所有权利。",
+  },
+  github: {
+    eyebrow: "GitHub 实时动态",
+    heading: "开源作品与贡献",
+    intro: "关注我的最新仓库，看看我在 GitHub 上的贡献。",
+    avatarAlt: (login: string) => `${login} 的 GitHub 头像`,
+    publicRepos: (n: number) => `${n} 个公开仓库`,
+    followers: (n: number) => `${n} 位关注者`,
+    visitProfile: "访问我的 GitHub 主页",
+    unavailable: "暂时无法获取 GitHub 数据。",
+    openGithub: "打开 GitHub",
+    viewFullProfile: "查看完整主页",
+    contributions: (n: number, year: number | null) =>
+      `${year === null ? "过去一年" : `${year} 年`}共 ${n} 次贡献`,
+    dayTitle: (n: number, date: string) => `${date}：${n} 次贡献`,
+    graphLabel: (user: string) => `${user} 的 GitHub 贡献`,
+    refresh: "刷新贡献动态",
+    yearLabel: "贡献年份",
+    viewProfile: "查看 GitHub 主页",
+    weekdays: ["周一", "周三", "周五"],
+    loading: "正在加载贡献动态…",
+    activityUnavailable: "暂时无法显示贡献动态。",
+    learnCount: "了解贡献的统计方式",
+    couldntRefresh: "无法刷新动态。",
+    lastChecked: (time: string) => `最后检查于 ${time}`,
+    loadingLive: "正在加载实时动态",
+    levels: "贡献等级，从少到多",
+    less: "少",
+    more: "多",
+  },
+};
+
+const ja: Dictionary = {
+  meta: {
+    title: "Wintas | AIを活用するフルスタック開発者",
+  },
+  language: {
+    label: "言語",
+  },
+  nav: {
+    home: "ホーム",
+    about: "自己紹介",
+    projects: "プロジェクト",
+    contact: "お問い合わせ",
+    letsTalk: "相談する",
+    toggleMenu: "メニューを開閉",
+  },
+  hero: {
+    line1: "デザインする、",
+    line2: "デジタルソリューション",
+    intro:
+      "大学向けプラットフォームからチケット販売や決済まで、フルスタックのWebアプリとAIを活用したプロダクトを開発し、AIツールでスピーディーに届けています。",
+    available: "受付中",
+    availableText: "現在、新しいプロジェクトを受け付けています。",
+  },
+  about: {
+    title: "自己紹介",
+    body: "2026年にコンピュータサイエンスの学位を取得した、AIを活用して開発するフルスタック開発者です。大学の電子図書館とWebサイト、チケット販売プラットフォーム、VTU決済アプリ、AIコンテンツボットを手がけてきました。AIは、私がソフトウェアを設計し、書き、リリースするうえで欠かせない存在です。目指しているのは、役に立ち、完成度が高く、長く使えるテクノロジーです。",
+    expertise: "専門分野",
+    expertiseItems: [
+      "フルスタックWeb開発",
+      "AI統合（LLM API）",
+      "AI支援開発とプロンプト設計",
+      "UI/UXデザイン",
+    ],
+    focus: "注力分野",
+    focusItems: [
+      "実用的なデジタルプロダクト",
+      "ユーザー中心の体験",
+      "継続的な学習",
+      "インパクトのあるテクノロジー",
+    ],
+    downloadCv: "履歴書をダウンロード",
+  },
+  projects: {
+    title: "プロジェクト",
+    subtitle: "これまでに作ったものと、作品を見られる場所です。",
+    visitPage: "サイトを見る",
+    liveDemo: "ライブデモ",
+    comingSoon: "近日公開",
+    viewCode: "コードを見る",
+    templateBadge: "ポートフォリオテンプレート",
+    previewAlt: (title: string) => `${title}のプレビュー`,
+    descriptions: {
+      tixora:
+        "イベントチケットプラットフォーム：コンサートやパーティーを探し、好きな方法で支払い、QRコードで入場できます。",
+      komuLibrary:
+        "電子書籍、学術誌、学位論文、研究データベースを備えた大学の電子図書館。フロントエンドとバックエンドを開発しました。",
+      vtu: "私のVTUアプリをダウンロード — 速くて、シンプルで、信頼できます。",
+      churchBot: "教会向け自動アシスタントの体験とワークフローのデモプラットフォーム。",
+      komuWebsite:
+        "キングズリー・オズンバ・ムバディウェ大学公式サイトのチームによるリデザイン。",
+      neon: "パーティクルフィールド、動くテキスト、スクロール固定ギャラリーを備えた無料のオープンソース・ポートフォリオテンプレート。HTMLファイル1つで、セットアップガイド付き。",
+      echo: "映画のようなスクロールが楽しめる無料のポートフォリオテンプレート。星空が現れる演出と3Dのプロジェクトリボンを備えたコンセプトを、素のHTML・CSS・JSで再構築しました。",
+    },
+  },
+  contact: {
+    titleLine1: "一緒に",
+    titleLine2: "つくりましょう。",
+    body: "フリーランスのご依頼やコラボレーションを受け付けています。お気軽にご連絡ください。素晴らしいものを一緒に作りましょう。",
+    email: "メール",
+    whatsapp: "WhatsApp",
+    contactMe: "連絡する",
+  },
+  footer: {
+    rights: "無断転載を禁じます。",
+  },
+  github: {
+    eyebrow: "GitHubでライブ公開中",
+    heading: "オープンソースの活動とコントリビューション",
+    intro: "最新のリポジトリや、GitHubでのコントリビューションをご覧ください。",
+    avatarAlt: (login: string) => `${login}のGitHubアバター`,
+    publicRepos: (n: number) => `公開リポジトリ ${n}件`,
+    followers: (n: number) => `フォロワー ${n}人`,
+    visitProfile: "GitHubプロフィールを見る",
+    unavailable: "GitHubのデータを一時的に表示できません。",
+    openGithub: "GitHubを開く",
+    viewFullProfile: "プロフィールをすべて見る",
+    contributions: (n: number, year: number | null) =>
+      `${year === null ? "過去1年間" : `${year}年`}のコントリビューション：${n}件`,
+    dayTitle: (n: number, date: string) => `${date}：${n}件のコントリビューション`,
+    graphLabel: (user: string) => `${user}のGitHubコントリビューション`,
+    refresh: "アクティビティを更新",
+    yearLabel: "コントリビューションの年",
+    viewProfile: "GitHubプロフィールを見る",
+    weekdays: ["月", "水", "金"],
+    loading: "アクティビティを読み込み中…",
+    activityUnavailable: "現在アクティビティを表示できません。",
+    learnCount: "コントリビューションの数え方",
+    couldntRefresh: "アクティビティを更新できませんでした。",
+    lastChecked: (time: string) => `最終確認 ${time}`,
+    loadingLive: "最新のアクティビティを読み込み中",
+    levels: "コントリビューションのレベル（少ない〜多い）",
+    less: "少",
+    more: "多",
+  },
+};
+
+const ko: Dictionary = {
+  meta: {
+    title: "Wintas | AI 기반 풀스택 개발자",
+  },
+  language: {
+    label: "언어",
+  },
+  nav: {
+    home: "홈",
+    about: "소개",
+    projects: "프로젝트",
+    contact: "연락처",
+    letsTalk: "문의하기",
+    toggleMenu: "메뉴 열기/닫기",
+  },
+  hero: {
+    line1: "디지털 솔루션을",
+    line2: "디자인합니다",
+    intro:
+      "대학 플랫폼부터 티켓 예매와 결제까지, 풀스택 웹 앱과 AI 기반 제품을 만들고 AI 도구로 빠르게 출시합니다.",
+    available: "작업 가능",
+    availableText: "현재 새 프로젝트를 받고 있습니다.",
+  },
+  about: {
+    title: "소개",
+    body: "2026년 컴퓨터공학을 졸업한 풀스택 개발자로, AI를 활용해 개발합니다. 대학 전자도서관과 웹사이트, 티켓 예매 플랫폼, VTU 결제 앱, AI 콘텐츠 봇을 만들었으며, AI는 제가 소프트웨어를 설계하고 작성하고 출시하는 방식의 핵심입니다. 제 목표는 유용하고, 완성도 높으며, 오래가는 기술을 만드는 것입니다.",
+    expertise: "전문 분야",
+    expertiseItems: [
+      "풀스택 웹 개발",
+      "AI 통합(LLM API)",
+      "AI 보조 개발 및 프롬프트 작성",
+      "UI/UX 디자인",
+    ],
+    focus: "관심 분야",
+    focusItems: [
+      "실용적인 디지털 제품",
+      "사용자 중심 경험",
+      "꾸준한 학습",
+      "임팩트 있는 기술",
+    ],
+    downloadCv: "이력서 다운로드",
+  },
+  projects: {
+    title: "프로젝트",
+    subtitle: "제가 만든 것들과 작업을 볼 수 있는 곳입니다.",
+    visitPage: "사이트 방문",
+    liveDemo: "라이브 데모",
+    comingSoon: "출시 예정",
+    viewCode: "코드 보기",
+    templateBadge: "포트폴리오 템플릿",
+    previewAlt: (title: string) => `${title} 미리보기`,
+    descriptions: {
+      tixora:
+        "이벤트 티켓 플랫폼: 콘서트와 파티를 찾고, 원하는 방식으로 결제하고, QR 코드로 입장하세요.",
+      komuLibrary:
+        "전자책, 학술지, 학위논문, 연구 데이터베이스를 제공하는 대학 전자도서관입니다. 프런트엔드와 백엔드를 직접 개발했습니다.",
+      vtu: "제 VTU 앱을 다운로드하세요 — 빠르고, 간단하고, 믿을 수 있습니다.",
+      churchBot: "교회용 자동화 어시스턴트 경험과 워크플로를 보여주는 데모 플랫폼입니다.",
+      komuWebsite: "킹슬리 오줌바 음바디웨 대학교 공식 웹사이트를 팀으로 리디자인했습니다.",
+      neon: "파티클 필드, 움직이는 텍스트, 스크롤 고정 갤러리를 갖춘 무료 오픈소스 포트폴리오 템플릿입니다. HTML 파일 하나와 설정 가이드로 구성됩니다.",
+      echo: "영화 같은 스크롤을 갖춘 무료 포트폴리오 템플릿 — 별이 빛나는 하늘이 드러나는 효과와 3D 프로젝트 리본이 있는 콘셉트를 순수 HTML, CSS, JS로 다시 만들었습니다.",
+    },
+  },
+  contact: {
+    titleLine1: "함께",
+    titleLine2: "만들어요.",
+    body: "프리랜스와 협업이 가능합니다. 연락 주시면 함께 멋진 것을 만들어 보겠습니다.",
+    email: "이메일",
+    whatsapp: "WhatsApp",
+    contactMe: "연락하기",
+  },
+  footer: {
+    rights: "모든 권리 보유.",
+  },
+  github: {
+    eyebrow: "GitHub 실시간",
+    heading: "오픈소스 작업과 기여",
+    intro: "최신 저장소를 확인하고 제가 GitHub에서 기여한 내용을 살펴보세요.",
+    avatarAlt: (login: string) => `${login}의 GitHub 아바타`,
+    publicRepos: (n: number) => `공개 저장소 ${n}개`,
+    followers: (n: number) => `팔로워 ${n}명`,
+    visitProfile: "제 GitHub 프로필 방문하기",
+    unavailable: "GitHub 데이터를 일시적으로 불러올 수 없습니다.",
+    openGithub: "GitHub 열기",
+    viewFullProfile: "전체 프로필 보기",
+    contributions: (n: number, year: number | null) =>
+      `${year === null ? "지난 1년간" : `${year}년`} 기여 ${n}회`,
+    dayTitle: (n: number, date: string) => `${date}: 기여 ${n}회`,
+    graphLabel: (user: string) => `${user}의 GitHub 기여`,
+    refresh: "기여 활동 새로고침",
+    yearLabel: "기여 연도",
+    viewProfile: "GitHub 프로필 보기",
+    weekdays: ["월", "수", "금"],
+    loading: "기여 활동을 불러오는 중…",
+    activityUnavailable: "지금은 기여 활동을 표시할 수 없습니다.",
+    learnCount: "기여 횟수 계산 방법",
+    couldntRefresh: "활동을 새로고침하지 못했습니다.",
+    lastChecked: (time: string) => `마지막 확인 ${time}`,
+    loadingLive: "실시간 활동을 불러오는 중",
+    levels: "기여 수준(적음에서 많음)",
+    less: "적음",
+    more: "많음",
+  },
+};
+
+const hi: Dictionary = {
+  meta: {
+    title: "Wintas | AI-संचालित फुल-स्टैक डेवलपर",
+  },
+  language: {
+    label: "भाषा",
+  },
+  nav: {
+    home: "होम",
+    about: "परिचय",
+    projects: "प्रोजेक्ट्स",
+    contact: "संपर्क",
+    letsTalk: "बात करें",
+    toggleMenu: "मेन्यू खोलें या बंद करें",
+  },
+  hero: {
+    line1: "डिज़ाइन करता हूँ",
+    line2: "डिजिटल समाधान",
+    intro:
+      "मैं फुल-स्टैक वेब ऐप्स और AI-संचालित प्रोडक्ट बनाता हूँ — यूनिवर्सिटी प्लेटफ़ॉर्म से लेकर टिकटिंग और पेमेंट तक — और उन्हें जल्दी लॉन्च करने के लिए AI टूल्स का इस्तेमाल करता हूँ।",
+    available: "उपलब्ध",
+    availableText: "फ़िलहाल नए प्रोजेक्ट ले रहा हूँ।",
+  },
+  about: {
+    title: "मेरे बारे में",
+    body: "मैं कंप्यूटर साइंस ग्रेजुएट (2026) और फुल-स्टैक डेवलपर हूँ, जो AI के साथ निर्माण करता है। मैंने एक यूनिवर्सिटी ई-लाइब्रेरी और वेबसाइट, एक टिकटिंग प्लेटफ़ॉर्म, एक VTU पेमेंट ऐप और एक AI कंटेंट बॉट बनाए हैं, और AI मेरे सॉफ़्टवेयर डिज़ाइन करने, लिखने और लॉन्च करने के तरीके का अहम हिस्सा है। मेरा लक्ष्य ऐसी तकनीक बनाना है जो उपयोगी, बेहतरीन और लंबे समय तक चलने वाली हो।",
+    expertise: "विशेषज्ञता",
+    expertiseItems: [
+      "फुल-स्टैक वेब डेवलपमेंट",
+      "AI इंटीग्रेशन (LLM API)",
+      "AI-सहायता प्राप्त डेवलपमेंट और प्रॉम्प्टिंग",
+      "UI/UX डिज़ाइन",
+    ],
+    focus: "फ़ोकस क्षेत्र",
+    focusItems: [
+      "व्यावहारिक डिजिटल प्रोडक्ट",
+      "यूज़र-केंद्रित अनुभव",
+      "लगातार सीखना",
+      "प्रभावशाली तकनीक",
+    ],
+    downloadCv: "CV डाउनलोड करें",
+  },
+  projects: {
+    title: "प्रोजेक्ट्स",
+    subtitle: "मैंने क्या बनाया है और मेरा काम कहाँ देखें।",
+    visitPage: "साइट देखें",
+    liveDemo: "लाइव डेमो",
+    comingSoon: "जल्द आ रहा है",
+    viewCode: "कोड देखें",
+    templateBadge: "पोर्टफ़ोलियो टेम्पलेट",
+    previewAlt: (title: string) => `${title} का प्रीव्यू`,
+    descriptions: {
+      tixora:
+        "इवेंट टिकटिंग प्लेटफ़ॉर्म: कॉन्सर्ट और पार्टियाँ खोजें, अपने तरीके से भुगतान करें और QR कोड से प्रवेश करें।",
+      komuLibrary:
+        "ई-बुक्स, जर्नल्स, थीसिस और रिसर्च डेटाबेस के लिए यूनिवर्सिटी ई-लाइब्रेरी। इसका फ्रंटएंड और बैकएंड मैंने बनाया।",
+      vtu: "मेरा VTU ऐप डाउनलोड करें — तेज़, आसान और भरोसेमंद।",
+      churchBot: "चर्च के लिए एक स्वचालित असिस्टेंट अनुभव और वर्कफ़्लो का डेमो प्लेटफ़ॉर्म।",
+      komuWebsite:
+        "किंग्सले ओज़ुम्बा म्बाडिवे यूनिवर्सिटी की आधिकारिक वेबसाइट का टीम के साथ किया गया रीडिज़ाइन।",
+      neon: "पार्टिकल फ़ील्ड, एनिमेटेड टेक्स्ट और स्क्रॉल पर पिन गैलरी वाला मुफ़्त, ओपन-सोर्स पोर्टफ़ोलियो टेम्पलेट। एक ही HTML फ़ाइल, सेटअप गाइड के साथ।",
+      echo: "सिनेमाई स्क्रॉल वाला मुफ़्त पोर्टफ़ोलियो टेम्पलेट — तारों भरे आसमान के रिवील और 3D प्रोजेक्ट रिबन वाला एक दोबारा बनाया गया कॉन्सेप्ट, सादे HTML, CSS और JS में।",
+    },
+  },
+  contact: {
+    titleLine1: "आइए मिलकर",
+    titleLine2: "कुछ बनाएँ।",
+    body: "फ़्रीलांस और सहयोग के लिए उपलब्ध हूँ। संपर्क करें और कुछ शानदार बनाते हैं।",
+    email: "ईमेल",
+    whatsapp: "WhatsApp",
+    contactMe: "संपर्क करें",
+  },
+  footer: {
+    rights: "सर्वाधिकार सुरक्षित।",
+  },
+  github: {
+    eyebrow: "GitHub पर लाइव",
+    heading: "ओपन-सोर्स काम और योगदान",
+    intro: "मेरी नई रिपॉज़िटरी देखें और जानें कि मैं GitHub पर किसमें योगदान दे रहा हूँ।",
+    avatarAlt: (login: string) => `${login} का GitHub अवतार`,
+    publicRepos: (n: number) => `${n} पब्लिक रिपॉज़िटरी`,
+    followers: (n: number) => `${n} फ़ॉलोअर्स`,
+    visitProfile: "मेरी GitHub प्रोफ़ाइल देखें",
+    unavailable: "GitHub डेटा अभी अस्थायी रूप से उपलब्ध नहीं है।",
+    openGithub: "GitHub खोलें",
+    viewFullProfile: "पूरी प्रोफ़ाइल देखें",
+    contributions: (n: number, year: number | null) =>
+      `${year === null ? "पिछले एक साल में" : `${year} में`} ${n} योगदान`,
+    dayTitle: (n: number, date: string) => `${date} को ${n} योगदान`,
+    graphLabel: (user: string) => `${user} के GitHub योगदान`,
+    refresh: "योगदान गतिविधि रीफ़्रेश करें",
+    yearLabel: "योगदान वर्ष",
+    viewProfile: "GitHub प्रोफ़ाइल देखें",
+    weekdays: ["सोम", "बुध", "शुक्र"],
+    loading: "योगदान गतिविधि लोड हो रही है…",
+    activityUnavailable: "योगदान गतिविधि अभी उपलब्ध नहीं है।",
+    learnCount: "योगदान कैसे गिने जाते हैं",
+    couldntRefresh: "गतिविधि रीफ़्रेश नहीं हो सकी।",
+    lastChecked: (time: string) => `आख़िरी बार जाँचा गया: ${time}`,
+    loadingLive: "लाइव गतिविधि लोड हो रही है",
+    levels: "योगदान स्तर, कम से ज़्यादा",
+    less: "कम",
+    more: "ज़्यादा",
+  },
+};
+
+const dictionaries: Record<LanguageCode, Dictionary> = {
+  en,
+  fr,
+  es,
+  pt,
+  de,
+  ar,
+  zh,
+  ja,
+  ko,
+  hi,
+};
 
 function isLanguageCode(value: unknown): value is LanguageCode {
   return LANGUAGES.some((language) => language.code === value);
@@ -612,6 +1175,7 @@ function detectInitialLanguage(): LanguageCode {
 type I18nContextValue = {
   language: LanguageCode;
   locale: string;
+  dir: "ltr" | "rtl";
   t: Dictionary;
   setLanguage: (language: LanguageCode) => void;
 };
@@ -633,13 +1197,21 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   };
 
   const value = useMemo<I18nContextValue>(() => {
-    const locale =
-      LANGUAGES.find((entry) => entry.code === language)?.locale ?? "en-US";
-    return { language, locale, t: dictionaries[language], setLanguage };
+    const entry = LANGUAGES.find((item) => item.code === language);
+    return {
+      language,
+      locale: entry?.locale ?? "en-US",
+      dir: entry?.dir ?? "ltr",
+      t: dictionaries[language],
+      setLanguage,
+    };
   }, [language]);
 
   useEffect(() => {
+    const entry = LANGUAGES.find((item) => item.code === language);
     document.documentElement.lang = language;
+    document.documentElement.dir = entry?.dir ?? "ltr";
+    loadFontFor(language);
     document.title = dictionaries[language].meta.title;
   }, [language]);
 
