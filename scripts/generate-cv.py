@@ -1,4 +1,10 @@
-"""Generate the downloadable CV at artifacts/portfolio/public/.
+"""OLD English-only CV generator, kept for reference.
+
+The CVs (English included) are now built by scripts/cv/generate_cv_translations.py
+from the website's project list, automatically on every push. Running this file
+would overwrite the English CV with a version that lacks newer projects.
+
+Generate the downloadable CV at artifacts/portfolio/public/.
 
 Run from the repo root:  python3 scripts/generate-cv.py  (needs reportlab and Pillow)
 """

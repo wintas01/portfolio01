@@ -1,0 +1,757 @@
+{
+  "_howTo": [
+    "HOW TO ADD A PROJECT: copy one entry, give it a new id and fill in at least the English (en) text.",
+    "It then appears on the website AND in every CV (rebuilt automatically when you push). Other languages fall back to English until translated.",
+    "Images go in artifacts/portfolio/public/project-previews/. onCV:false keeps a project off the CV; onWebsite:false keeps it off the website.",
+    "cvRank (optional) orders the CV; projects without one go after the ranked ones, in this file's order. cvLinks label can be live, demo or source; use \"launching\" for not-yet-live."
+  ],
+  "projects": [
+    {
+      "id": "tixora",
+      "title": "Tixora",
+      "onWebsite": true,
+      "onCV": true,
+      "preview": "project-previews/tixora-mockup.png",
+      "previewAlt": "Tixora event ticketing homepage on an iMac mockup",
+      "framed": true,
+      "icon": "project-previews/tixora-icon.png",
+      "iconBorder": false,
+      "cvLinks": "launching",
+      "cvRank": 3,
+      "text": {
+        "en": {
+          "description": "Event ticketing platform: find concerts and parties, pay your way, and enter with a QR code.",
+          "cvKicker": "Event ticketing platform",
+          "cvTitle": "Tixora",
+          "cvBullets": [
+            "Ticketing platform to find concerts, parties, dinners, and shows and book in seconds.",
+            "Checkout by card, bank transfer, or USSD, with a QR ticket issued right after payment.",
+            "One scan at the door: no paper tickets, no queues, no fakes."
+          ]
+        },
+        "fr": {
+          "description": "Plateforme de billetterie événementielle : trouvez des concerts et des soirées, payez comme vous voulez et entrez avec un QR code.",
+          "cvKicker": "Plateforme de billetterie événementielle",
+          "cvTitle": "Tixora",
+          "cvBullets": [
+            "Trouver concerts, soirées, dîners et spectacles et réserver en quelques secondes.",
+            "Paiement par carte, virement ou USSD, billet QR émis juste après le paiement.",
+            "Un seul scan à l'entrée : pas de billets papier, pas de files d'attente, pas de faux."
+          ]
+        },
+        "es": {
+          "description": "Plataforma de venta de entradas para eventos: encuentra conciertos y fiestas, paga como prefieras y entra con un código QR.",
+          "cvKicker": "Plataforma de venta de entradas",
+          "cvTitle": "Tixora",
+          "cvBullets": [
+            "Encuentra conciertos, fiestas, cenas y espectáculos y reserva en segundos.",
+            "Pago con tarjeta, transferencia o USSD, con entrada QR al instante.",
+            "Un solo escaneo en la puerta: sin entradas de papel, sin colas, sin falsificaciones."
+          ]
+        },
+        "pt": {
+          "description": "Plataforma de ingressos para eventos: encontre shows e festas, pague do seu jeito e entre com um QR code.",
+          "cvKicker": "Plataforma de ingressos para eventos",
+          "cvTitle": "Tixora",
+          "cvBullets": [
+            "Encontre shows, festas, jantares e espetáculos e reserve em segundos.",
+            "Pagamento por cartão, transferência ou USSD, com ingresso QR na hora.",
+            "Um único scan na entrada: sem ingressos de papel, sem filas, sem falsificações."
+          ]
+        },
+        "de": {
+          "description": "Ticketing-Plattform für Events: Konzerte und Partys finden, flexibel bezahlen und per QR-Code einchecken.",
+          "cvKicker": "Ticketing-Plattform für Events",
+          "cvTitle": "Tixora",
+          "cvBullets": [
+            "Konzerte, Partys, Dinner und Shows finden und in Sekunden buchen.",
+            "Zahlung per Karte, Überweisung oder USSD; QR-Ticket direkt nach der Zahlung.",
+            "Ein Scan am Eingang: keine Papiertickets, keine Warteschlangen, keine Fälschungen."
+          ]
+        },
+        "ar": {
+          "description": "منصة لحجز تذاكر الفعاليات: اعثر على الحفلات الموسيقية والسهرات، وادفع بالطريقة التي تناسبك، وادخل برمز QR.",
+          "cvKicker": "منصة لحجز تذاكر الفعاليات",
+          "cvTitle": "Tixora",
+          "cvBullets": [
+            "منصة للعثور على الحفلات الموسيقية والسهرات والعشاءات والعروض والحجز في ثوانٍ.",
+            "الدفع بالبطاقة أو التحويل البنكي أو USSD، مع تذكرة برمز QR تصدر فور الدفع.",
+            "مسح واحد عند الباب: لا تذاكر ورقية، ولا طوابير، ولا تزوير."
+          ]
+        },
+        "zh": {
+          "description": "活动票务平台：发现演唱会和派对，灵活支付，凭二维码入场。",
+          "cvKicker": "活动票务平台",
+          "cvTitle": "Tixora",
+          "cvBullets": [
+            "发现演唱会、派对、晚宴和演出，几秒钟即可完成预订。",
+            "支持银行卡、银行转账或 USSD 支付，付款后立即生成二维码门票。",
+            "入场一扫即可：无纸质门票、无需排队、杜绝假票。"
+          ]
+        },
+        "ja": {
+          "description": "イベントチケットプラットフォーム：コンサートやパーティーを探し、好きな方法で支払い、QRコードで入場できます。",
+          "cvKicker": "イベントチケットプラットフォーム",
+          "cvTitle": "Tixora",
+          "cvBullets": [
+            "コンサートやパーティー、ショーを探して数秒で予約できる。",
+            "カード、銀行振込、USSDで決済でき、支払い直後にQRチケットを発行。",
+            "入口でワンスキャン：紙のチケットも行列も偽造もなし。"
+          ]
+        },
+        "ko": {
+          "description": "이벤트 티켓 플랫폼: 콘서트와 파티를 찾고, 원하는 방식으로 결제하고, QR 코드로 입장하세요.",
+          "cvKicker": "이벤트 티켓 플랫폼",
+          "cvTitle": "Tixora",
+          "cvBullets": [
+            "콘서트, 파티, 디너, 공연을 찾아 몇 초 만에 예약할 수 있는 플랫폼입니다.",
+            "카드, 계좌이체, USSD로 결제하면 즉시 QR 티켓이 발급됩니다.",
+            "입구에서 한 번만 스캔: 종이 티켓도, 줄 서기도, 위조도 없습니다."
+          ]
+        },
+        "hi": {
+          "description": "इवेंट टिकटिंग प्लेटफ़ॉर्म: कॉन्सर्ट और पार्टियाँ खोजें, अपने तरीके से भुगतान करें और QR कोड से प्रवेश करें।",
+          "cvKicker": "इवेंट टिकटिंग प्लेटफ़ॉर्म",
+          "cvTitle": "Tixora",
+          "cvBullets": [
+            "कॉन्सर्ट, पार्टियाँ, डिनर और शो खोजने और सेकंडों में बुक करने का प्लेटफ़ॉर्म।",
+            "कार्ड, बैंक ट्रांसफ़र या USSD से भुगतान, और भुगतान के तुरंत बाद QR टिकट।",
+            "दरवाज़े पर एक स्कैन: न कागज़ी टिकट, न कतारें, न नकली टिकट।"
+          ]
+        }
+      }
+    },
+    {
+      "id": "komu-elibrary",
+      "title": "KOMU E-Library",
+      "onWebsite": true,
+      "onCV": true,
+      "href": "https://komudigital.ng/",
+      "preview": "project-previews/komu-elibrary-mockup.png",
+      "previewAlt": "KOMU E-Library homepage on an iMac mockup",
+      "framed": true,
+      "icon": "project-previews/komu-icon.png",
+      "iconBorder": true,
+      "cvLinks": [
+        {
+          "label": "live",
+          "url": "komu-elibrary.vercel.app"
+        }
+      ],
+      "cvRank": 1,
+      "text": {
+        "en": {
+          "description": "University e-library for e-books, journals, theses and research databases. I built the frontend and backend.",
+          "cvKicker": "Full-stack  —  Frontend & Backend",
+          "cvTitle": "KOMU E-Library",
+          "cvBullets": [
+            "Built the frontend and backend of the university's e-library for e-books, journals, and theses.",
+            "Search across 19+ research databases, available on campus and remotely, 24/7."
+          ]
+        },
+        "fr": {
+          "description": "Bibliothèque numérique universitaire pour livres électroniques, revues, thèses et bases de données de recherche. J'ai développé le frontend et le backend.",
+          "cvKicker": "Full-stack  —  Frontend et backend",
+          "cvTitle": "Bibliothèque numérique KOMU",
+          "cvBullets": [
+            "Frontend et backend de la bibliothèque numérique : e-books, revues et thèses.",
+            "Plus de 19 bases de données de recherche, sur le campus et à distance, 24 h/24."
+          ]
+        },
+        "es": {
+          "description": "Biblioteca digital universitaria con libros electrónicos, revistas, tesis y bases de datos de investigación. Desarrollé el frontend y el backend.",
+          "cvKicker": "Full-stack  —  Frontend y backend",
+          "cvTitle": "Biblioteca digital KOMU",
+          "cvBullets": [
+            "Frontend y backend de la biblioteca digital: e-books, revistas y tesis.",
+            "Más de 19 bases de datos de investigación, en el campus y en remoto, 24/7."
+          ]
+        },
+        "pt": {
+          "description": "Biblioteca digital universitária com e-books, periódicos, teses e bases de dados de pesquisa. Desenvolvi o frontend e o backend.",
+          "cvKicker": "Full-stack  —  Frontend e backend",
+          "cvTitle": "Biblioteca digital KOMU",
+          "cvBullets": [
+            "Frontend e backend da biblioteca digital: e-books, periódicos e teses.",
+            "Busca em mais de 19 bases de dados de pesquisa, no campus e remotamente, 24/7."
+          ]
+        },
+        "de": {
+          "description": "Digitale Hochschulbibliothek für E-Books, Fachzeitschriften, Abschlussarbeiten und Forschungsdatenbanken. Ich habe Frontend und Backend entwickelt.",
+          "cvKicker": "Full-Stack  —  Frontend & Backend",
+          "cvTitle": "Digitale Bibliothek KOMU",
+          "cvBullets": [
+            "Frontend & Backend der digitalen Bibliothek: E-Books, Journale, Abschlussarbeiten.",
+            "Über 19 Forschungsdatenbanken, auf dem Campus und von unterwegs, rund um die Uhr."
+          ]
+        },
+        "ar": {
+          "description": "مكتبة إلكترونية جامعية للكتب الإلكترونية والمجلات العلمية والرسائل الجامعية وقواعد بيانات الأبحاث. بنيتُ الواجهتين الأمامية والخلفية.",
+          "cvKicker": "Full-Stack  —  الواجهة الأمامية والخلفية",
+          "cvTitle": "المكتبة الإلكترونية لجامعة KOMU",
+          "cvBullets": [
+            "بنيتُ الواجهتين الأمامية والخلفية للمكتبة الإلكترونية للجامعة، للكتب الإلكترونية والمجلات العلمية والرسائل الجامعية.",
+            "بحث في أكثر من 19 قاعدة بيانات بحثية، داخل الحرم الجامعي وعن بُعد، على مدار الساعة."
+          ]
+        },
+        "zh": {
+          "description": "高校电子图书馆，提供电子书、期刊、学位论文和科研数据库。前端和后端均由我开发。",
+          "cvKicker": "全栈  —  前端与后端",
+          "cvTitle": "KOMU 电子图书馆",
+          "cvBullets": [
+            "开发了大学电子图书馆的前端和后端，涵盖电子书、期刊和学位论文。",
+            "可检索 19 个以上科研数据库，校内外均可 24 小时访问。"
+          ]
+        },
+        "ja": {
+          "description": "電子書籍、学術誌、学位論文、研究データベースを備えた大学の電子図書館。フロントエンドとバックエンドを開発しました。",
+          "cvKicker": "フルスタック  —  フロントエンド & バックエンド",
+          "cvTitle": "KOMU電子図書館",
+          "cvBullets": [
+            "大学電子図書館（電子書籍・学術誌・論文）を一貫して開発。",
+            "19以上の研究データベースを横断検索でき、学内外から24時間利用可能。"
+          ]
+        },
+        "ko": {
+          "description": "전자책, 학술지, 학위논문, 연구 데이터베이스를 제공하는 대학 전자도서관입니다. 프런트엔드와 백엔드를 직접 개발했습니다.",
+          "cvKicker": "풀스택  —  프런트엔드 & 백엔드",
+          "cvTitle": "KOMU 전자도서관",
+          "cvBullets": [
+            "전자책, 학술지, 학위논문을 제공하는 대학 전자도서관의 프런트엔드와 백엔드를 개발했습니다.",
+            "19개 이상의 연구 데이터베이스를 교내외에서 24시간 검색할 수 있습니다."
+          ]
+        },
+        "hi": {
+          "description": "ई-बुक्स, जर्नल्स, थीसिस और रिसर्च डेटाबेस के लिए यूनिवर्सिटी ई-लाइब्रेरी। इसका फ्रंटएंड और बैकएंड मैंने बनाया।",
+          "cvKicker": "फुल-स्टैक  —  फ्रंटएंड और बैकएंड",
+          "cvTitle": "KOMU ई-लाइब्रेरी",
+          "cvBullets": [
+            "ई-बुक्स, जर्नल्स और थीसिस के लिए यूनिवर्सिटी की ई-लाइब्रेरी का फ्रंटएंड और बैकएंड बनाया।",
+            "19+ रिसर्च डेटाबेस में खोज, कैंपस में और रिमोट से, 24/7।"
+          ]
+        }
+      }
+    },
+    {
+      "id": "vtu-app",
+      "title": "VTU App",
+      "onWebsite": true,
+      "onCV": true,
+      "href": "https://sabuss.com/ojsub3",
+      "preview": "project-previews/vtu-mockup.png",
+      "previewAlt": "OJ Sub services page on an iMac mockup",
+      "framed": true,
+      "icon": "project-previews/vtu-icon.jpg",
+      "iconBorder": false,
+      "cvLinks": [
+        {
+          "label": "live",
+          "url": "sabuss.com/ojsub3"
+        }
+      ],
+      "cvRank": 4,
+      "text": {
+        "en": {
+          "description": "Download my VTU application — fast, simple, and reliable.",
+          "cvKicker": "Instant top-up web app",
+          "cvTitle": "OJ Sub VTU Platform",
+          "cvBullets": [
+            "Built a VTU platform for cheap data and airtime, electricity bills, TV, and school fees.",
+            "Added a marketplace where users can sell items, with an installable app version."
+          ]
+        },
+        "fr": {
+          "description": "Téléchargez mon application VTU — rapide, simple et fiable.",
+          "cvKicker": "Application web de recharge instantanée",
+          "cvTitle": "Plateforme VTU OJ Sub",
+          "cvBullets": [
+            "Plateforme VTU : data et crédit à petit prix, électricité, TV, frais de scolarité.",
+            "Place de marché pour vendre des articles, avec une version installable de l'app."
+          ]
+        },
+        "es": {
+          "description": "Descarga mi aplicación VTU: rápida, sencilla y fiable.",
+          "cvKicker": "App web de recargas instantáneas",
+          "cvTitle": "Plataforma VTU OJ Sub",
+          "cvBullets": [
+            "Plataforma VTU: datos y saldo baratos, luz, TV y matrículas escolares.",
+            "Marketplace para vender artículos, con una versión instalable de la app."
+          ]
+        },
+        "pt": {
+          "description": "Baixe meu aplicativo VTU — rápido, simples e confiável.",
+          "cvKicker": "App web de recarga instantânea",
+          "cvTitle": "Plataforma VTU OJ Sub",
+          "cvBullets": [
+            "Plataforma VTU: dados e créditos baratos, luz, TV e mensalidades escolares.",
+            "Marketplace para vender itens, com uma versão instalável do app."
+          ]
+        },
+        "de": {
+          "description": "Laden Sie meine VTU-App herunter – schnell, einfach und zuverlässig.",
+          "cvKicker": "Web-App für Sofort-Aufladungen",
+          "cvTitle": "OJ Sub VTU-Plattform",
+          "cvBullets": [
+            "VTU-Plattform: günstige Daten und Guthaben, Strom, TV und Schulgebühren.",
+            "Marktplatz zum Verkaufen von Artikeln, mit installierbarer App-Version."
+          ]
+        },
+        "ar": {
+          "description": "حمّل تطبيق VTU الخاص بي — سريع وبسيط وموثوق.",
+          "cvKicker": "تطبيق ويب للشحن الفوري",
+          "cvTitle": "منصة OJ Sub للشحن (VTU)",
+          "cvBullets": [
+            "بنيتُ منصة VTU لباقات البيانات والرصيد بأسعار منخفضة، وفواتير الكهرباء، والتلفزيون، والرسوم المدرسية.",
+            "أضفتُ سوقًا يمكن للمستخدمين فيه بيع المنتجات، مع نسخة قابلة للتثبيت من التطبيق."
+          ]
+        },
+        "zh": {
+          "description": "下载我的 VTU 应用——快速、简单、可靠。",
+          "cvKicker": "即时充值 Web 应用",
+          "cvTitle": "OJ Sub VTU 平台",
+          "cvBullets": [
+            "搭建 VTU 平台，提供低价流量和话费充值、电费、电视及学费缴纳服务。",
+            "新增用户可出售商品的交易市场，并提供可安装的应用版本。"
+          ]
+        },
+        "ja": {
+          "description": "私のVTUアプリをダウンロード — 速くて、シンプルで、信頼できます。",
+          "cvKicker": "即時チャージWebアプリ",
+          "cvTitle": "OJ Sub VTUプラットフォーム",
+          "cvBullets": [
+            "格安データ通信、電気・TV・学費の支払いに対応したVTU基盤を構築。",
+            "商品を販売できるマーケットプレイスとインストール型アプリを追加。"
+          ]
+        },
+        "ko": {
+          "description": "제 VTU 앱을 다운로드하세요 — 빠르고, 간단하고, 믿을 수 있습니다.",
+          "cvKicker": "즉시 충전 웹 앱",
+          "cvTitle": "OJ Sub VTU 플랫폼",
+          "cvBullets": [
+            "저렴한 데이터·통화 충전, 전기 요금, TV, 학비 납부를 위한 VTU 플랫폼을 구축했습니다.",
+            "사용자가 물건을 판매할 수 있는 마켓플레이스와 설치형 앱 버전을 추가했습니다."
+          ]
+        },
+        "hi": {
+          "description": "मेरा VTU ऐप डाउनलोड करें — तेज़, आसान और भरोसेमंद।",
+          "cvKicker": "इंस्टेंट टॉप-अप वेब ऐप",
+          "cvTitle": "OJ Sub VTU प्लेटफ़ॉर्म",
+          "cvBullets": [
+            "सस्ते डेटा और एयरटाइम, बिजली बिल, TV और स्कूल फ़ीस के लिए VTU प्लेटफ़ॉर्म बनाया।",
+            "एक मार्केटप्लेस जोड़ा जहाँ यूज़र सामान बेच सकते हैं, साथ में इंस्टॉल करने योग्य ऐप वर्ज़न।"
+          ]
+        }
+      }
+    },
+    {
+      "id": "church-auto-bot",
+      "title": "Church Auto Bot",
+      "onWebsite": true,
+      "onCV": true,
+      "href": "https://church-auto-bot-demo.vercel.app/",
+      "preview": "project-previews/church-bot.png",
+      "previewAlt": "Church Facebook Auto Bot sign-in screen screenshot",
+      "framed": false,
+      "icon": "project-previews/church-bot-icon.png",
+      "iconBorder": false,
+      "cvLinks": [
+        {
+          "label": "demo",
+          "url": "church-auto-bot-demo.vercel.app"
+        },
+        {
+          "label": "source",
+          "url": null
+        }
+      ],
+      "cvRank": 5,
+      "text": {
+        "en": {
+          "description": "Demo platform for an automated church assistant experience and workflow.",
+          "cvKicker": "Cloudflare AI API  ·  Supabase  ·  Vercel",
+          "cvTitle": "Church Facebook Auto Bot",
+          "cvBullets": [
+            "Generates posts and images with the Cloudflare AI API and auto-publishes them to Facebook.",
+            "Stores content in Supabase and runs on Vercel, so no manual daily posting is needed."
+          ]
+        },
+        "fr": {
+          "description": "Plateforme de démonstration d'un assistant automatisé pour église et de son flux de travail.",
+          "cvKicker": "Cloudflare AI API  ·  Supabase  ·  Vercel",
+          "cvTitle": "Bot Facebook automatique pour église",
+          "cvBullets": [
+            "Génère publications et images avec l'API Cloudflare AI et les publie sur Facebook.",
+            "Contenu stocké dans Supabase, hébergé sur Vercel : aucune publication manuelle."
+          ]
+        },
+        "es": {
+          "description": "Plataforma de demostración de un asistente automatizado para iglesias y su flujo de trabajo.",
+          "cvKicker": "Cloudflare AI API  ·  Supabase  ·  Vercel",
+          "cvTitle": "Bot automático de Facebook para iglesias",
+          "cvBullets": [
+            "Genera posts e imágenes con la API de Cloudflare AI y los publica en Facebook.",
+            "Contenido en Supabase, alojado en Vercel: sin publicar a mano cada día."
+          ]
+        },
+        "pt": {
+          "description": "Plataforma de demonstração de um assistente automatizado para igrejas e seu fluxo de trabalho.",
+          "cvKicker": "Cloudflare AI API  ·  Supabase  ·  Vercel",
+          "cvTitle": "Bot automático do Facebook para igrejas",
+          "cvBullets": [
+            "Gera posts e imagens com a API Cloudflare AI e os publica no Facebook.",
+            "Conteúdo no Supabase, hospedado na Vercel: nada de postar manualmente."
+          ]
+        },
+        "de": {
+          "description": "Demo-Plattform für einen automatisierten Kirchenassistenten und dessen Abläufe.",
+          "cvKicker": "Cloudflare AI API  ·  Supabase  ·  Vercel",
+          "cvTitle": "Automatischer Facebook-Bot für Kirchen",
+          "cvBullets": [
+            "Erstellt Beiträge und Bilder mit der Cloudflare AI API und postet sie auf Facebook.",
+            "Inhalte in Supabase, gehostet auf Vercel – kein manuelles Posten mehr."
+          ]
+        },
+        "ar": {
+          "description": "منصة تجريبية لتجربة مساعد آلي للكنائس وسير عمله.",
+          "cvKicker": "Cloudflare AI API  ·  Supabase  ·  Vercel",
+          "cvTitle": "روبوت فيسبوك آلي للكنائس",
+          "cvBullets": [
+            "يُنشئ منشورات وصورًا باستخدام Cloudflare AI API وينشرها تلقائيًا على فيسبوك.",
+            "يخزّن المحتوى في Supabase ويعمل على Vercel، فلا حاجة إلى النشر اليدوي يوميًا."
+          ]
+        },
+        "zh": {
+          "description": "教会自动化助手体验及其工作流程的演示平台。",
+          "cvKicker": "Cloudflare AI API  ·  Supabase  ·  Vercel",
+          "cvTitle": "教会 Facebook 自动发帖机器人",
+          "cvBullets": [
+            "使用 Cloudflare AI API 生成帖子和图片，并自动发布到 Facebook。",
+            "内容存储在 Supabase，部署于 Vercel，无需每天手动发帖。"
+          ]
+        },
+        "ja": {
+          "description": "教会向け自動アシスタントの体験とワークフローのデモプラットフォーム。",
+          "cvKicker": "Cloudflare AI API  ·  Supabase  ·  Vercel",
+          "cvTitle": "教会向けFacebook自動投稿ボット",
+          "cvBullets": [
+            "Cloudflare AI APIで投稿と画像を生成し、Facebookに自動投稿。",
+            "コンテンツをSupabaseに保存し、Vercel上で稼働。毎日の手動投稿は不要。"
+          ]
+        },
+        "ko": {
+          "description": "교회용 자동화 어시스턴트 경험과 워크플로를 보여주는 데모 플랫폼입니다.",
+          "cvKicker": "Cloudflare AI API  ·  Supabase  ·  Vercel",
+          "cvTitle": "교회용 Facebook 자동 게시 봇",
+          "cvBullets": [
+            "Cloudflare AI API로 게시물과 이미지를 생성해 Facebook에 자동으로 게시합니다.",
+            "콘텐츠는 Supabase에 저장되고 Vercel에서 실행되어 매일 수동으로 게시할 필요가 없습니다."
+          ]
+        },
+        "hi": {
+          "description": "चर्च के लिए एक स्वचालित असिस्टेंट अनुभव और वर्कफ़्लो का डेमो प्लेटफ़ॉर्म।",
+          "cvKicker": "Cloudflare AI API  ·  Supabase  ·  Vercel",
+          "cvTitle": "चर्च फ़ेसबुक ऑटो बॉट",
+          "cvBullets": [
+            "Cloudflare AI API से पोस्ट और इमेज बनाता है और उन्हें अपने आप Facebook पर प्रकाशित करता है।",
+            "कंटेंट Supabase में सहेजता है और Vercel पर चलता है, इसलिए रोज़ हाथ से पोस्ट करने की ज़रूरत नहीं।"
+          ]
+        }
+      }
+    },
+    {
+      "id": "komu-website",
+      "title": "KOMU Website",
+      "onWebsite": true,
+      "onCV": true,
+      "href": "https://komu.edu.ng/",
+      "preview": "project-previews/komu-mockup.png",
+      "previewAlt": "Kingsley Ozumba Mbadiwe University homepage on an iMac mockup",
+      "framed": true,
+      "icon": "project-previews/komu-icon.png",
+      "iconBorder": true,
+      "cvLinks": [
+        {
+          "label": "live",
+          "url": "komu.edu.ng"
+        }
+      ],
+      "cvRank": 2,
+      "text": {
+        "en": {
+          "description": "Team redesign of the official Kingsley Ozumba Mbadiwe University website.",
+          "cvKicker": "Team project  —  Full-stack developer",
+          "cvTitle": "KOMU Website Redesign",
+          "cvBullets": [
+            "Full-stack developer in the team that redesigned the official KOMU university website.",
+            "Contributed to both the frontend and the backend of the new site, which is now live."
+          ]
+        },
+        "fr": {
+          "description": "Refonte en équipe du site officiel de l'Université Kingsley Ozumba Mbadiwe.",
+          "cvKicker": "Projet d'équipe  —  Développeur full-stack",
+          "cvTitle": "Refonte du site web de KOMU",
+          "cvBullets": [
+            "Développeur full-stack dans l'équipe qui a refondu le site officiel de l'université KOMU.",
+            "Contribution au frontend comme au backend du nouveau site, aujourd'hui en ligne."
+          ]
+        },
+        "es": {
+          "description": "Rediseño en equipo del sitio web oficial de la Universidad Kingsley Ozumba Mbadiwe.",
+          "cvKicker": "Proyecto en equipo  —  Desarrollador full-stack",
+          "cvTitle": "Rediseño del sitio web de KOMU",
+          "cvBullets": [
+            "Desarrollador full-stack en el equipo que rediseñó el sitio oficial de KOMU.",
+            "Contribuí tanto al frontend como al backend del nuevo sitio, que ya está en producción."
+          ]
+        },
+        "pt": {
+          "description": "Redesign em equipe do site oficial da Universidade Kingsley Ozumba Mbadiwe.",
+          "cvKicker": "Projeto em equipe  —  Desenvolvedor full-stack",
+          "cvTitle": "Redesign do site da KOMU",
+          "cvBullets": [
+            "Desenvolvedor full-stack na equipe que redesenhou o site oficial da KOMU.",
+            "Contribuí tanto para o frontend quanto para o backend do novo site, que já está no ar."
+          ]
+        },
+        "de": {
+          "description": "Team-Redesign der offiziellen Website der Kingsley Ozumba Mbadiwe University.",
+          "cvKicker": "Teamprojekt  —  Full-Stack-Entwickler",
+          "cvTitle": "Redesign der KOMU-Website",
+          "cvBullets": [
+            "Full-Stack-Entwickler im Team, das die offizielle KOMU-Website neu gestaltet hat.",
+            "Mitarbeit an Frontend und Backend der neuen Website, die inzwischen live ist."
+          ]
+        },
+        "ar": {
+          "description": "إعادة تصميم جماعية للموقع الرسمي لجامعة كينغسلي أوزومبا مباديوي.",
+          "cvKicker": "مشروع جماعي  —  مطوّر Full-Stack",
+          "cvTitle": "إعادة تصميم موقع جامعة KOMU",
+          "cvBullets": [
+            "مطوّر Full-Stack ضمن الفريق الذي أعاد تصميم الموقع الرسمي لجامعة KOMU.",
+            "ساهمتُ في الواجهة الأمامية والخلفية للموقع الجديد، وهو منشور الآن."
+          ]
+        },
+        "zh": {
+          "description": "与团队一起重新设计金斯利·奥祖姆巴·姆巴迪威大学官方网站。",
+          "cvKicker": "团队项目  —  全栈开发者",
+          "cvTitle": "KOMU 官网改版",
+          "cvBullets": [
+            "作为全栈开发者参与团队，重新设计了 KOMU 大学官方网站。",
+            "参与新网站的前端和后端开发，网站现已上线。"
+          ]
+        },
+        "ja": {
+          "description": "キングズリー・オズンバ・ムバディウェ大学公式サイトのチームによるリデザイン。",
+          "cvKicker": "チームプロジェクト  —  フルスタック開発者",
+          "cvTitle": "KOMU公式サイトのリデザイン",
+          "cvBullets": [
+            "KOMU大学公式サイトをリデザインしたチームにフルスタック開発者として参加。",
+            "新サイトのフロントエンドとバックエンドの両方を担当し、現在公開中。"
+          ]
+        },
+        "ko": {
+          "description": "킹슬리 오줌바 음바디웨 대학교 공식 웹사이트를 팀으로 리디자인했습니다.",
+          "cvKicker": "팀 프로젝트  —  풀스택 개발자",
+          "cvTitle": "KOMU 웹사이트 리디자인",
+          "cvBullets": [
+            "KOMU 대학교 공식 웹사이트를 리디자인한 팀에서 풀스택 개발자로 참여했습니다.",
+            "현재 운영 중인 새 사이트의 프런트엔드와 백엔드를 모두 개발했습니다."
+          ]
+        },
+        "hi": {
+          "description": "किंग्सले ओज़ुम्बा म्बाडिवे यूनिवर्सिटी की आधिकारिक वेबसाइट का टीम के साथ किया गया रीडिज़ाइन।",
+          "cvKicker": "टीम प्रोजेक्ट  —  फुल-स्टैक डेवलपर",
+          "cvTitle": "KOMU वेबसाइट रीडिज़ाइन",
+          "cvBullets": [
+            "उस टीम में फुल-स्टैक डेवलपर, जिसने KOMU यूनिवर्सिटी की आधिकारिक वेबसाइट को रीडिज़ाइन किया।",
+            "नई साइट के फ्रंटएंड और बैकएंड दोनों में योगदान दिया, जो अब लाइव है।"
+          ]
+        }
+      }
+    },
+    {
+      "id": "neon-portfolio",
+      "title": "Neon Portfolio",
+      "onWebsite": true,
+      "onCV": false,
+      "badge": "template",
+      "href": "https://wintas01.github.io/portfolio01/templates/neon/",
+      "linkLabel": "liveDemo",
+      "codeHref": "https://github.com/wintas01/portfolio-template-1",
+      "preview": "project-previews/neon-template-mockup.png",
+      "previewAlt": "Neon portfolio template hero on an iMac mockup",
+      "framed": true,
+      "icon": "project-previews/neon-template-icon.png",
+      "iconBorder": false,
+      "text": {
+        "en": {
+          "description": "Free, open-source portfolio template with a particle field, kinetic text and a pinned scroll gallery. One HTML file, with a setup guide."
+        },
+        "fr": {
+          "description": "Modèle de portfolio gratuit et open source avec champ de particules, texte animé et galerie fixée au défilement. Un seul fichier HTML, avec guide d'installation."
+        },
+        "es": {
+          "description": "Plantilla de portafolio gratuita y de código abierto con campo de partículas, texto animado y galería fija al desplazarse. Un solo archivo HTML, con guía de configuración."
+        },
+        "pt": {
+          "description": "Template de portfólio gratuito e open source com campo de partículas, texto animado e galeria fixa na rolagem. Um único arquivo HTML, com guia de configuração."
+        },
+        "de": {
+          "description": "Kostenlose Open-Source-Portfolio-Vorlage mit Partikelfeld, animierter Typografie und fixierter Scroll-Galerie. Eine einzige HTML-Datei, inklusive Einrichtungsanleitung."
+        },
+        "ar": {
+          "description": "قالب مجاني ومفتوح المصدر لمعرض الأعمال، فيه حقل جسيمات ونص متحرك ومعرض مثبّت أثناء التمرير. ملف HTML واحد مع دليل إعداد."
+        },
+        "zh": {
+          "description": "免费开源的作品集模板，包含粒子场、动态文字和滚动固定画廊。仅一个 HTML 文件，附带设置指南。"
+        },
+        "ja": {
+          "description": "パーティクルフィールド、動くテキスト、スクロール固定ギャラリーを備えた無料のオープンソース・ポートフォリオテンプレート。HTMLファイル1つで、セットアップガイド付き。"
+        },
+        "ko": {
+          "description": "파티클 필드, 움직이는 텍스트, 스크롤 고정 갤러리를 갖춘 무료 오픈소스 포트폴리오 템플릿입니다. HTML 파일 하나와 설정 가이드로 구성됩니다."
+        },
+        "hi": {
+          "description": "पार्टिकल फ़ील्ड, एनिमेटेड टेक्स्ट और स्क्रॉल पर पिन गैलरी वाला मुफ़्त, ओपन-सोर्स पोर्टफ़ोलियो टेम्पलेट। एक ही HTML फ़ाइल, सेटअप गाइड के साथ।"
+        }
+      }
+    },
+    {
+      "id": "echo-portfolio",
+      "title": "ECHO Portfolio",
+      "onWebsite": true,
+      "onCV": false,
+      "badge": "template",
+      "href": "https://wintas01.github.io/portfolio01/templates/echo/",
+      "linkLabel": "liveDemo",
+      "codeHref": "https://github.com/wintas01/portfolio-template-2",
+      "preview": "project-previews/echo-template-mockup.png",
+      "previewAlt": "ECHO portfolio template hero on an iMac mockup",
+      "framed": true,
+      "icon": "project-previews/echo-template-icon.png",
+      "iconBorder": true,
+      "text": {
+        "en": {
+          "description": "Free cinematic scroll portfolio template — a recreated concept with a starry-sky reveal and a 3D project ribbon, rebuilt in plain HTML, CSS and JS."
+        },
+        "fr": {
+          "description": "Modèle de portfolio gratuit au défilement cinématographique — un concept recréé avec un ciel étoilé qui se dévoile et un ruban de projets en 3D, reconstruit en HTML, CSS et JS purs."
+        },
+        "es": {
+          "description": "Plantilla de portafolio gratuita con desplazamiento cinematográfico: un concepto recreado con un cielo estrellado que se revela y una cinta de proyectos en 3D, reconstruido en HTML, CSS y JS puros."
+        },
+        "pt": {
+          "description": "Template de portfólio gratuito com rolagem cinematográfica — um conceito recriado com um céu estrelado que se revela e uma faixa de projetos em 3D, refeito em HTML, CSS e JS puros."
+        },
+        "de": {
+          "description": "Kostenlose Portfolio-Vorlage mit cineastischem Scrollen – ein nachgebautes Konzept mit Sternenhimmel-Effekt und 3D-Projektband, neu umgesetzt in reinem HTML, CSS und JS."
+        },
+        "ar": {
+          "description": "قالب مجاني لمعرض الأعمال بتمرير سينمائي — فكرة مُعاد إنشاؤها مع سماء مرصّعة بالنجوم تتكشّف وشريط مشاريع ثلاثي الأبعاد، مبنية بـ HTML وCSS وJS فقط."
+        },
+        "zh": {
+          "description": "免费的电影感滚动作品集模板——重现的创意设计，带有星空展开效果和 3D 项目缎带，使用纯 HTML、CSS 和 JS 重新构建。"
+        },
+        "ja": {
+          "description": "映画のようなスクロールが楽しめる無料のポートフォリオテンプレート。星空が現れる演出と3Dのプロジェクトリボンを備えたコンセプトを、素のHTML・CSS・JSで再構築しました。"
+        },
+        "ko": {
+          "description": "영화 같은 스크롤을 갖춘 무료 포트폴리오 템플릿 — 별이 빛나는 하늘이 드러나는 효과와 3D 프로젝트 리본이 있는 콘셉트를 순수 HTML, CSS, JS로 다시 만들었습니다."
+        },
+        "hi": {
+          "description": "सिनेमाई स्क्रॉल वाला मुफ़्त पोर्टफ़ोलियो टेम्पलेट — तारों भरे आसमान के रिवील और 3D प्रोजेक्ट रिबन वाला एक दोबारा बनाया गया कॉन्सेप्ट, सादे HTML, CSS और JS में।"
+        }
+      }
+    },
+    {
+      "id": "portfolio-website",
+      "title": "Portfolio Website",
+      "onWebsite": false,
+      "onCV": true,
+      "icon": "favicon.png",
+      "cvLinks": [
+        {
+          "label": "live",
+          "url": "wintas01.github.io/portfolio01"
+        },
+        {
+          "label": "source",
+          "url": "github.com/wintas01/portfolio01"
+        }
+      ],
+      "cvRank": 6,
+      "text": {
+        "en": {
+          "cvKicker": "TypeScript",
+          "cvTitle": "Portfolio Website",
+          "cvBullets": [
+            "Designed and published this portfolio, with live project previews and GitHub activity."
+          ]
+        },
+        "fr": {
+          "cvKicker": "TypeScript",
+          "cvTitle": "Site portfolio",
+          "cvBullets": [
+            "Ce portfolio, conçu et publié par moi : aperçus en direct et activité GitHub."
+          ]
+        },
+        "es": {
+          "cvKicker": "TypeScript",
+          "cvTitle": "Sitio web de portafolio",
+          "cvBullets": [
+            "Diseñé y publiqué este portafolio, con vistas previas y actividad de GitHub."
+          ]
+        },
+        "pt": {
+          "cvKicker": "TypeScript",
+          "cvTitle": "Site de portfólio",
+          "cvBullets": [
+            "Criei e publiquei este portfólio, com prévias dos projetos ao vivo e atividade no GitHub."
+          ]
+        },
+        "de": {
+          "cvKicker": "TypeScript",
+          "cvTitle": "Portfolio-Website",
+          "cvBullets": [
+            "Dieses Portfolio entworfen und veröffentlicht, mit Live-Vorschauen und GitHub."
+          ]
+        },
+        "ar": {
+          "cvKicker": "TypeScript",
+          "cvTitle": "موقع معرض الأعمال",
+          "cvBullets": [
+            "صمّمتُ هذا المعرض ونشرته، مع معاينات مباشرة للمشاريع ونشاط GitHub."
+          ]
+        },
+        "zh": {
+          "cvKicker": "TypeScript",
+          "cvTitle": "作品集网站",
+          "cvBullets": [
+            "设计并发布了本作品集网站，包含项目实时预览和 GitHub 动态。"
+          ]
+        },
+        "ja": {
+          "cvKicker": "TypeScript",
+          "cvTitle": "ポートフォリオサイト",
+          "cvBullets": [
+            "ライブプレビューとGitHub活動を載せた本ポートフォリオを設計・公開。"
+          ]
+        },
+        "ko": {
+          "cvKicker": "TypeScript",
+          "cvTitle": "포트폴리오 웹사이트",
+          "cvBullets": [
+            "프로젝트 실시간 미리보기와 GitHub 활동을 담은 이 포트폴리오를 디자인하고 게시했습니다."
+          ]
+        },
+        "hi": {
+          "cvKicker": "TypeScript",
+          "cvTitle": "पोर्टफ़ोलियो वेबसाइट",
+          "cvBullets": [
+            "लाइव प्रोजेक्ट प्रीव्यू और GitHub गतिविधि के साथ यह पोर्टफ़ोलियो डिज़ाइन और प्रकाशित किया।"
+          ]
+        }
+      }
+    }
+  ]
+}

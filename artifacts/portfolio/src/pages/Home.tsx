@@ -15,7 +15,9 @@ import aboutPhoto from "@/assets/wintas-about.png";
 import GitHubShowcase from "@/components/GitHubShowcase";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import VenomButton from "@/components/VenomButton";
-import { useI18n, type Dictionary } from "@/i18n";
+import ToolsMarquee from "@/components/ToolsMarquee";
+import { useI18n } from "@/i18n";
+import projectsData from "@/data/projects.json";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
@@ -38,8 +40,6 @@ const staggerContainer = {
 };
 
 const navLinks = ["home", "about", "projects", "contact"] as const;
-const projectPreviewPath = (fileName: string) =>
-  `${import.meta.env.BASE_URL}project-previews/${fileName}`;
 
 function LaptopPreview({ src, alt }: { src: string; alt: string }) {
   return (
@@ -78,163 +78,49 @@ function MockupPreview({ src, alt }: { src: string; alt: string }) {
   );
 }
 
-const projects: Array<{
-  key: keyof Dictionary["projects"]["descriptions"];
+type ProjectText = {
+  description?: string;
+  cvKicker?: string;
+  cvTitle?: string;
+  cvBullets?: string[];
+};
+type Project = {
+  id: string;
   title: string;
+  onWebsite: boolean;
   badge?: string;
-  description: string;
   href?: string;
   linkLabel?: string;
   codeHref?: string;
-  preview: string;
-  previewAlt: string;
+  preview?: string;
+  previewAlt?: string;
   framed?: boolean;
-  icon: React.ReactNode;
-}> = [
-  {
-    key: "tixora",
-    title: "Tixora",
-    description:
-      "Event ticketing platform: find concerts and parties, pay your way, and enter with a QR code.",
-    preview: projectPreviewPath("tixora-mockup.png"),
-    previewAlt: "Tixora event ticketing homepage on an iMac mockup",
-    framed: true,
-    icon: (
-      <img
-        src={projectPreviewPath("tixora-icon.png")}
-        alt=""
-        aria-hidden="true"
-        className="h-12 w-12 flex-none rounded-2xl object-cover sm:h-14 sm:w-14"
-      />
-    ),
-  },
-  {
-    key: "komuLibrary",
-    title: "KOMU E-Library",
-    description:
-      "University e-library for e-books, journals, theses and research databases. I built the frontend and backend.",
-    href: "https://komudigital.ng/",
-    preview: projectPreviewPath("komu-elibrary-mockup.png"),
-    previewAlt: "KOMU E-Library homepage on an iMac mockup",
-    framed: true,
-    icon: (
-      <img
-        src={projectPreviewPath("komu-icon.png")}
-        alt=""
-        aria-hidden="true"
-        className="h-12 w-12 flex-none rounded-2xl border border-border object-cover sm:h-14 sm:w-14"
-      />
-    ),
-  },
-  {
-    key: "vtu",
-    title: "VTU App",
-    description: "Download my VTU application — fast, simple, and reliable.",
-    href: "https://sabuss.com/ojsub3",
-    preview: projectPreviewPath("vtu-mockup.png"),
-    previewAlt: "OJ Sub services page on an iMac mockup",
-    framed: true,
-    icon: (
-      <img
-        src={projectPreviewPath("vtu-icon.jpg")}
-        alt=""
-        aria-hidden="true"
-        className="h-12 w-12 flex-none rounded-2xl object-cover sm:h-14 sm:w-14"
-      />
-    ),
-  },
-  {
-    key: "churchBot",
-    title: "Church Auto Bot",
-    description:
-      "Demo platform for an automated church assistant experience and workflow.",
-    href: "https://church-auto-bot-demo.vercel.app/",
-    preview: projectPreviewPath("church-bot.png"),
-    previewAlt: "Church Facebook Auto Bot sign-in screen screenshot",
-    icon: (
-      <img
-        src={projectPreviewPath("church-bot-icon.png")}
-        alt=""
-        aria-hidden="true"
-        className="h-12 w-12 flex-none rounded-2xl object-cover sm:h-14 sm:w-14"
-      />
-    ),
-  },
-  {
-    key: "komuWebsite",
-    title: "KOMU Website",
-    description:
-      "Team redesign of the official Kingsley Ozumba Mbadiwe University website.",
-    href: "https://komu.edu.ng/",
-    preview: projectPreviewPath("komu-mockup.png"),
-    previewAlt: "Kingsley Ozumba Mbadiwe University homepage on an iMac mockup",
-    framed: true,
-    icon: (
-      <img
-        src={projectPreviewPath("komu-icon.png")}
-        alt=""
-        aria-hidden="true"
-        className="h-12 w-12 flex-none rounded-2xl border border-border object-cover sm:h-14 sm:w-14"
-      />
-    ),
-  },
-  {
-    key: "neon",
-    title: "Neon Portfolio",
-    badge: "Portfolio template",
-    description:
-      "Free, open-source portfolio template with a particle field, kinetic text and a pinned scroll gallery. One HTML file, with a setup guide.",
-    href: "https://wintas01.github.io/portfolio01/templates/neon/",
-    linkLabel: "Live Demo",
-    codeHref: "https://github.com/wintas01/portfolio-template-1",
-    preview: projectPreviewPath("neon-template-mockup.png"),
-    previewAlt: "Neon portfolio template hero on an iMac mockup",
-    framed: true,
-    icon: (
-      <img
-        src={projectPreviewPath("neon-template-icon.png")}
-        alt=""
-        aria-hidden="true"
-        className="h-12 w-12 flex-none rounded-2xl object-cover sm:h-14 sm:w-14"
-      />
-    ),
-  },
-  {
-    key: "echo",
-    title: "ECHO Portfolio",
-    badge: "Portfolio template",
-    description:
-      "Free cinematic scroll portfolio template — a recreated concept with a starry-sky reveal and a 3D project ribbon, rebuilt in plain HTML, CSS and JS.",
-    href: "https://wintas01.github.io/portfolio01/templates/echo/",
-    linkLabel: "Live Demo",
-    codeHref: "https://github.com/wintas01/portfolio-template-2",
-    preview: projectPreviewPath("echo-template-mockup.png"),
-    previewAlt: "ECHO portfolio template hero on an iMac mockup",
-    framed: true,
-    icon: (
-      <img
-        src={projectPreviewPath("echo-template-icon.png")}
-        alt=""
-        aria-hidden="true"
-        className="h-12 w-12 flex-none rounded-2xl border border-border object-cover sm:h-14 sm:w-14"
-      />
-    ),
-  },
-];
+  icon?: string;
+  iconBorder?: boolean;
+  text: Record<string, ProjectText | undefined>;
+};
+
+// Projects live in src/data/projects.json, shared with the CV generator.
+const projects = (projectsData.projects as unknown as Project[]).filter(
+  (project) => project.onWebsite !== false,
+);
+const publicPath = (file: string) => `${import.meta.env.BASE_URL}${file}`;
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { t, language } = useI18n();
-  // The CV downloads in the visitor's language (translated copies live in
-  // public/cv/ and are built by scripts/cv/generate_cv_translations.py).
+  // The CV downloads in the visitor's language. All CVs are built from
+  // src/data/projects.json by scripts/cv/generate_cv_translations.py.
   const cvFileName =
     language === "en"
       ? "Nnanna-Okechukwu-Jason-CV.pdf"
       : `Nnanna-Okechukwu-Jason-CV-${language.toUpperCase()}.pdf`;
+  // ?v= changes on every deploy so browsers never serve an outdated CV.
+  const cvVersion = import.meta.env.VITE_CV_VERSION ?? "2026-11-19";
   const cvHref =
     language === "en"
-      ? `${import.meta.env.BASE_URL}Nnanna-Okechukwu-Jason-CV.pdf?v=2026-11-02c`
-      : `${import.meta.env.BASE_URL}cv/${cvFileName}?v=2026-11-19`;
+      ? `${import.meta.env.BASE_URL}Nnanna-Okechukwu-Jason-CV.pdf?v=${cvVersion}`
+      : `${import.meta.env.BASE_URL}cv/${cvFileName}?v=${cvVersion}`;
 
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-foreground selection:text-background font-sans overflow-x-hidden">
@@ -311,7 +197,7 @@ export default function Home() {
       {/* Hero Section */}
       <section
         id="home"
-        className="pt-28 sm:pt-32 lg:pt-28 pb-16 px-5 sm:px-8 max-w-[1400px] mx-auto lg:flex lg:min-h-[100svh] lg:items-center"
+        className="pt-28 sm:pt-32 lg:pt-28 pb-6 lg:pb-10 px-5 sm:px-8 max-w-[1400px] mx-auto lg:flex lg:min-h-[100svh] lg:items-center"
       >
         <div className="grid w-full lg:grid-cols-[1.15fr_0.85fr] gap-10 lg:gap-12 items-center">
           <motion.div
@@ -381,10 +267,12 @@ export default function Home() {
         </div>
       </section>
 
+      <ToolsMarquee />
+
       {/* About Section */}
       <section
         id="about"
-        className="py-20 sm:py-32 px-5 sm:px-8 max-w-[1400px] mx-auto"
+        className="pt-10 pb-20 sm:pt-16 sm:pb-32 px-5 sm:px-8 max-w-[1400px] mx-auto"
       >
         <motion.div
           initial="hidden"
@@ -478,7 +366,7 @@ export default function Home() {
           <div className="grid gap-6 sm:grid-cols-2 sm:gap-7 xl:grid-cols-3">
             {projects.map((project, index) => (
               <motion.article
-                key={project.title}
+                key={project.id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -487,18 +375,18 @@ export default function Home() {
               >
                 {project.framed ? (
                   <MockupPreview
-                    src={project.preview}
+                    src={publicPath(project.preview ?? "")}
                     alt={
-                      language === "en"
+                      language === "en" && project.previewAlt
                         ? project.previewAlt
                         : t.projects.previewAlt(project.title)
                     }
                   />
                 ) : (
                   <LaptopPreview
-                    src={project.preview}
+                    src={publicPath(project.preview ?? "")}
                     alt={
-                      language === "en"
+                      language === "en" && project.previewAlt
                         ? project.previewAlt
                         : t.projects.previewAlt(project.title)
                     }
@@ -507,7 +395,14 @@ export default function Home() {
 
                 <div className="flex flex-1 flex-col p-5 sm:p-6">
                   <div className="flex items-start gap-4">
-                    {project.icon}
+                    {project.icon ? (
+                      <img
+                        src={publicPath(project.icon)}
+                        alt=""
+                        aria-hidden="true"
+                        className={`h-12 w-12 flex-none rounded-2xl object-cover sm:h-14 sm:w-14 ${project.iconBorder ? "border border-border" : ""}`}
+                      />
+                    ) : null}
                     <div className="min-w-0">
                       {project.badge ? (
                         <span className="mb-1.5 inline-flex items-center rounded-full border border-border bg-muted px-2.5 py-0.5 text-xs font-semibold text-muted-foreground">
@@ -518,7 +413,8 @@ export default function Home() {
                         {project.title}
                       </h3>
                       <p className="mt-1 text-sm leading-relaxed text-muted-foreground sm:text-base">
-                        {t.projects.descriptions[project.key]}
+                        {project.text[language]?.description ??
+                          project.text.en?.description}
                       </p>
                     </div>
                   </div>

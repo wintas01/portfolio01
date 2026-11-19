@@ -102,19 +102,6 @@ const en = {
     viewCode: "View Code",
     templateBadge: "Portfolio template",
     previewAlt: (title: string) => `Preview of ${title}`,
-    descriptions: {
-      tixora:
-        "Event ticketing platform: find concerts and parties, pay your way, and enter with a QR code.",
-      komuLibrary:
-        "University e-library for e-books, journals, theses and research databases. I built the frontend and backend.",
-      vtu: "Download my VTU application — fast, simple, and reliable.",
-      churchBot:
-        "Demo platform for an automated church assistant experience and workflow.",
-      komuWebsite:
-        "Team redesign of the official Kingsley Ozumba Mbadiwe University website.",
-      neon: "Free, open-source portfolio template with a particle field, kinetic text and a pinned scroll gallery. One HTML file, with a setup guide.",
-      echo: "Free cinematic scroll portfolio template — a recreated concept with a starry-sky reveal and a 3D project ribbon, rebuilt in plain HTML, CSS and JS.",
-    },
   },
   contact: {
     titleLine1: "Let's create",
@@ -123,6 +110,9 @@ const en = {
     email: "Email",
     whatsapp: "WhatsApp",
     contactMe: "Contact Me",
+  },
+  tools: {
+    title: "Tools I build with",
   },
   footer: {
     rights: "All rights reserved.",
@@ -213,19 +203,6 @@ const fr: Dictionary = {
     viewCode: "Voir le code",
     templateBadge: "Modèle de portfolio",
     previewAlt: (title: string) => `Aperçu de ${title}`,
-    descriptions: {
-      tixora:
-        "Plateforme de billetterie événementielle : trouvez des concerts et des soirées, payez comme vous voulez et entrez avec un QR code.",
-      komuLibrary:
-        "Bibliothèque numérique universitaire pour livres électroniques, revues, thèses et bases de données de recherche. J'ai développé le frontend et le backend.",
-      vtu: "Téléchargez mon application VTU — rapide, simple et fiable.",
-      churchBot:
-        "Plateforme de démonstration d'un assistant automatisé pour église et de son flux de travail.",
-      komuWebsite:
-        "Refonte en équipe du site officiel de l'Université Kingsley Ozumba Mbadiwe.",
-      neon: "Modèle de portfolio gratuit et open source avec champ de particules, texte animé et galerie fixée au défilement. Un seul fichier HTML, avec guide d'installation.",
-      echo: "Modèle de portfolio gratuit au défilement cinématographique — un concept recréé avec un ciel étoilé qui se dévoile et un ruban de projets en 3D, reconstruit en HTML, CSS et JS purs.",
-    },
   },
   contact: {
     titleLine1: "Créons",
@@ -234,6 +211,9 @@ const fr: Dictionary = {
     email: "E-mail",
     whatsapp: "WhatsApp",
     contactMe: "Me contacter",
+  },
+  tools: {
+    title: "Mes outils de création",
   },
   footer: {
     rights: "Tous droits réservés.",
@@ -322,19 +302,6 @@ const es: Dictionary = {
     viewCode: "Ver código",
     templateBadge: "Plantilla de portafolio",
     previewAlt: (title: string) => `Vista previa de ${title}`,
-    descriptions: {
-      tixora:
-        "Plataforma de venta de entradas para eventos: encuentra conciertos y fiestas, paga como prefieras y entra con un código QR.",
-      komuLibrary:
-        "Biblioteca digital universitaria con libros electrónicos, revistas, tesis y bases de datos de investigación. Desarrollé el frontend y el backend.",
-      vtu: "Descarga mi aplicación VTU: rápida, sencilla y fiable.",
-      churchBot:
-        "Plataforma de demostración de un asistente automatizado para iglesias y su flujo de trabajo.",
-      komuWebsite:
-        "Rediseño en equipo del sitio web oficial de la Universidad Kingsley Ozumba Mbadiwe.",
-      neon: "Plantilla de portafolio gratuita y de código abierto con campo de partículas, texto animado y galería fija al desplazarse. Un solo archivo HTML, con guía de configuración.",
-      echo: "Plantilla de portafolio gratuita con desplazamiento cinematográfico: un concepto recreado con un cielo estrellado que se revela y una cinta de proyectos en 3D, reconstruido en HTML, CSS y JS puros.",
-    },
   },
   contact: {
     titleLine1: "Creemos algo",
@@ -343,6 +310,9 @@ const es: Dictionary = {
     email: "Correo",
     whatsapp: "WhatsApp",
     contactMe: "Contáctame",
+  },
+  tools: {
+    title: "Herramientas con las que construyo",
   },
   footer: {
     rights: "Todos los derechos reservados.",
@@ -431,19 +401,6 @@ const pt: Dictionary = {
     viewCode: "Ver código",
     templateBadge: "Template de portfólio",
     previewAlt: (title: string) => `Prévia de ${title}`,
-    descriptions: {
-      tixora:
-        "Plataforma de ingressos para eventos: encontre shows e festas, pague do seu jeito e entre com um QR code.",
-      komuLibrary:
-        "Biblioteca digital universitária com e-books, periódicos, teses e bases de dados de pesquisa. Desenvolvi o frontend e o backend.",
-      vtu: "Baixe meu aplicativo VTU — rápido, simples e confiável.",
-      churchBot:
-        "Plataforma de demonstração de um assistente automatizado para igrejas e seu fluxo de trabalho.",
-      komuWebsite:
-        "Redesign em equipe do site oficial da Universidade Kingsley Ozumba Mbadiwe.",
-      neon: "Template de portfólio gratuito e open source com campo de partículas, texto animado e galeria fixa na rolagem. Um único arquivo HTML, com guia de configuração.",
-      echo: "Template de portfólio gratuito com rolagem cinematográfica — um conceito recriado com um céu estrelado que se revela e uma faixa de projetos em 3D, refeito em HTML, CSS e JS puros.",
-    },
   },
   contact: {
     titleLine1: "Vamos criar",
@@ -452,6 +409,9 @@ const pt: Dictionary = {
     email: "E-mail",
     whatsapp: "WhatsApp",
     contactMe: "Fale comigo",
+  },
+  tools: {
+    title: "Ferramentas que uso para construir",
   },
   footer: {
     rights: "Todos os direitos reservados.",
@@ -540,19 +500,6 @@ const de: Dictionary = {
     viewCode: "Code ansehen",
     templateBadge: "Portfolio-Vorlage",
     previewAlt: (title: string) => `Vorschau von ${title}`,
-    descriptions: {
-      tixora:
-        "Ticketing-Plattform für Events: Konzerte und Partys finden, flexibel bezahlen und per QR-Code einchecken.",
-      komuLibrary:
-        "Digitale Hochschulbibliothek für E-Books, Fachzeitschriften, Abschlussarbeiten und Forschungsdatenbanken. Ich habe Frontend und Backend entwickelt.",
-      vtu: "Laden Sie meine VTU-App herunter – schnell, einfach und zuverlässig.",
-      churchBot:
-        "Demo-Plattform für einen automatisierten Kirchenassistenten und dessen Abläufe.",
-      komuWebsite:
-        "Team-Redesign der offiziellen Website der Kingsley Ozumba Mbadiwe University.",
-      neon: "Kostenlose Open-Source-Portfolio-Vorlage mit Partikelfeld, animierter Typografie und fixierter Scroll-Galerie. Eine einzige HTML-Datei, inklusive Einrichtungsanleitung.",
-      echo: "Kostenlose Portfolio-Vorlage mit cineastischem Scrollen – ein nachgebautes Konzept mit Sternenhimmel-Effekt und 3D-Projektband, neu umgesetzt in reinem HTML, CSS und JS.",
-    },
   },
   contact: {
     titleLine1: "Gemeinsam",
@@ -561,6 +508,9 @@ const de: Dictionary = {
     email: "E-Mail",
     whatsapp: "WhatsApp",
     contactMe: "Kontakt aufnehmen",
+  },
+  tools: {
+    title: "Werkzeuge, mit denen ich baue",
   },
   footer: {
     rights: "Alle Rechte vorbehalten.",
@@ -649,18 +599,6 @@ const ar: Dictionary = {
     viewCode: "عرض الكود",
     templateBadge: "قالب معرض أعمال",
     previewAlt: (title: string) => `معاينة ${title}`,
-    descriptions: {
-      tixora:
-        "منصة لحجز تذاكر الفعاليات: اعثر على الحفلات الموسيقية والسهرات، وادفع بالطريقة التي تناسبك، وادخل برمز QR.",
-      komuLibrary:
-        "مكتبة إلكترونية جامعية للكتب الإلكترونية والمجلات العلمية والرسائل الجامعية وقواعد بيانات الأبحاث. بنيتُ الواجهتين الأمامية والخلفية.",
-      vtu: "حمّل تطبيق VTU الخاص بي — سريع وبسيط وموثوق.",
-      churchBot: "منصة تجريبية لتجربة مساعد آلي للكنائس وسير عمله.",
-      komuWebsite:
-        "إعادة تصميم جماعية للموقع الرسمي لجامعة كينغسلي أوزومبا مباديوي.",
-      neon: "قالب مجاني ومفتوح المصدر لمعرض الأعمال، فيه حقل جسيمات ونص متحرك ومعرض مثبّت أثناء التمرير. ملف HTML واحد مع دليل إعداد.",
-      echo: "قالب مجاني لمعرض الأعمال بتمرير سينمائي — فكرة مُعاد إنشاؤها مع سماء مرصّعة بالنجوم تتكشّف وشريط مشاريع ثلاثي الأبعاد، مبنية بـ HTML وCSS وJS فقط.",
-    },
   },
   contact: {
     titleLine1: "لنصنع شيئًا",
@@ -669,6 +607,9 @@ const ar: Dictionary = {
     email: "البريد الإلكتروني",
     whatsapp: "واتساب",
     contactMe: "تواصل معي",
+  },
+  tools: {
+    title: "الأدوات التي أبني بها",
   },
   footer: {
     rights: "جميع الحقوق محفوظة.",
@@ -755,16 +696,6 @@ const zh: Dictionary = {
     viewCode: "查看代码",
     templateBadge: "作品集模板",
     previewAlt: (title: string) => `${title} 预览`,
-    descriptions: {
-      tixora: "活动票务平台：发现演唱会和派对，灵活支付，凭二维码入场。",
-      komuLibrary:
-        "高校电子图书馆，提供电子书、期刊、学位论文和科研数据库。前端和后端均由我开发。",
-      vtu: "下载我的 VTU 应用——快速、简单、可靠。",
-      churchBot: "教会自动化助手体验及其工作流程的演示平台。",
-      komuWebsite: "与团队一起重新设计金斯利·奥祖姆巴·姆巴迪威大学官方网站。",
-      neon: "免费开源的作品集模板，包含粒子场、动态文字和滚动固定画廊。仅一个 HTML 文件，附带设置指南。",
-      echo: "免费的电影感滚动作品集模板——重现的创意设计，带有星空展开效果和 3D 项目缎带，使用纯 HTML、CSS 和 JS 重新构建。",
-    },
   },
   contact: {
     titleLine1: "让我们",
@@ -773,6 +704,9 @@ const zh: Dictionary = {
     email: "邮箱",
     whatsapp: "WhatsApp",
     contactMe: "联系我",
+  },
+  tools: {
+    title: "我使用的开发工具",
   },
   footer: {
     rights: "保留所有权利。",
@@ -859,18 +793,6 @@ const ja: Dictionary = {
     viewCode: "コードを見る",
     templateBadge: "ポートフォリオテンプレート",
     previewAlt: (title: string) => `${title}のプレビュー`,
-    descriptions: {
-      tixora:
-        "イベントチケットプラットフォーム：コンサートやパーティーを探し、好きな方法で支払い、QRコードで入場できます。",
-      komuLibrary:
-        "電子書籍、学術誌、学位論文、研究データベースを備えた大学の電子図書館。フロントエンドとバックエンドを開発しました。",
-      vtu: "私のVTUアプリをダウンロード — 速くて、シンプルで、信頼できます。",
-      churchBot: "教会向け自動アシスタントの体験とワークフローのデモプラットフォーム。",
-      komuWebsite:
-        "キングズリー・オズンバ・ムバディウェ大学公式サイトのチームによるリデザイン。",
-      neon: "パーティクルフィールド、動くテキスト、スクロール固定ギャラリーを備えた無料のオープンソース・ポートフォリオテンプレート。HTMLファイル1つで、セットアップガイド付き。",
-      echo: "映画のようなスクロールが楽しめる無料のポートフォリオテンプレート。星空が現れる演出と3Dのプロジェクトリボンを備えたコンセプトを、素のHTML・CSS・JSで再構築しました。",
-    },
   },
   contact: {
     titleLine1: "一緒に",
@@ -879,6 +801,9 @@ const ja: Dictionary = {
     email: "メール",
     whatsapp: "WhatsApp",
     contactMe: "連絡する",
+  },
+  tools: {
+    title: "開発に使っているツール",
   },
   footer: {
     rights: "無断転載を禁じます。",
@@ -965,17 +890,6 @@ const ko: Dictionary = {
     viewCode: "코드 보기",
     templateBadge: "포트폴리오 템플릿",
     previewAlt: (title: string) => `${title} 미리보기`,
-    descriptions: {
-      tixora:
-        "이벤트 티켓 플랫폼: 콘서트와 파티를 찾고, 원하는 방식으로 결제하고, QR 코드로 입장하세요.",
-      komuLibrary:
-        "전자책, 학술지, 학위논문, 연구 데이터베이스를 제공하는 대학 전자도서관입니다. 프런트엔드와 백엔드를 직접 개발했습니다.",
-      vtu: "제 VTU 앱을 다운로드하세요 — 빠르고, 간단하고, 믿을 수 있습니다.",
-      churchBot: "교회용 자동화 어시스턴트 경험과 워크플로를 보여주는 데모 플랫폼입니다.",
-      komuWebsite: "킹슬리 오줌바 음바디웨 대학교 공식 웹사이트를 팀으로 리디자인했습니다.",
-      neon: "파티클 필드, 움직이는 텍스트, 스크롤 고정 갤러리를 갖춘 무료 오픈소스 포트폴리오 템플릿입니다. HTML 파일 하나와 설정 가이드로 구성됩니다.",
-      echo: "영화 같은 스크롤을 갖춘 무료 포트폴리오 템플릿 — 별이 빛나는 하늘이 드러나는 효과와 3D 프로젝트 리본이 있는 콘셉트를 순수 HTML, CSS, JS로 다시 만들었습니다.",
-    },
   },
   contact: {
     titleLine1: "함께",
@@ -984,6 +898,9 @@ const ko: Dictionary = {
     email: "이메일",
     whatsapp: "WhatsApp",
     contactMe: "연락하기",
+  },
+  tools: {
+    title: "제가 사용하는 도구",
   },
   footer: {
     rights: "모든 권리 보유.",
@@ -1070,18 +987,6 @@ const hi: Dictionary = {
     viewCode: "कोड देखें",
     templateBadge: "पोर्टफ़ोलियो टेम्पलेट",
     previewAlt: (title: string) => `${title} का प्रीव्यू`,
-    descriptions: {
-      tixora:
-        "इवेंट टिकटिंग प्लेटफ़ॉर्म: कॉन्सर्ट और पार्टियाँ खोजें, अपने तरीके से भुगतान करें और QR कोड से प्रवेश करें।",
-      komuLibrary:
-        "ई-बुक्स, जर्नल्स, थीसिस और रिसर्च डेटाबेस के लिए यूनिवर्सिटी ई-लाइब्रेरी। इसका फ्रंटएंड और बैकएंड मैंने बनाया।",
-      vtu: "मेरा VTU ऐप डाउनलोड करें — तेज़, आसान और भरोसेमंद।",
-      churchBot: "चर्च के लिए एक स्वचालित असिस्टेंट अनुभव और वर्कफ़्लो का डेमो प्लेटफ़ॉर्म।",
-      komuWebsite:
-        "किंग्सले ओज़ुम्बा म्बाडिवे यूनिवर्सिटी की आधिकारिक वेबसाइट का टीम के साथ किया गया रीडिज़ाइन।",
-      neon: "पार्टिकल फ़ील्ड, एनिमेटेड टेक्स्ट और स्क्रॉल पर पिन गैलरी वाला मुफ़्त, ओपन-सोर्स पोर्टफ़ोलियो टेम्पलेट। एक ही HTML फ़ाइल, सेटअप गाइड के साथ।",
-      echo: "सिनेमाई स्क्रॉल वाला मुफ़्त पोर्टफ़ोलियो टेम्पलेट — तारों भरे आसमान के रिवील और 3D प्रोजेक्ट रिबन वाला एक दोबारा बनाया गया कॉन्सेप्ट, सादे HTML, CSS और JS में।",
-    },
   },
   contact: {
     titleLine1: "आइए मिलकर",
@@ -1090,6 +995,9 @@ const hi: Dictionary = {
     email: "ईमेल",
     whatsapp: "WhatsApp",
     contactMe: "संपर्क करें",
+  },
+  tools: {
+    title: "जिन टूल्स से मैं बनाता हूँ",
   },
   footer: {
     rights: "सर्वाधिकार सुरक्षित।",

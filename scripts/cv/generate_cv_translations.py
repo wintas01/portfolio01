@@ -1,12 +1,18 @@
-"""Generate the translated CV PDFs at artifacts/portfolio/public/cv/.
+"""Generate the CV PDFs in every site language.
 
-The English CV is still built by scripts/generate-cv.py. This script lays the
-same design out as an HTML page and has Chrome print it, because Chrome shapes
-Arabic, Devanagari and CJK text correctly (the PDF library cannot).
+English goes to artifacts/portfolio/public/Nnanna-Okechukwu-Jason-CV.pdf, the
+others to artifacts/portfolio/public/cv/. Projects are read from
+artifacts/portfolio/src/data/projects.json (the website's own list), so adding a
+project to the site adds it to every CV. GitHub Actions runs this on every push
+(.github/workflows/main.yml), so the CVs on the live site are always current.
+
+The design is laid out as an HTML page and printed by Chrome, because Chrome
+shapes Arabic, Devanagari and CJK text correctly. If there are too many
+projects for one page, the CV continues on a second page.
 
 Run from the repo root:
     pip install playwright pillow && playwright install chromium
-    python3 scripts/cv/generate_cv_translations.py            # all languages
+    python3 scripts/cv/generate_cv_translations.py            # all 10 languages
     python3 scripts/cv/generate_cv_translations.py fr de      # just some
     python3 scripts/cv/generate_cv_translations.py --html     # also keep the HTML
 
@@ -20,6 +26,8 @@ import os
 import base64
 import html
 import io
+import json
+import re
 import sys
 from pathlib import Path
 
@@ -31,6 +39,8 @@ from cv_translations import CV  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT_DIR = ROOT / "artifacts/portfolio/public/cv"
+ENGLISH_OUT = ROOT / "artifacts/portfolio/public/Nnanna-Okechukwu-Jason-CV.pdf"
+PROJECTS_FILE = ROOT / "artifacts/portfolio/src/data/projects.json"
 PHOTO = ROOT / "artifacts/portfolio/src/assets/wintas-about.png"
 ICONS = ROOT / "scripts/cv-assets"
 LOGOS = ROOT / "artifacts/portfolio/public"
@@ -45,15 +55,45 @@ FONTS = {
     "ko": "'TeX Gyre Heros', 'Noto Sans CJK KR', 'Noto Sans KR', sans-serif",
 }
 
-PROJECTS = [
-    # key, logo, links (label key, url text, url) — "launching" has no link
-    ("elibrary", "project-previews/komu-icon.png", [("live", "komu-elibrary.vercel.app")]),
-    ("website", "project-previews/komu-icon.png", [("live", "komu.edu.ng")]),
-    ("tixora", "project-previews/tixora-icon.png", "launching"),
-    ("vtu", "project-previews/vtu-icon.jpg", [("live", "sabuss.com/ojsub3")]),
-    ("bot", "project-previews/church-bot-icon.png", [("demo", "church-auto-bot-demo.vercel.app"), ("source", None)]),
-    ("portfolio", "favicon.png", [("live", "wintas01.github.io/portfolio01"), ("source", "github.com/wintas01/portfolio01")]),
-]
+def short_url(url: str) -> str:
+    return url.split("://", 1)[-1].rstrip("/")
+
+
+def cv_projects(lang: str) -> list[dict]:
+    """Projects for the CV in one language, from the website's projects.json.
+
+    Missing translations fall back to English; missing CV-specific text falls
+    back to the project's website description.
+    """
+    data = json.loads(PROJECTS_FILE.read_text(encoding="utf-8"))["projects"]
+    chosen = [p for p in data if p.get("onCV", True)]
+    chosen.sort(key=lambda p: (p.get("cvRank", 1000), data.index(p)))
+    out = []
+    for p in chosen:
+        text = p.get("text", {})
+        mine, en = text.get(lang) or {}, text.get("en") or {}
+        bullets = (
+            mine.get("cvBullets")
+            or ([mine["description"]] if mine.get("description") else None)
+            or en.get("cvBullets")
+            or ([en["description"]] if en.get("description") else [])
+        )
+        links = p.get("cvLinks")
+        if links is None:
+            links = []
+            if p.get("href"):
+                links.append({"label": "live", "url": short_url(p["href"])})
+            if p.get("codeHref"):
+                links.append({"label": "source", "url": short_url(p["codeHref"])})
+        out.append({
+            "logo": p.get("icon"),
+            "kicker": mine.get("cvKicker") or en.get("cvKicker") or "",
+            "title": mine.get("cvTitle") or en.get("cvTitle") or p["title"],
+            "bullets": bullets,
+            "links": links,
+        })
+    return out
+
 
 
 def data_uri(path: Path, size: int = 96) -> str:
@@ -99,24 +139,26 @@ def build_html(lang: str, t: dict, photo: str) -> str:
         return "".join(f'<li class="{cls}">{e(i)}</li>' for i in items)
 
     projects_html = []
-    for key, logo, links in PROJECTS:
-        kicker, title, items = t["p"][key]
+    for proj in cv_projects(lang):
+        logo, kicker, title, items, links = proj["logo"], proj["kicker"], proj["title"], proj["bullets"], proj["links"]
         if links == "launching":
             meta = e(t["launching"])
         else:
             parts = []
-            for label, url in links:
+            for item in links:
+                label, url = item["label"], item.get("url")
                 if url:
                     parts.append(f"{e(t[label])}: {link(url)}")
                 else:
                     parts.append(f"{e(t[label])}: {e(t['private'])}")
             meta = '<span class="sep">  ·  </span>'.join(parts)
+        logo_html = f'<img class="logo" src="{data_uri(LOGOS / logo)}" alt="">' if logo and (LOGOS / logo).exists() else '<span class="logo"></span>'
         projects_html.append(f"""
         <div class="project">
           <div class="project-head">
-            <img class="logo" src="{data_uri(LOGOS / logo)}" alt="">
+            {logo_html}
             <div>
-              <div class="kicker spaced">{e(kicker)}</div>
+              {f'<div class="kicker spaced">{e(kicker)}</div>' if kicker else ''}
               <div class="ptitle spaced">{e(title)}</div>
             </div>
           </div>
@@ -132,11 +174,15 @@ def build_html(lang: str, t: dict, photo: str) -> str:
 <meta charset="utf-8">
 <title>Nnanna Okechukwu Jason - CV</title>
 <style>
+  /* Pages are full-bleed (so the background covers everything). Spacing at the
+     top and bottom of each page comes from the table header/footer rows below,
+     which Chrome repeats on every printed page. */
   @page {{ size: A4; margin: 0; }}
   * {{ box-sizing: border-box; margin: 0; padding: 0; }}
-  html, body {{ width: 595.28pt; height: 841.89pt; }}
+  html {{ background: #F4F4F2; }}
+  body {{ width: 595.28pt; min-height: 841.89pt; }}
   body {{
-    position: relative; overflow: hidden; background: #F4F4F2; color: #2B2B2B;
+    position: relative; background: #F4F4F2; color: #2B2B2B;
     font-family: {font}; -webkit-print-color-adjust: exact; print-color-adjust: exact;
   }}
   a {{ color: #111111; text-decoration: underline; }}
@@ -145,12 +191,13 @@ def build_html(lang: str, t: dict, photo: str) -> str:
   .bar {{ inset-inline-start: 28pt; top: 155pt; width: 497pt; height: 30pt; background: #CDE600; }}
   .panel {{ inset-inline-start: 98pt; top: 33pt; width: 92pt; height: 150pt; background: #E4E4E4; }}
   .panel img {{ position: absolute; left: 0; top: 12pt; width: 92pt; height: 138pt; }}
+  /* The label's box spans from the top of the rule to y=205pt; the text sits at its bottom. */
+  .resume-box {{ position: absolute; left: 55pt; top: 59pt; height: 146pt; display: flex; align-items: flex-end; }}
+  [dir="rtl"] .resume-box {{ left: auto; right: 55pt; }}
   .resume {{
-    left: 55pt; bottom: calc(841.89pt - 205pt);
     font-weight: 700; font-size: 17pt; line-height: 17pt; color: #111; letter-spacing: 0.4pt;
     writing-mode: vertical-rl; transform: rotate(180deg); white-space: nowrap;
   }}
-  [dir="rtl"] .resume {{ left: auto; right: 55pt; }}
   .cjk .resume {{ writing-mode: vertical-rl; text-orientation: upright; transform: none; letter-spacing: 3pt; }}
   .name {{ inset-inline-start: 205pt; top: 124pt; font-size: 25pt; line-height: 1; color: #111; white-space: nowrap; }}
   .name b {{ font-weight: 700; }}
@@ -164,7 +211,11 @@ def build_html(lang: str, t: dict, photo: str) -> str:
   }}
   .contacts span, .contacts a {{ display: inline-flex; align-items: center; gap: 4pt; text-decoration: none; color: #111; white-space: nowrap; }}
   .contacts img {{ width: 9pt; height: 9pt; }}
-  .content {{ inset-inline-start: 50pt; top: 247pt; width: 503pt; }}
+  .content {{ position: relative; margin-inline-start: 50pt; padding-top: 211pt; width: 503pt; }}
+  .flow {{ width: 100%; border-collapse: collapse; }}
+  .flow td {{ padding: 0; vertical-align: top; }}
+  .page-top {{ height: 36pt; }}
+  .page-bottom {{ height: 26pt; }}
   .objective {{ position: relative; padding-inline-start: 18pt; font-size: 9pt; line-height: 13pt; color: #111; }}
   .objective::before {{ content: ""; position: absolute; inset-inline-start: 0; top: -2pt; bottom: -2pt; width: 6pt; background: #CDE600; }}
   .cols {{ display: flex; gap: 22pt; margin-top: 24pt; }}
@@ -185,7 +236,8 @@ def build_html(lang: str, t: dict, photo: str) -> str:
   .uni {{ display: flex; gap: 6pt; margin-top: 5pt; align-items: flex-start; }}
   .uni img {{ width: 24pt; height: 24pt; object-fit: contain; flex: none; }}
   .uni span {{ font-size: 8pt; line-height: 10.5pt; color: #6B6B6B; }}
-  .project {{ margin-bottom: 8pt; }}
+  .project {{ margin-bottom: 8pt; break-inside: avoid; }}
+  .footer {{ break-inside: avoid; }}
   .project-head {{ display: flex; gap: 8pt; align-items: center; margin-bottom: 3pt; }}
   .logo {{ width: 22pt; height: 22pt; object-fit: contain; flex: none; }}
   .kicker {{ font-size: 7.2pt; line-height: 9pt; letter-spacing: 1.3pt; text-transform: uppercase; color: #2B2B2B; white-space: pre; }}
@@ -210,7 +262,7 @@ def build_html(lang: str, t: dict, photo: str) -> str:
   <div class="abs vline"></div>
   <div class="abs bar"></div>
   <div class="abs panel"><img src="{photo}" alt=""></div>
-  <div class="abs resume">{e(t['resume'])}</div>
+  <div class="resume-box"><div class="resume">{e(t['resume'])}</div></div>
   <div class="abs name"><span dir="ltr">Nnanna Okechukwu <b>Jason</b></span></div>
   <div class="abs role">{e(t['role'])}</div>
   <div class="abs contacts">
@@ -220,7 +272,11 @@ def build_html(lang: str, t: dict, photo: str) -> str:
     <a href="https://wintas01.github.io/portfolio01/"><img src="{icon['globe']}" alt=""><span dir="ltr">wintas01.github.io/portfolio01</span></a>
     <a href="https://github.com/wintas01"><img src="{icon['github']}" alt=""><span dir="ltr">github.com/wintas01</span></a>
   </div>
-  <div class="abs content">
+  <div class="content">
+   <table class="flow">
+    <thead><tr><td><div class="page-top"></div></td></tr></thead>
+    <tfoot><tr><td><div class="page-bottom"></div></td></tr></tfoot>
+    <tbody><tr><td>
     <p class="objective">{e(t['objective'])}</p>
     <div class="cols">
       <div class="left">
@@ -246,6 +302,8 @@ def build_html(lang: str, t: dict, photo: str) -> str:
         <div class="footer">{e(t['more'])} {link('github.com/wintas01')}<span class="sep">  ·  </span>{e(t['refs'])}</div>
       </div>
     </div>
+    </td></tr></tbody>
+   </table>
   </div>
 </body>
 </html>"""
@@ -277,20 +335,15 @@ async def main(langs: list[str], keep_html: bool) -> None:
                   }
                 }"""
             )
-            overflow = await page.evaluate(
-                "() => { const c = document.querySelector('.content').getBoundingClientRect();"
-                " return Math.round(c.bottom - document.body.getBoundingClientRect().height + 24); }"
-            )
-            if overflow > 0:
-                print(f"  ! {lang}: content runs {overflow}px past the bottom margin")
-            out = OUT_DIR / f"Nnanna-Okechukwu-Jason-CV-{lang.upper()}.pdf"
+            out = ENGLISH_OUT if lang == "en" else OUT_DIR / f"Nnanna-Okechukwu-Jason-CV-{lang.upper()}.pdf"
             await page.pdf(path=str(out), format="A4", print_background=True, prefer_css_page_size=True,
                            margin={"top": "0", "right": "0", "bottom": "0", "left": "0"})
-            print(f"Wrote {out.relative_to(ROOT)}")
+            pages = len(re.findall(rb"/Type\s*/Page[^s]", out.read_bytes()))
+            print(f"Wrote {out.relative_to(ROOT)} ({pages} page{'s' if pages != 1 else ''})")
         await browser.close()
 
 
 if __name__ == "__main__":
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
-    chosen = args or [lang for lang in CV if lang != "en"]
+    chosen = args or list(CV)
     asyncio.run(main(chosen, "--html" in sys.argv))

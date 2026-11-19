@@ -1,7 +1,7 @@
-"""CV text in every site language.
+"""The CV's fixed text (headings, skills, summary) in every site language.
 
-English here mirrors scripts/generate-cv.py (which still builds the English PDF).
-Edit a language's text here, then run:  python3 scripts/cv/generate_cv_translations.py
+Projects are NOT here: they come from artifacts/portfolio/src/data/projects.json,
+the same file the website uses, so a project added there shows up in every CV.
 Names of products, people and the university stay as they are in every language.
 """
 
@@ -30,32 +30,6 @@ CV = {
         "graduated": "Graduated 2026",
         "degree": "B.Sc. Computer Science",
         "projects": "Projects",
-        "p": {
-            "elibrary": ("Full-stack  —  Frontend & Backend", "KOMU E-Library", [
-                "Built the frontend and backend of the university's e-library for e-books, journals, and theses.",
-                "Search across 19+ research databases, available on campus and remotely, 24/7.",
-            ]),
-            "website": ("Team project  —  Full-stack developer", "KOMU Website Redesign", [
-                "Full-stack developer in the team that redesigned the official KOMU university website.",
-                "Contributed to both the frontend and the backend of the new site, which is now live.",
-            ]),
-            "tixora": ("Event ticketing platform", "Tixora", [
-                "Ticketing platform to find concerts, parties, dinners, and shows and book in seconds.",
-                "Checkout by card, bank transfer, or USSD, with a QR ticket issued right after payment.",
-                "One scan at the door: no paper tickets, no queues, no fakes.",
-            ]),
-            "vtu": ("Instant top-up web app", "OJ Sub VTU Platform", [
-                "Built a VTU platform for cheap data and airtime, electricity bills, TV, and school fees.",
-                "Added a marketplace where users can sell items, with an installable app version.",
-            ]),
-            "bot": ("Cloudflare AI API  ·  Supabase  ·  Vercel", "Church Facebook Auto Bot", [
-                "Generates posts and images with the Cloudflare AI API and auto-publishes them to Facebook.",
-                "Stores content in Supabase and runs on Vercel, so no manual daily posting is needed.",
-            ]),
-            "portfolio": ("TypeScript", "Portfolio Website", [
-                "Designed and published this portfolio, with live project previews and GitHub activity.",
-            ]),
-        },
         "live": "Live",
         "demo": "Demo",
         "source": "Source",
@@ -85,32 +59,6 @@ CV = {
         "graduated": "Diplômé en 2026",
         "degree": "Licence (B.Sc.) en informatique",
         "projects": "Projets",
-        "p": {
-            "elibrary": ("Full-stack  —  Frontend et backend", "Bibliothèque numérique KOMU", [
-                "Frontend et backend de la bibliothèque numérique : e-books, revues et thèses.",
-                "Plus de 19 bases de données de recherche, sur le campus et à distance, 24 h/24.",
-            ]),
-            "website": ("Projet d'équipe  —  Développeur full-stack", "Refonte du site web de KOMU", [
-                "Développeur full-stack dans l'équipe qui a refondu le site officiel de l'université KOMU.",
-                "Contribution au frontend comme au backend du nouveau site, aujourd'hui en ligne.",
-            ]),
-            "tixora": ("Plateforme de billetterie événementielle", "Tixora", [
-                "Trouver concerts, soirées, dîners et spectacles et réserver en quelques secondes.",
-                "Paiement par carte, virement ou USSD, billet QR émis juste après le paiement.",
-                "Un seul scan à l'entrée : pas de billets papier, pas de files d'attente, pas de faux.",
-            ]),
-            "vtu": ("Application web de recharge instantanée", "Plateforme VTU OJ Sub", [
-                "Plateforme VTU : data et crédit à petit prix, électricité, TV, frais de scolarité.",
-                "Place de marché pour vendre des articles, avec une version installable de l'app.",
-            ]),
-            "bot": ("Cloudflare AI API  ·  Supabase  ·  Vercel", "Bot Facebook automatique pour église", [
-                "Génère publications et images avec l'API Cloudflare AI et les publie sur Facebook.",
-                "Contenu stocké dans Supabase, hébergé sur Vercel : aucune publication manuelle.",
-            ]),
-            "portfolio": ("TypeScript", "Site portfolio", [
-                "Ce portfolio, conçu et publié par moi : aperçus en direct et activité GitHub.",
-            ]),
-        },
         "live": "En ligne",
         "demo": "Démo",
         "source": "Code source",
@@ -140,32 +88,6 @@ CV = {
         "graduated": "Graduado en 2026",
         "degree": "Grado (B.Sc.) en Informática",
         "projects": "Proyectos",
-        "p": {
-            "elibrary": ("Full-stack  —  Frontend y backend", "Biblioteca digital KOMU", [
-                "Frontend y backend de la biblioteca digital: e-books, revistas y tesis.",
-                "Más de 19 bases de datos de investigación, en el campus y en remoto, 24/7.",
-            ]),
-            "website": ("Proyecto en equipo  —  Desarrollador full-stack", "Rediseño del sitio web de KOMU", [
-                "Desarrollador full-stack en el equipo que rediseñó el sitio oficial de KOMU.",
-                "Contribuí tanto al frontend como al backend del nuevo sitio, que ya está en producción.",
-            ]),
-            "tixora": ("Plataforma de venta de entradas", "Tixora", [
-                "Encuentra conciertos, fiestas, cenas y espectáculos y reserva en segundos.",
-                "Pago con tarjeta, transferencia o USSD, con entrada QR al instante.",
-                "Un solo escaneo en la puerta: sin entradas de papel, sin colas, sin falsificaciones.",
-            ]),
-            "vtu": ("App web de recargas instantáneas", "Plataforma VTU OJ Sub", [
-                "Plataforma VTU: datos y saldo baratos, luz, TV y matrículas escolares.",
-                "Marketplace para vender artículos, con una versión instalable de la app.",
-            ]),
-            "bot": ("Cloudflare AI API  ·  Supabase  ·  Vercel", "Bot automático de Facebook para iglesias", [
-                "Genera posts e imágenes con la API de Cloudflare AI y los publica en Facebook.",
-                "Contenido en Supabase, alojado en Vercel: sin publicar a mano cada día.",
-            ]),
-            "portfolio": ("TypeScript", "Sitio web de portafolio", [
-                "Diseñé y publiqué este portafolio, con vistas previas y actividad de GitHub.",
-            ]),
-        },
         "live": "En línea",
         "demo": "Demo",
         "source": "Código",
@@ -195,32 +117,6 @@ CV = {
         "graduated": "Formado em 2026",
         "degree": "Bacharelado (B.Sc.) em Ciência da Computação",
         "projects": "Projetos",
-        "p": {
-            "elibrary": ("Full-stack  —  Frontend e backend", "Biblioteca digital KOMU", [
-                "Frontend e backend da biblioteca digital: e-books, periódicos e teses.",
-                "Busca em mais de 19 bases de dados de pesquisa, no campus e remotamente, 24/7.",
-            ]),
-            "website": ("Projeto em equipe  —  Desenvolvedor full-stack", "Redesign do site da KOMU", [
-                "Desenvolvedor full-stack na equipe que redesenhou o site oficial da KOMU.",
-                "Contribuí tanto para o frontend quanto para o backend do novo site, que já está no ar.",
-            ]),
-            "tixora": ("Plataforma de ingressos para eventos", "Tixora", [
-                "Encontre shows, festas, jantares e espetáculos e reserve em segundos.",
-                "Pagamento por cartão, transferência ou USSD, com ingresso QR na hora.",
-                "Um único scan na entrada: sem ingressos de papel, sem filas, sem falsificações.",
-            ]),
-            "vtu": ("App web de recarga instantânea", "Plataforma VTU OJ Sub", [
-                "Plataforma VTU: dados e créditos baratos, luz, TV e mensalidades escolares.",
-                "Marketplace para vender itens, com uma versão instalável do app.",
-            ]),
-            "bot": ("Cloudflare AI API  ·  Supabase  ·  Vercel", "Bot automático do Facebook para igrejas", [
-                "Gera posts e imagens com a API Cloudflare AI e os publica no Facebook.",
-                "Conteúdo no Supabase, hospedado na Vercel: nada de postar manualmente.",
-            ]),
-            "portfolio": ("TypeScript", "Site de portfólio", [
-                "Criei e publiquei este portfólio, com prévias dos projetos ao vivo e atividade no GitHub.",
-            ]),
-        },
         "live": "No ar",
         "demo": "Demo",
         "source": "Código",
@@ -250,32 +146,6 @@ CV = {
         "graduated": "Abschluss 2026",
         "degree": "B.Sc. Informatik",
         "projects": "Projekte",
-        "p": {
-            "elibrary": ("Full-Stack  —  Frontend & Backend", "Digitale Bibliothek KOMU", [
-                "Frontend & Backend der digitalen Bibliothek: E-Books, Journale, Abschlussarbeiten.",
-                "Über 19 Forschungsdatenbanken, auf dem Campus und von unterwegs, rund um die Uhr.",
-            ]),
-            "website": ("Teamprojekt  —  Full-Stack-Entwickler", "Redesign der KOMU-Website", [
-                "Full-Stack-Entwickler im Team, das die offizielle KOMU-Website neu gestaltet hat.",
-                "Mitarbeit an Frontend und Backend der neuen Website, die inzwischen live ist.",
-            ]),
-            "tixora": ("Ticketing-Plattform für Events", "Tixora", [
-                "Konzerte, Partys, Dinner und Shows finden und in Sekunden buchen.",
-                "Zahlung per Karte, Überweisung oder USSD; QR-Ticket direkt nach der Zahlung.",
-                "Ein Scan am Eingang: keine Papiertickets, keine Warteschlangen, keine Fälschungen.",
-            ]),
-            "vtu": ("Web-App für Sofort-Aufladungen", "OJ Sub VTU-Plattform", [
-                "VTU-Plattform: günstige Daten und Guthaben, Strom, TV und Schulgebühren.",
-                "Marktplatz zum Verkaufen von Artikeln, mit installierbarer App-Version.",
-            ]),
-            "bot": ("Cloudflare AI API  ·  Supabase  ·  Vercel", "Automatischer Facebook-Bot für Kirchen", [
-                "Erstellt Beiträge und Bilder mit der Cloudflare AI API und postet sie auf Facebook.",
-                "Inhalte in Supabase, gehostet auf Vercel – kein manuelles Posten mehr.",
-            ]),
-            "portfolio": ("TypeScript", "Portfolio-Website", [
-                "Dieses Portfolio entworfen und veröffentlicht, mit Live-Vorschauen und GitHub.",
-            ]),
-        },
         "live": "Live",
         "demo": "Demo",
         "source": "Quellcode",
@@ -305,32 +175,6 @@ CV = {
         "graduated": "تخرّج 2026",
         "degree": "بكالوريوس علوم الحاسوب",
         "projects": "المشاريع",
-        "p": {
-            "elibrary": ("Full-Stack  —  الواجهة الأمامية والخلفية", "المكتبة الإلكترونية لجامعة KOMU", [
-                "بنيتُ الواجهتين الأمامية والخلفية للمكتبة الإلكترونية للجامعة، للكتب الإلكترونية والمجلات العلمية والرسائل الجامعية.",
-                "بحث في أكثر من 19 قاعدة بيانات بحثية، داخل الحرم الجامعي وعن بُعد، على مدار الساعة.",
-            ]),
-            "website": ("مشروع جماعي  —  مطوّر Full-Stack", "إعادة تصميم موقع جامعة KOMU", [
-                "مطوّر Full-Stack ضمن الفريق الذي أعاد تصميم الموقع الرسمي لجامعة KOMU.",
-                "ساهمتُ في الواجهة الأمامية والخلفية للموقع الجديد، وهو منشور الآن.",
-            ]),
-            "tixora": ("منصة لحجز تذاكر الفعاليات", "Tixora", [
-                "منصة للعثور على الحفلات الموسيقية والسهرات والعشاءات والعروض والحجز في ثوانٍ.",
-                "الدفع بالبطاقة أو التحويل البنكي أو USSD، مع تذكرة برمز QR تصدر فور الدفع.",
-                "مسح واحد عند الباب: لا تذاكر ورقية، ولا طوابير، ولا تزوير.",
-            ]),
-            "vtu": ("تطبيق ويب للشحن الفوري", "منصة OJ Sub للشحن (VTU)", [
-                "بنيتُ منصة VTU لباقات البيانات والرصيد بأسعار منخفضة، وفواتير الكهرباء، والتلفزيون، والرسوم المدرسية.",
-                "أضفتُ سوقًا يمكن للمستخدمين فيه بيع المنتجات، مع نسخة قابلة للتثبيت من التطبيق.",
-            ]),
-            "bot": ("Cloudflare AI API  ·  Supabase  ·  Vercel", "روبوت فيسبوك آلي للكنائس", [
-                "يُنشئ منشورات وصورًا باستخدام Cloudflare AI API وينشرها تلقائيًا على فيسبوك.",
-                "يخزّن المحتوى في Supabase ويعمل على Vercel، فلا حاجة إلى النشر اليدوي يوميًا.",
-            ]),
-            "portfolio": ("TypeScript", "موقع معرض الأعمال", [
-                "صمّمتُ هذا المعرض ونشرته، مع معاينات مباشرة للمشاريع ونشاط GitHub.",
-            ]),
-        },
         "live": "مباشر",
         "demo": "عرض تجريبي",
         "source": "الكود المصدري",
@@ -360,32 +204,6 @@ CV = {
         "graduated": "2026 年毕业",
         "degree": "计算机科学理学学士",
         "projects": "项目经历",
-        "p": {
-            "elibrary": ("全栈  —  前端与后端", "KOMU 电子图书馆", [
-                "开发了大学电子图书馆的前端和后端，涵盖电子书、期刊和学位论文。",
-                "可检索 19 个以上科研数据库，校内外均可 24 小时访问。",
-            ]),
-            "website": ("团队项目  —  全栈开发者", "KOMU 官网改版", [
-                "作为全栈开发者参与团队，重新设计了 KOMU 大学官方网站。",
-                "参与新网站的前端和后端开发，网站现已上线。",
-            ]),
-            "tixora": ("活动票务平台", "Tixora", [
-                "发现演唱会、派对、晚宴和演出，几秒钟即可完成预订。",
-                "支持银行卡、银行转账或 USSD 支付，付款后立即生成二维码门票。",
-                "入场一扫即可：无纸质门票、无需排队、杜绝假票。",
-            ]),
-            "vtu": ("即时充值 Web 应用", "OJ Sub VTU 平台", [
-                "搭建 VTU 平台，提供低价流量和话费充值、电费、电视及学费缴纳服务。",
-                "新增用户可出售商品的交易市场，并提供可安装的应用版本。",
-            ]),
-            "bot": ("Cloudflare AI API  ·  Supabase  ·  Vercel", "教会 Facebook 自动发帖机器人", [
-                "使用 Cloudflare AI API 生成帖子和图片，并自动发布到 Facebook。",
-                "内容存储在 Supabase，部署于 Vercel，无需每天手动发帖。",
-            ]),
-            "portfolio": ("TypeScript", "作品集网站", [
-                "设计并发布了本作品集网站，包含项目实时预览和 GitHub 动态。",
-            ]),
-        },
         "live": "在线访问",
         "demo": "演示",
         "source": "源代码",
@@ -415,32 +233,6 @@ CV = {
         "graduated": "2026年 卒業",
         "degree": "コンピュータサイエンス学士",
         "projects": "プロジェクト",
-        "p": {
-            "elibrary": ("フルスタック  —  フロントエンド & バックエンド", "KOMU電子図書館", [
-                "大学電子図書館（電子書籍・学術誌・論文）を一貫して開発。",
-                "19以上の研究データベースを横断検索でき、学内外から24時間利用可能。",
-            ]),
-            "website": ("チームプロジェクト  —  フルスタック開発者", "KOMU公式サイトのリデザイン", [
-                "KOMU大学公式サイトをリデザインしたチームにフルスタック開発者として参加。",
-                "新サイトのフロントエンドとバックエンドの両方を担当し、現在公開中。",
-            ]),
-            "tixora": ("イベントチケットプラットフォーム", "Tixora", [
-                "コンサートやパーティー、ショーを探して数秒で予約できる。",
-                "カード、銀行振込、USSDで決済でき、支払い直後にQRチケットを発行。",
-                "入口でワンスキャン：紙のチケットも行列も偽造もなし。",
-            ]),
-            "vtu": ("即時チャージWebアプリ", "OJ Sub VTUプラットフォーム", [
-                "格安データ通信、電気・TV・学費の支払いに対応したVTU基盤を構築。",
-                "商品を販売できるマーケットプレイスとインストール型アプリを追加。",
-            ]),
-            "bot": ("Cloudflare AI API  ·  Supabase  ·  Vercel", "教会向けFacebook自動投稿ボット", [
-                "Cloudflare AI APIで投稿と画像を生成し、Facebookに自動投稿。",
-                "コンテンツをSupabaseに保存し、Vercel上で稼働。毎日の手動投稿は不要。",
-            ]),
-            "portfolio": ("TypeScript", "ポートフォリオサイト", [
-                "ライブプレビューとGitHub活動を載せた本ポートフォリオを設計・公開。",
-            ]),
-        },
         "live": "公開中",
         "demo": "デモ",
         "source": "ソースコード",
@@ -470,32 +262,6 @@ CV = {
         "graduated": "2026년 졸업",
         "degree": "컴퓨터공학 학사",
         "projects": "프로젝트",
-        "p": {
-            "elibrary": ("풀스택  —  프런트엔드 & 백엔드", "KOMU 전자도서관", [
-                "전자책, 학술지, 학위논문을 제공하는 대학 전자도서관의 프런트엔드와 백엔드를 개발했습니다.",
-                "19개 이상의 연구 데이터베이스를 교내외에서 24시간 검색할 수 있습니다.",
-            ]),
-            "website": ("팀 프로젝트  —  풀스택 개발자", "KOMU 웹사이트 리디자인", [
-                "KOMU 대학교 공식 웹사이트를 리디자인한 팀에서 풀스택 개발자로 참여했습니다.",
-                "현재 운영 중인 새 사이트의 프런트엔드와 백엔드를 모두 개발했습니다.",
-            ]),
-            "tixora": ("이벤트 티켓 플랫폼", "Tixora", [
-                "콘서트, 파티, 디너, 공연을 찾아 몇 초 만에 예약할 수 있는 플랫폼입니다.",
-                "카드, 계좌이체, USSD로 결제하면 즉시 QR 티켓이 발급됩니다.",
-                "입구에서 한 번만 스캔: 종이 티켓도, 줄 서기도, 위조도 없습니다.",
-            ]),
-            "vtu": ("즉시 충전 웹 앱", "OJ Sub VTU 플랫폼", [
-                "저렴한 데이터·통화 충전, 전기 요금, TV, 학비 납부를 위한 VTU 플랫폼을 구축했습니다.",
-                "사용자가 물건을 판매할 수 있는 마켓플레이스와 설치형 앱 버전을 추가했습니다.",
-            ]),
-            "bot": ("Cloudflare AI API  ·  Supabase  ·  Vercel", "교회용 Facebook 자동 게시 봇", [
-                "Cloudflare AI API로 게시물과 이미지를 생성해 Facebook에 자동으로 게시합니다.",
-                "콘텐츠는 Supabase에 저장되고 Vercel에서 실행되어 매일 수동으로 게시할 필요가 없습니다.",
-            ]),
-            "portfolio": ("TypeScript", "포트폴리오 웹사이트", [
-                "프로젝트 실시간 미리보기와 GitHub 활동을 담은 이 포트폴리오를 디자인하고 게시했습니다.",
-            ]),
-        },
         "live": "사이트",
         "demo": "데모",
         "source": "소스 코드",
@@ -525,32 +291,6 @@ CV = {
         "graduated": "2026 में स्नातक",
         "degree": "B.Sc. कंप्यूटर साइंस",
         "projects": "प्रोजेक्ट्स",
-        "p": {
-            "elibrary": ("फुल-स्टैक  —  फ्रंटएंड और बैकएंड", "KOMU ई-लाइब्रेरी", [
-                "ई-बुक्स, जर्नल्स और थीसिस के लिए यूनिवर्सिटी की ई-लाइब्रेरी का फ्रंटएंड और बैकएंड बनाया।",
-                "19+ रिसर्च डेटाबेस में खोज, कैंपस में और रिमोट से, 24/7।",
-            ]),
-            "website": ("टीम प्रोजेक्ट  —  फुल-स्टैक डेवलपर", "KOMU वेबसाइट रीडिज़ाइन", [
-                "उस टीम में फुल-स्टैक डेवलपर, जिसने KOMU यूनिवर्सिटी की आधिकारिक वेबसाइट को रीडिज़ाइन किया।",
-                "नई साइट के फ्रंटएंड और बैकएंड दोनों में योगदान दिया, जो अब लाइव है।",
-            ]),
-            "tixora": ("इवेंट टिकटिंग प्लेटफ़ॉर्म", "Tixora", [
-                "कॉन्सर्ट, पार्टियाँ, डिनर और शो खोजने और सेकंडों में बुक करने का प्लेटफ़ॉर्म।",
-                "कार्ड, बैंक ट्रांसफ़र या USSD से भुगतान, और भुगतान के तुरंत बाद QR टिकट।",
-                "दरवाज़े पर एक स्कैन: न कागज़ी टिकट, न कतारें, न नकली टिकट।",
-            ]),
-            "vtu": ("इंस्टेंट टॉप-अप वेब ऐप", "OJ Sub VTU प्लेटफ़ॉर्म", [
-                "सस्ते डेटा और एयरटाइम, बिजली बिल, TV और स्कूल फ़ीस के लिए VTU प्लेटफ़ॉर्म बनाया।",
-                "एक मार्केटप्लेस जोड़ा जहाँ यूज़र सामान बेच सकते हैं, साथ में इंस्टॉल करने योग्य ऐप वर्ज़न।",
-            ]),
-            "bot": ("Cloudflare AI API  ·  Supabase  ·  Vercel", "चर्च फ़ेसबुक ऑटो बॉट", [
-                "Cloudflare AI API से पोस्ट और इमेज बनाता है और उन्हें अपने आप Facebook पर प्रकाशित करता है।",
-                "कंटेंट Supabase में सहेजता है और Vercel पर चलता है, इसलिए रोज़ हाथ से पोस्ट करने की ज़रूरत नहीं।",
-            ]),
-            "portfolio": ("TypeScript", "पोर्टफ़ोलियो वेबसाइट", [
-                "लाइव प्रोजेक्ट प्रीव्यू और GitHub गतिविधि के साथ यह पोर्टफ़ोलियो डिज़ाइन और प्रकाशित किया।",
-            ]),
-        },
         "live": "लाइव",
         "demo": "डेमो",
         "source": "सोर्स",
