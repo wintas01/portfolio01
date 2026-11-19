@@ -230,8 +230,8 @@ export default function Home() {
     <div className="min-h-screen bg-background text-foreground selection:bg-foreground selection:text-background font-sans overflow-x-hidden">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/40">
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 py-4 flex items-center justify-between">
-          <div dir="ltr" className="font-bold text-xl tracking-tight">
+        <div className="max-w-[1400px] mx-auto px-5 max-[359px]:px-3 sm:px-8 py-4 flex items-center justify-between">
+          <div dir="ltr" className="font-bold text-lg max-[359px]:text-base sm:text-xl tracking-tight">
             WINTAS.
           </div>
 
@@ -247,12 +247,12 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-3">
             <LanguageSwitcher />
             <VenomButton
               href="mailto:nnannaokechukwu1@gmail.com"
-              wrapperClassName="hidden md:block"
-              className="block bg-foreground text-background px-5 py-2.5 rounded-full text-sm font-semibold transition-shadow hover:shadow-[0_10px_24px_-8px_rgba(0,0,0,0.55)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2"
+              wrapperClassName="order-first md:order-none"
+              className="block whitespace-nowrap bg-foreground text-background px-3.5 max-[359px]:px-2.5 py-2 text-xs sm:px-5 sm:py-2.5 sm:text-sm rounded-full font-semibold transition-shadow hover:shadow-[0_10px_24px_-8px_rgba(0,0,0,0.55)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2"
             >
               {t.nav.letsTalk}
             </VenomButton>

@@ -85,14 +85,14 @@ export default function LanguageSwitcher({
             openMenu();
           }
         }}
-        className="inline-flex h-10 items-center gap-2 rounded-full border-2 border-foreground bg-background px-3.5 text-sm font-semibold transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2"
+        className="inline-flex h-10 items-center gap-1.5 rounded-full border-2 border-foreground bg-background px-3 text-sm sm:gap-2 sm:px-3.5 font-semibold transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2"
       >
         <Globe className="h-4 w-4" aria-hidden="true" />
         <span className="hidden sm:inline">{current?.label}</span>
         <span className="uppercase sm:hidden">{language}</span>
         <ChevronDown
           aria-hidden="true"
-          className={`h-3.5 w-3.5 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+          className={`hidden h-3.5 w-3.5 transition-transform duration-200 sm:block ${open ? "rotate-180" : ""}`}
         />
       </button>
 

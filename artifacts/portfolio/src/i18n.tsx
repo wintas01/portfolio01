@@ -392,7 +392,7 @@ const pt: Dictionary = {
     about: "Sobre",
     projects: "Projetos",
     contact: "Contato",
-    letsTalk: "Vamos conversar",
+    letsTalk: "Vamos falar",
     toggleMenu: "Abrir ou fechar o menu",
   },
   hero: {
@@ -501,7 +501,7 @@ const de: Dictionary = {
     about: "Über mich",
     projects: "Projekte",
     contact: "Kontakt",
-    letsTalk: "Kontakt aufnehmen",
+    letsTalk: "Kontakt",
     toggleMenu: "Menü öffnen oder schließen",
   },
   hero: {
