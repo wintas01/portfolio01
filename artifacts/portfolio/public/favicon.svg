@@ -1,3 +1,8 @@
-<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="180" height="180" rx="36" fill="#FF3C00"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="7" fill="#0B0B0C"/>
+  <defs><mask id="m"><rect width="32" height="32" fill="#fff"/>
+    <circle cx="16" cy="18.2" r="2.4" fill="#000"/>
+    <path d="M11.8 21.6 H20.2 L21.2 24.6 H10.8 Z" fill="#000"/>
+  </mask></defs>
+  <polygon points="2,6 8.6,6 12.3,16.8 14.4,11.2 17.6,11.2 19.7,16.8 23.4,6 30,6 23.6,27 8.4,27" fill="#FFFFFF" mask="url(#m)"/>
 </svg>
