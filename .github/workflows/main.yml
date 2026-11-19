@@ -21,9 +21,23 @@ jobs:
         with:
           version: 10.26.1
       - run: pnpm install --frozen-lockfile
+      # Rebuild every CV (10 languages) from src/data/projects.json, so a
+      # project added to the site is on the downloadable CVs too. If this ever
+      # fails, the site still deploys with the CVs already in the repo.
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Generate CVs
+        continue-on-error: true
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-core fonts-noto-cjk fonts-texgyre fonts-dejavu-core fonts-freefont-ttf
+          pip install --quiet playwright pillow
+          CHROME_PATH="$(command -v google-chrome || command -v google-chrome-stable)" python scripts/cv/generate_cv_translations.py
       - run: pnpm --filter @workspace/portfolio run build
         env:
           BASE_PATH: /portfolio01/
+          VITE_CV_VERSION: ${{ github.sha }}
           VITE_GITHUB_CONTRIBUTIONS_API_URL: ${{ vars.PORTFOLIO_API_BASE_URL }}
       - uses: actions/upload-pages-artifact@v3
         with:
