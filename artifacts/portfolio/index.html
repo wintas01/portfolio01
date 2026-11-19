@@ -35,22 +35,21 @@
       html.intro-on, html.intro-on body { overflow: hidden; }
       html.intro-on #intro {
         position: fixed; inset: 0; z-index: 2147483647; display: flex; overflow: hidden;
-        align-items: center; justify-content: center; background: #000;
+        align-items: center; justify-content: center; background: #fff;
         transition: opacity 0.7s ease;
       }
       #intro.intro-done { opacity: 0; pointer-events: none; }
-      /* Size the 1920x1080 intro (pure black background) to the screen so the
-         logo + WINTAS block (about 38.5% of the video's width, 66% of its
-         height) fills up to 84% of the screen's width or 78% of its height,
-         whichever comes first: big on phones, tablets, laptops and ultrawides,
-         never cut off. The extra black around it is simply clipped. */
+      /* Size the 1920x1080 intro to the screen: the final W + INTAS lockup is
+         46% of the video's width, so 185vw makes it ~86% of a phone's width;
+         178vh lets it fill a laptop or desktop exactly. Whatever the video does
+         not cover takes the video's own edge colours (script below), so the
+         white -> black -> white changes fill the whole screen on every device. */
       #intro video {
         flex: none; max-width: none; max-height: none; height: auto;
-        width: min(218vw, 210vh);
-        transform: translateY(-3%);
+        width: min(185vw, 178vh);
       }
       @supports (height: 100dvh) {
-        #intro video { width: min(218vw, 210dvh); }
+        #intro video { width: min(185vw, 178dvh); }
       }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -80,6 +79,26 @@
           setTimeout(function () { try { video.pause(); } catch (e) {} intro.remove(); }, 750);
         }
         video.muted = true; // belt and braces: the file has no sound track either
+
+        // Paint the area around the video with the colours at the video's top
+        // and bottom edges, every frame, so it always looks full-screen.
+        var probe = document.createElement("canvas");
+        probe.width = 1; probe.height = 2;
+        var pctx = probe.getContext("2d", { willReadFrequently: true });
+        (function syncEdges() {
+          if (finished) return;
+          if (video.readyState >= 2 && video.videoWidth) {
+            try {
+              var vw = video.videoWidth, vh = video.videoHeight;
+              pctx.drawImage(video, vw / 2 - 2, 1, 4, 4, 0, 0, 1, 1);
+              pctx.drawImage(video, vw / 2 - 2, vh - 5, 4, 4, 0, 1, 1, 1);
+              var px = pctx.getImageData(0, 0, 1, 2).data;
+              intro.style.background = "linear-gradient(to bottom, rgb(" + px[0] + "," + px[1] + "," + px[2] +
+                ") 50%, rgb(" + px[4] + "," + px[5] + "," + px[6] + ") 50%)";
+            } catch (e) {}
+          }
+          requestAnimationFrame(syncEdges);
+        })();
         video.addEventListener("ended", finish);
         video.addEventListener("error", finish, true);
         document.addEventListener("keydown", function (e) { if (e.key === "Escape") finish(); });
