@@ -225,6 +225,16 @@ const projects: Array<{
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { t, language } = useI18n();
+  // The CV downloads in the visitor's language (translated copies live in
+  // public/cv/ and are built by scripts/cv/generate_cv_translations.py).
+  const cvFileName =
+    language === "en"
+      ? "Nnanna-Okechukwu-Jason-CV.pdf"
+      : `Nnanna-Okechukwu-Jason-CV-${language.toUpperCase()}.pdf`;
+  const cvHref =
+    language === "en"
+      ? `${import.meta.env.BASE_URL}Nnanna-Okechukwu-Jason-CV.pdf?v=2026-11-02c`
+      : `${import.meta.env.BASE_URL}cv/${cvFileName}?v=2026-11-19`;
 
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-foreground selection:text-background font-sans overflow-x-hidden">
@@ -436,8 +446,8 @@ export default function Home() {
 
             <motion.a
               variants={fadeInUp}
-              href={`${import.meta.env.BASE_URL}Nnanna-Okechukwu-Jason-CV.pdf?v=2026-11-02c`}
-              download="Nnanna-Okechukwu-Jason-CV.pdf"
+              href={cvHref}
+              download={cvFileName}
               className="inline-flex items-center justify-center gap-3 self-start bg-foreground text-background px-6 py-3 rounded-full text-sm font-semibold hover:bg-foreground/80 transition-colors"
             >
               <Download className="w-4 h-4" />
