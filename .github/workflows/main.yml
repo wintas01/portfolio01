@@ -12,6 +12,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -27,13 +28,16 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      # Time-limited: if anything here stalls, the site still deploys with the
+      # CVs already saved in the repo.
       - name: Generate CVs
         continue-on-error: true
+        timeout-minutes: 6
         run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq fonts-noto-core fonts-noto-cjk fonts-texgyre fonts-dejavu-core fonts-freefont-ttf
-          pip install --quiet playwright pillow
-          CHROME_PATH="$(command -v google-chrome || command -v google-chrome-stable)" python scripts/cv/generate_cv_translations.py
+          sudo apt-get update -qq -o Acquire::Retries=2 -o Acquire::http::Timeout=20
+          sudo apt-get install -y -qq -o Acquire::Retries=2 -o Acquire::http::Timeout=20 fonts-noto-core fonts-noto-cjk fonts-texgyre fonts-dejavu-core fonts-freefont-ttf
+          pip install --quiet --timeout 30 playwright pillow
+          CHROME_PATH="$(command -v google-chrome || command -v google-chrome-stable)" timeout 180 python scripts/cv/generate_cv_translations.py
       - run: pnpm --filter @workspace/portfolio run build
         env:
           BASE_PATH: /portfolio01/
