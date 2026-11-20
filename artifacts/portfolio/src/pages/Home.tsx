@@ -98,6 +98,7 @@ type Project = {
   framed?: boolean;
   icon?: string;
   iconBorder?: boolean;
+  stack?: string[];
   text: Record<string, ProjectText | undefined>;
 };
 
@@ -476,6 +477,22 @@ export default function Home() {
                         {project.text[language]?.description ??
                           project.text.en?.description}
                       </p>
+                      {project.stack?.length ? (
+                        <ul
+                          aria-label="Built with"
+                          className="mt-3 flex flex-wrap gap-1.5"
+                        >
+                          {project.stack.map((tool) => (
+                            <li
+                              key={tool}
+                              dir="ltr"
+                              className="rounded-full border border-border bg-muted px-2.5 py-0.5 text-xs font-medium text-muted-foreground"
+                            >
+                              {tool}
+                            </li>
+                          ))}
+                        </ul>
+                      ) : null}
                     </div>
                   </div>
 
