@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowUpRight,
@@ -107,9 +107,60 @@ const projects = (projectsData.projects as unknown as Project[]).filter(
 );
 const publicPath = (file: string) => `${import.meta.env.BASE_URL}${file}`;
 
+// On laptops and desktops the hero title grows until its longest line
+// reaches the photo, whatever language is chosen.
+function useFitHeroTitle(
+  ref: { current: HTMLHeadingElement | null },
+  language: string,
+) {
+  useEffect(() => {
+    const h1 = ref.current;
+    const column = h1?.parentElement;
+    if (!h1 || !column) return;
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    const fit = () => {
+      if (!desktop.matches) {
+        h1.style.fontSize = "";
+        return;
+      }
+      const spans = Array.from(h1.children) as HTMLElement[];
+      h1.style.fontSize = "100px";
+      spans.forEach((s) => (s.style.maxWidth = "none"));
+      const widest = Math.max(...spans.map((s) => s.getBoundingClientRect().width));
+      spans.forEach((s) => (s.style.maxWidth = ""));
+      // Room = from the start of the text column to the photo, minus a gap.
+      const col = column.getBoundingClientRect();
+      const photo = h1
+        .closest("section")
+        ?.querySelector<HTMLElement>("[data-hero-photo]")
+        ?.getBoundingClientRect();
+      const rtl = getComputedStyle(h1).direction === "rtl";
+      const gap = 40;
+      let room = col.width;
+      if (photo && photo.width) {
+        room = rtl ? col.right - photo.right - gap : photo.left - col.left - gap;
+      }
+      if (!widest || !room) return;
+      const size = Math.max(56, Math.min(120, Math.floor((100 * room) / widest)));
+      h1.style.fontSize = `${size}px`;
+    };
+    fit();
+    const ro = new ResizeObserver(fit);
+    ro.observe(column);
+    desktop.addEventListener("change", fit);
+    document.fonts?.ready.then(fit);
+    return () => {
+      ro.disconnect();
+      desktop.removeEventListener("change", fit);
+    };
+  }, [ref, language]);
+}
+
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { t, language } = useI18n();
+  const heroTitleRef = useRef<HTMLHeadingElement>(null);
+  useFitHeroTitle(heroTitleRef, language);
   // "Let's Talk" and WhatsApp open a chat with a greeting in the visitor's language.
   const whatsappHref = `https://wa.me/2347083066127?text=${encodeURIComponent(t.nav.whatsappGreeting)}`;
   // The CV downloads in the visitor's language. All CVs are built from
@@ -206,7 +257,7 @@ export default function Home() {
         id="home"
         className="pt-28 sm:pt-32 lg:pt-28 pb-6 lg:pb-10 px-5 sm:px-8 max-w-[1400px] mx-auto lg:flex lg:min-h-[100svh] lg:items-center"
       >
-        <div className="grid w-full lg:grid-cols-[1.15fr_0.85fr] gap-10 lg:gap-12 items-center">
+        <div className="grid w-full lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] gap-10 lg:gap-12 items-center">
           <motion.div
             initial="hidden"
             animate="visible"
@@ -214,11 +265,12 @@ export default function Home() {
             className="flex flex-col gap-6 sm:gap-8"
           >
             <motion.h1
+              ref={heroTitleRef}
               variants={fadeInUp}
-              className="text-5xl sm:text-6xl md:text-7xl lg:text-[80px] leading-[1.05] font-bold tracking-tight"
+              className="text-5xl sm:text-6xl md:text-7xl lg:text-[80px] leading-[1.02] font-bold tracking-tight"
             >
-              <span className="block text-foreground">{t.hero.line1}</span>
-              <span className="block text-muted-foreground">
+              <span className="block lg:w-max lg:whitespace-nowrap text-foreground">{t.hero.line1}</span>
+              <span className="block lg:w-max lg:whitespace-nowrap text-muted-foreground">
                 {t.hero.line2}
               </span>
             </motion.h1>
@@ -236,6 +288,7 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+            data-hero-photo
             className="relative bg-card rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden border border-border lg:h-[min(calc(100svh-9rem),760px)] lg:w-auto lg:justify-self-end"
             style={{ aspectRatio: "4/5" }}
           >
