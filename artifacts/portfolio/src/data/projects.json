@@ -248,9 +248,9 @@
     },
     {
       "id": "vtu-app",
-      "title": "VTU App",
+      "title": "VTU Platform",
       "onWebsite": true,
-      "onCV": true,
+      "onCV": false,
       "href": "https://sabuss.com/ojsub3",
       "preview": "project-previews/vtu-mockup.png",
       "previewAlt": "OJ Sub services page on an iMac mockup",
@@ -266,7 +266,7 @@
       "cvRank": 4,
       "text": {
         "en": {
-          "description": "Download my VTU application — fast, simple, and reliable.",
+          "description": "A live VTU site I set up and run: data, airtime, TV, electricity and school fees from one wallet, with a marketplace and an installable app. Need one for your business? I can build it for you.",
           "cvKicker": "Instant top-up web app",
           "cvTitle": "OJ Sub VTU Platform",
           "cvBullets": [
@@ -275,7 +275,7 @@
           ]
         },
         "fr": {
-          "description": "Téléchargez mon application VTU — rapide, simple et fiable.",
+          "description": "Un site VTU en ligne que j'ai mis en place et que je gère : data, crédit, TV, électricité et frais de scolarité depuis un seul portefeuille, avec une marketplace et une appli installable. Besoin du même pour votre entreprise ? Je peux le créer pour vous.",
           "cvKicker": "Application web de recharge instantanée",
           "cvTitle": "Plateforme VTU OJ Sub",
           "cvBullets": [
@@ -284,7 +284,7 @@
           ]
         },
         "es": {
-          "description": "Descarga mi aplicación VTU: rápida, sencilla y fiable.",
+          "description": "Un sitio VTU en funcionamiento que configuré y gestiono: datos, saldo, TV, electricidad y matrículas desde una sola billetera, con un marketplace y una app instalable. ¿Necesitas uno para tu negocio? Puedo crearlo para ti.",
           "cvKicker": "App web de recargas instantáneas",
           "cvTitle": "Plataforma VTU OJ Sub",
           "cvBullets": [
@@ -293,7 +293,7 @@
           ]
         },
         "pt": {
-          "description": "Baixe meu aplicativo VTU — rápido, simples e confiável.",
+          "description": "Um site VTU no ar que configurei e administro: dados, crédito, TV, energia e mensalidades escolares em uma única carteira, com marketplace e app instalável. Precisa de um para o seu negócio? Posso criar para você.",
           "cvKicker": "App web de recarga instantânea",
           "cvTitle": "Plataforma VTU OJ Sub",
           "cvBullets": [
@@ -302,7 +302,7 @@
           ]
         },
         "de": {
-          "description": "Laden Sie meine VTU-App herunter – schnell, einfach und zuverlässig.",
+          "description": "Eine live VTU-Website, die ich eingerichtet habe und betreibe: Daten, Guthaben, TV, Strom und Schulgebühren aus einer Wallet, mit Marktplatz und installierbarer App. Brauchen Sie so etwas für Ihr Unternehmen? Ich baue es Ihnen.",
           "cvKicker": "Web-App für Sofort-Aufladungen",
           "cvTitle": "OJ Sub VTU-Plattform",
           "cvBullets": [
@@ -311,7 +311,7 @@
           ]
         },
         "ar": {
-          "description": "حمّل تطبيق VTU الخاص بي — سريع وبسيط وموثوق.",
+          "description": "موقع VTU يعمل أعددته وأديره: باقات الإنترنت والرصيد والتلفاز والكهرباء والرسوم الدراسية من محفظة واحدة، مع سوق وتطبيق قابل للتثبيت. تحتاج مثله لعملك؟ يمكنني بناؤه لك.",
           "cvKicker": "تطبيق ويب للشحن الفوري",
           "cvTitle": "منصة OJ Sub للشحن (VTU)",
           "cvBullets": [
@@ -320,7 +320,7 @@
           ]
         },
         "zh": {
-          "description": "下载我的 VTU 应用——快速、简单、可靠。",
+          "description": "一个由我搭建并运营的在线 VTU 网站：流量、话费、电视、电费和学费都可用同一个钱包支付，还有交易市场和可安装的应用。您的企业也需要吗？我可以为您开发。",
           "cvKicker": "即时充值 Web 应用",
           "cvTitle": "OJ Sub VTU 平台",
           "cvBullets": [
@@ -329,7 +329,7 @@
           ]
         },
         "ja": {
-          "description": "私のVTUアプリをダウンロード — 速くて、シンプルで、信頼できます。",
+          "description": "私が立ち上げて運営している VTU サイト：データ通信、通話クレジット、TV、電気、学費を1つのウォレットで支払え、マーケットプレイスとインストール可能なアプリも備えています。御社にも必要ですか？お作りします。",
           "cvKicker": "即時チャージWebアプリ",
           "cvTitle": "OJ Sub VTUプラットフォーム",
           "cvBullets": [
@@ -338,7 +338,7 @@
           ]
         },
         "ko": {
-          "description": "제 VTU 앱을 다운로드하세요 — 빠르고, 간단하고, 믿을 수 있습니다.",
+          "description": "제가 구축하고 운영하는 VTU 사이트: 데이터, 통화 충전, TV, 전기, 학비를 하나의 지갑으로 결제하고, 마켓플레이스와 설치형 앱도 있습니다. 비즈니스에 필요하신가요? 만들어 드립니다.",
           "cvKicker": "즉시 충전 웹 앱",
           "cvTitle": "OJ Sub VTU 플랫폼",
           "cvBullets": [
@@ -347,7 +347,7 @@
           ]
         },
         "hi": {
-          "description": "मेरा VTU ऐप डाउनलोड करें — तेज़, आसान और भरोसेमंद।",
+          "description": "एक लाइव VTU साइट जिसे मैंने सेट अप किया और चलाता हूँ: डेटा, एयरटाइम, TV, बिजली और स्कूल फ़ीस एक ही वॉलेट से, साथ में मार्केटप्लेस और इंस्टॉल होने वाला ऐप। आपके बिज़नेस के लिए चाहिए? मैं बना सकता हूँ।",
           "cvKicker": "इंस्टेंट टॉप-अप वेब ऐप",
           "cvTitle": "OJ Sub VTU प्लेटफ़ॉर्म",
           "cvBullets": [

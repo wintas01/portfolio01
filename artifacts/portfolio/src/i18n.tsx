@@ -77,7 +77,7 @@ const en = {
   },
   about: {
     title: "About Me",
-    body: "I'm a Computer Science graduate (2026) and full-stack developer who builds with AI. I've delivered a university e-library and website, a ticketing platform, a VTU payments app, and an AI content bot, using AI as a core part of how I design, write, and ship software. My goal is technology that is useful, polished, and built to last.",
+    body: "I'm a Computer Science graduate (2026) and full-stack developer who builds with AI. I've delivered a university e-library and website, a ticketing platform, and an AI content bot, using AI as a core part of how I design, write, and ship software. My goal is technology that is useful, polished, and built to last.",
     expertise: "Expertise",
     expertiseItems: [
       "Full-Stack Web Development",
@@ -179,7 +179,7 @@ const fr: Dictionary = {
   },
   about: {
     title: "À propos de moi",
-    body: "Je suis diplômé en informatique (2026) et développeur full-stack qui construit avec l'IA. J'ai livré une bibliothèque numérique et un site web universitaires, une plateforme de billetterie, une application de paiements VTU et un bot de contenu IA, en faisant de l'IA un élément central de ma façon de concevoir, d'écrire et de livrer des logiciels. Mon objectif : une technologie utile, soignée et faite pour durer.",
+    body: "Je suis diplômé en informatique (2026) et développeur full-stack qui construit avec l'IA. J'ai livré une bibliothèque numérique et un site web universitaires, une plateforme de billetterie et un bot de contenu IA, en faisant de l'IA un élément central de ma façon de concevoir, d'écrire et de livrer des logiciels. Mon objectif : une technologie utile, soignée et faite pour durer.",
     expertise: "Compétences",
     expertiseItems: [
       "Développement web full-stack",
@@ -279,7 +279,7 @@ const es: Dictionary = {
   },
   about: {
     title: "Sobre mí",
-    body: "Soy graduado en Informática (2026) y desarrollador full-stack que construye con IA. He entregado una biblioteca digital y un sitio web universitarios, una plataforma de venta de entradas, una app de pagos VTU y un bot de contenido con IA, usando la IA como parte central de cómo diseño, escribo y lanzo software. Mi objetivo es una tecnología útil, pulida y hecha para durar.",
+    body: "Soy graduado en Informática (2026) y desarrollador full-stack que construye con IA. He entregado una biblioteca digital y un sitio web universitarios, una plataforma de venta de entradas y un bot de contenido con IA, usando la IA como parte central de cómo diseño, escribo y lanzo software. Mi objetivo es una tecnología útil, pulida y hecha para durar.",
     expertise: "Especialidades",
     expertiseItems: [
       "Desarrollo web full-stack",
@@ -379,7 +379,7 @@ const pt: Dictionary = {
   },
   about: {
     title: "Sobre mim",
-    body: "Sou formado em Ciência da Computação (2026) e desenvolvedor full-stack que constrói com IA. Já entreguei uma biblioteca digital e um site universitários, uma plataforma de venda de ingressos, um app de pagamentos VTU e um bot de conteúdo com IA, usando a IA como parte central de como projeto, escrevo e entrego software. Meu objetivo é criar tecnologia útil, bem-acabada e feita para durar.",
+    body: "Sou formado em Ciência da Computação (2026) e desenvolvedor full-stack que constrói com IA. Já entreguei uma biblioteca digital e um site universitários, uma plataforma de venda de ingressos e um bot de conteúdo com IA, usando a IA como parte central de como projeto, escrevo e entrego software. Meu objetivo é criar tecnologia útil, bem-acabada e feita para durar.",
     expertise: "Especialidades",
     expertiseItems: [
       "Desenvolvimento web full-stack",
@@ -479,7 +479,7 @@ const de: Dictionary = {
   },
   about: {
     title: "Über mich",
-    body: "Ich habe 2026 meinen Abschluss in Informatik gemacht und bin Full-Stack-Entwickler, der mit KI baut. Ich habe eine digitale Hochschulbibliothek und eine Hochschulwebsite, eine Ticketing-Plattform, eine VTU-Zahlungs-App und einen KI-Content-Bot umgesetzt – KI ist ein zentraler Teil davon, wie ich Software entwerfe, schreibe und ausliefere. Mein Ziel ist Technologie, die nützlich, ausgereift und langlebig ist.",
+    body: "Ich habe 2026 meinen Abschluss in Informatik gemacht und bin Full-Stack-Entwickler, der mit KI baut. Ich habe eine digitale Hochschulbibliothek und eine Hochschulwebsite, eine Ticketing-Plattform und einen KI-Content-Bot umgesetzt – KI ist ein zentraler Teil davon, wie ich Software entwerfe, schreibe und ausliefere. Mein Ziel ist Technologie, die nützlich, ausgereift und langlebig ist.",
     expertise: "Kompetenzen",
     expertiseItems: [
       "Full-Stack-Webentwicklung",
@@ -579,7 +579,7 @@ const ar: Dictionary = {
   },
   about: {
     title: "نبذة عني",
-    body: "أنا خريج علوم الحاسوب (2026) ومطوّر Full-Stack أبني بالذكاء الاصطناعي. سلّمتُ مكتبة إلكترونية وموقعًا لجامعة، ومنصة لحجز التذاكر، وتطبيقًا لمدفوعات VTU، وروبوت محتوى بالذكاء الاصطناعي، مع جعل الذكاء الاصطناعي جزءًا أساسيًا من طريقتي في تصميم البرمجيات وكتابتها وإطلاقها. هدفي تقنية مفيدة ومتقنة ومصممة لتدوم.",
+    body: "أنا خريج علوم الحاسوب (2026) ومطوّر Full-Stack أبني بالذكاء الاصطناعي. سلّمتُ مكتبة إلكترونية وموقعًا لجامعة، ومنصة لحجز التذاكر، وروبوت محتوى بالذكاء الاصطناعي، مع جعل الذكاء الاصطناعي جزءًا أساسيًا من طريقتي في تصميم البرمجيات وكتابتها وإطلاقها. هدفي تقنية مفيدة ومتقنة ومصممة لتدوم.",
     expertise: "الخبرات",
     expertiseItems: [
       "تطوير الويب المتكامل (Full-Stack)",
@@ -677,7 +677,7 @@ const zh: Dictionary = {
   },
   about: {
     title: "关于我",
-    body: "我是计算机科学专业毕业生（2026 届），也是一名用 AI 进行开发的全栈开发者。我交付过高校电子图书馆和官网、票务平台、VTU 支付应用以及 AI 内容机器人，AI 是我设计、编写和交付软件的核心环节。我的目标是打造实用、精致且经久耐用的技术。",
+    body: "我是计算机科学专业毕业生（2026 届），也是一名用 AI 进行开发的全栈开发者。我交付过高校电子图书馆和官网、票务平台以及 AI 内容机器人，AI 是我设计、编写和交付软件的核心环节。我的目标是打造实用、精致且经久耐用的技术。",
     expertise: "专业技能",
     expertiseItems: [
       "全栈 Web 开发",
@@ -775,7 +775,7 @@ const ja: Dictionary = {
   },
   about: {
     title: "自己紹介",
-    body: "2026年にコンピュータサイエンスの学位を取得した、AIを活用して開発するフルスタック開発者です。大学の電子図書館とWebサイト、チケット販売プラットフォーム、VTU決済アプリ、AIコンテンツボットを手がけてきました。AIは、私がソフトウェアを設計し、書き、リリースするうえで欠かせない存在です。目指しているのは、役に立ち、完成度が高く、長く使えるテクノロジーです。",
+    body: "2026年にコンピュータサイエンスの学位を取得した、AIを活用して開発するフルスタック開発者です。大学の電子図書館とWebサイト、チケット販売プラットフォーム、AIコンテンツボットを手がけてきました。AIは、私がソフトウェアを設計し、書き、リリースするうえで欠かせない存在です。目指しているのは、役に立ち、完成度が高く、長く使えるテクノロジーです。",
     expertise: "専門分野",
     expertiseItems: [
       "フルスタックWeb開発",
@@ -873,7 +873,7 @@ const ko: Dictionary = {
   },
   about: {
     title: "소개",
-    body: "2026년 컴퓨터공학을 졸업한 풀스택 개발자로, AI를 활용해 개발합니다. 대학 전자도서관과 웹사이트, 티켓 예매 플랫폼, VTU 결제 앱, AI 콘텐츠 봇을 만들었으며, AI는 제가 소프트웨어를 설계하고 작성하고 출시하는 방식의 핵심입니다. 제 목표는 유용하고, 완성도 높으며, 오래가는 기술을 만드는 것입니다.",
+    body: "2026년 컴퓨터공학을 졸업한 풀스택 개발자로, AI를 활용해 개발합니다. 대학 전자도서관과 웹사이트, 티켓 예매 플랫폼, AI 콘텐츠 봇을 만들었으며, AI는 제가 소프트웨어를 설계하고 작성하고 출시하는 방식의 핵심입니다. 제 목표는 유용하고, 완성도 높으며, 오래가는 기술을 만드는 것입니다.",
     expertise: "전문 분야",
     expertiseItems: [
       "풀스택 웹 개발",
@@ -971,7 +971,7 @@ const hi: Dictionary = {
   },
   about: {
     title: "मेरे बारे में",
-    body: "मैं कंप्यूटर साइंस ग्रेजुएट (2026) और फुल-स्टैक डेवलपर हूँ, जो AI के साथ निर्माण करता है। मैंने एक यूनिवर्सिटी ई-लाइब्रेरी और वेबसाइट, एक टिकटिंग प्लेटफ़ॉर्म, एक VTU पेमेंट ऐप और एक AI कंटेंट बॉट बनाए हैं, और AI मेरे सॉफ़्टवेयर डिज़ाइन करने, लिखने और लॉन्च करने के तरीके का अहम हिस्सा है। मेरा लक्ष्य ऐसी तकनीक बनाना है जो उपयोगी, बेहतरीन और लंबे समय तक चलने वाली हो।",
+    body: "मैं कंप्यूटर साइंस ग्रेजुएट (2026) और फुल-स्टैक डेवलपर हूँ, जो AI के साथ निर्माण करता है। मैंने एक यूनिवर्सिटी ई-लाइब्रेरी और वेबसाइट, एक टिकटिंग प्लेटफ़ॉर्म और एक AI कंटेंट बॉट बनाए हैं, और AI मेरे सॉफ़्टवेयर डिज़ाइन करने, लिखने और लॉन्च करने के तरीके का अहम हिस्सा है। मेरा लक्ष्य ऐसी तकनीक बनाना है जो उपयोगी, बेहतरीन और लंबे समय तक चलने वाली हो।",
     expertise: "विशेषज्ञता",
     expertiseItems: [
       "फुल-स्टैक वेब डेवलपमेंट",
