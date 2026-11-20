@@ -16,6 +16,7 @@ import GitHubShowcase from "@/components/GitHubShowcase";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import VenomButton from "@/components/VenomButton";
 import ToolsMarquee from "@/components/ToolsMarquee";
+import CursorCTA from "@/components/CursorCTA";
 import { useI18n } from "@/i18n";
 import projectsData from "@/data/projects.json";
 
@@ -588,6 +589,7 @@ export default function Home() {
           </div>
         </div>
       </footer>
+      <CursorCTA href={whatsappHref} label={t.nav.letsTalk} />
     </div>
   );
 }

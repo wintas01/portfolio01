@@ -152,3 +152,33 @@ html[lang="hi"] h1, html[lang="hi"] h2, html[lang="hi"] h3 { letter-spacing: 0; 
   -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
   mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
 }
+
+/* Cursor "Let's talk" pill: follows the normal cursor, never replaces it */
+.cursor-cta {
+  pointer-events: none;
+  will-change: transform;
+}
+.cursor-cta-inner {
+  display: inline-flex;
+  opacity: 0;
+  transform: scale(0.6);
+  transform-origin: 0 0;
+  transition: opacity 0.2s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.cursor-cta[data-visible="true"] .cursor-cta-inner {
+  opacity: 1;
+  transform: scale(1);
+}
+.cursor-cta[data-visible="true"][data-parked="true"] {
+  pointer-events: auto;
+}
+.cursor-cta[data-parked="true"] .cursor-cta-dot {
+  animation: cursor-cta-pulse 1.2s ease-in-out infinite;
+}
+.cursor-cta[data-parked="true"]:hover .cursor-cta-inner {
+  transform: scale(1.08);
+}
+@keyframes cursor-cta-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
