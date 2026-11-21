@@ -381,7 +381,7 @@
       "cvRank": 5,
       "text": {
         "en": {
-          "description": "Demo platform for an automated church assistant experience and workflow.",
+          "description": "AI bot for a cathedral church: it writes posts and images with Cloudflare AI and publishes them to the church's Facebook page automatically, so nobody has to post by hand every day.",
           "cvKicker": "Cloudflare AI API  ·  Supabase  ·  Vercel",
           "cvTitle": "Church Facebook Auto Bot",
           "cvBullets": [
@@ -390,7 +390,7 @@
           ]
         },
         "fr": {
-          "description": "Plateforme de démonstration d'un assistant automatisé pour église et de son flux de travail.",
+          "description": "Bot IA pour une cathédrale : il rédige des publications et des images avec Cloudflare AI et les publie automatiquement sur la page Facebook de l'église, sans publication manuelle chaque jour.",
           "cvKicker": "Cloudflare AI API  ·  Supabase  ·  Vercel",
           "cvTitle": "Bot Facebook automatique pour église",
           "cvBullets": [
@@ -399,7 +399,7 @@
           ]
         },
         "es": {
-          "description": "Plataforma de demostración de un asistente automatizado para iglesias y su flujo de trabajo.",
+          "description": "Bot de IA para una catedral: escribe publicaciones e imágenes con Cloudflare AI y las publica automáticamente en la página de Facebook de la iglesia, sin publicar a mano cada día.",
           "cvKicker": "Cloudflare AI API  ·  Supabase  ·  Vercel",
           "cvTitle": "Bot automático de Facebook para iglesias",
           "cvBullets": [
@@ -408,7 +408,7 @@
           ]
         },
         "pt": {
-          "description": "Plataforma de demonstração de um assistente automatizado para igrejas e seu fluxo de trabalho.",
+          "description": "Bot de IA para uma catedral: escreve posts e imagens com Cloudflare AI e publica automaticamente na página do Facebook da igreja, sem ninguém postar à mão todos os dias.",
           "cvKicker": "Cloudflare AI API  ·  Supabase  ·  Vercel",
           "cvTitle": "Bot automático do Facebook para igrejas",
           "cvBullets": [
@@ -417,7 +417,7 @@
           ]
         },
         "de": {
-          "description": "Demo-Plattform für einen automatisierten Kirchenassistenten und dessen Abläufe.",
+          "description": "KI-Bot für eine Kathedrale: Er schreibt Beiträge und Bilder mit Cloudflare AI und veröffentlicht sie automatisch auf der Facebook-Seite der Kirche, ohne tägliches manuelles Posten.",
           "cvKicker": "Cloudflare AI API  ·  Supabase  ·  Vercel",
           "cvTitle": "Automatischer Facebook-Bot für Kirchen",
           "cvBullets": [
@@ -426,7 +426,7 @@
           ]
         },
         "ar": {
-          "description": "منصة تجريبية لتجربة مساعد آلي للكنائس وسير عمله.",
+          "description": "روبوت ذكاء اصطناعي لكاتدرائية: يكتب المنشورات والصور باستخدام Cloudflare AI وينشرها تلقائيًا على صفحة الكنيسة في فيسبوك، فلا حاجة للنشر اليدوي كل يوم.",
           "cvKicker": "Cloudflare AI API  ·  Supabase  ·  Vercel",
           "cvTitle": "روبوت فيسبوك آلي للكنائس",
           "cvBullets": [
@@ -435,7 +435,7 @@
           ]
         },
         "zh": {
-          "description": "教会自动化助手体验及其工作流程的演示平台。",
+          "description": "为一座主教座堂开发的 AI 机器人：用 Cloudflare AI 撰写帖子和生成图片，并自动发布到教会的 Facebook 主页，无需每天手动发帖。",
           "cvKicker": "Cloudflare AI API  ·  Supabase  ·  Vercel",
           "cvTitle": "教会 Facebook 自动发帖机器人",
           "cvBullets": [
@@ -444,7 +444,7 @@
           ]
         },
         "ja": {
-          "description": "教会向け自動アシスタントの体験とワークフローのデモプラットフォーム。",
+          "description": "大聖堂のための AI ボット：Cloudflare AI で投稿文と画像を作成し、教会の Facebook ページに自動で投稿します。毎日手作業で投稿する必要はありません。",
           "cvKicker": "Cloudflare AI API  ·  Supabase  ·  Vercel",
           "cvTitle": "教会向けFacebook自動投稿ボット",
           "cvBullets": [
@@ -453,7 +453,7 @@
           ]
         },
         "ko": {
-          "description": "교회용 자동화 어시스턴트 경험과 워크플로를 보여주는 데모 플랫폼입니다.",
+          "description": "대성당을 위한 AI 봇: Cloudflare AI로 게시글과 이미지를 만들어 교회 Facebook 페이지에 자동으로 게시하므로, 매일 직접 올릴 필요가 없습니다.",
           "cvKicker": "Cloudflare AI API  ·  Supabase  ·  Vercel",
           "cvTitle": "교회용 Facebook 자동 게시 봇",
           "cvBullets": [
@@ -462,7 +462,7 @@
           ]
         },
         "hi": {
-          "description": "चर्च के लिए एक स्वचालित असिस्टेंट अनुभव और वर्कफ़्लो का डेमो प्लेटफ़ॉर्म।",
+          "description": "एक कैथेड्रल चर्च के लिए AI बॉट: यह Cloudflare AI से पोस्ट और तस्वीरें बनाता है और उन्हें चर्च के Facebook पेज पर अपने-आप प्रकाशित करता है, ताकि रोज़ हाथ से पोस्ट न करना पड़े।",
           "cvKicker": "Cloudflare AI API  ·  Supabase  ·  Vercel",
           "cvTitle": "चर्च फ़ेसबुक ऑटो बॉट",
           "cvBullets": [

@@ -655,7 +655,7 @@ export default function Home() {
             ))}
           </div>
           <div className="text-xs sm:text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Wintas. {t.footer.rights}
+            © {new Date().getFullYear()} WINTAS · Nnanna Okechukwu. {t.footer.rights}
           </div>
         </div>
       </footer>

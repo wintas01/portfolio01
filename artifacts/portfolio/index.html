@@ -24,9 +24,13 @@
     <!-- Intro video (loading screen). Shown only when JavaScript runs and the
          visitor has not asked their device to reduce motion. -->
     <script>
+      // Shown once per visit (browser tab session), not again on reloads.
       try {
-        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        var introSeen = false;
+        try { introSeen = sessionStorage.getItem("wintas-intro-seen") === "1"; } catch (e) {}
+        if (!introSeen && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
           document.documentElement.classList.add("intro-on");
+          try { sessionStorage.setItem("wintas-intro-seen", "1"); } catch (e) {}
         }
       } catch (e) {}
     </script>
