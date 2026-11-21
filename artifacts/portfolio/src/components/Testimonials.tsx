@@ -1,40 +1,54 @@
-import { useEffect, useRef, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 
 export type Testimonial = {
   from: string;
   project: string;
   quote: string[];
+  /** Screenshot of the project, shown on the card (path inside public/). */
+  image?: string;
+  theme?: "dark" | "lime" | "light";
 };
 
 type Props = {
   title: string;
   projectLabel: string;
   items: Testimonial[];
+  /** Turns a public/ path into a URL (adds the site's base path). */
+  assetUrl: (file: string) => string;
 };
 
-// Testimonial cards that animate as the visitor scrolls:
-// - each card rises, straightens and fades in when it comes into view, and its quote mark pops;
-// - the quote then "writes itself" letter by letter as the visitor scrolls down, with a
-//   lime cursor; text already written stays written. The full text is always laid out
-//   (unwritten letters are invisible), so the card never jumps in size, and screen readers
-//   get the whole quote at once;
-// - when the writing finishes, a lime line draws under the client's name;
-// - while scrolling, the cards drift at slightly different speeds (wider screens only).
-// Visitors who ask their device for reduced motion see everything at once, without movement.
-const TILTS = [-3, 2, -2];
-const DRIFT = [0.05, -0.035, 0.07];
+// Testimonials as a curved 3D track that turns as the visitor scrolls
+// ("scroll to rotate"):
+// - the section stays on screen while the visitor scrolls through it, and each bit of
+//   scrolling turns the track to the next card; the front card faces the visitor and the
+//   cards beside it bend away in 3D;
+// - each quote writes itself letter by letter as its card comes to the front (text already
+//   written stays written; the full text is always laid out, so cards never change size,
+//   and screen readers get the whole quote);
+// - a label under the track names the front card, with a 01 / 03 counter.
+// Reduced motion (or no JavaScript): the cards are shown one under another, fully written.
+const STEP_VH = 0.75; // scrolling this much of the screen height turns the track one card
+const HOLD = 0.4; // the first card stays at the front for this long (in cards) while it writes
 
-export default function Testimonials({ title, projectLabel, items }: Props) {
+export default function Testimonials({ title, projectLabel, items, assetUrl }: Props) {
   const sectionRef = useRef<HTMLElement>(null);
+  const [motion, setMotion] = useState(false);
+  const [active, setActive] = useState(0);
+  const count = items.length;
+
+  useEffect(() => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setMotion(!reduce.matches);
+    update();
+    reduce.addEventListener("change", update);
+    return () => reduce.removeEventListener("change", update);
+  }, []);
 
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const cards = Array.from(section.querySelectorAll<HTMLElement>(".t-card"));
-    const drifters = Array.from(section.querySelectorAll<HTMLElement>(".t-drift"));
+    const cards = Array.from(section.querySelectorAll<HTMLElement>(".t3d-card"));
 
-    // Each card's paragraphs, as [typed span, rest span, full text].
     const writers = cards.map((card) => {
       const paras = Array.from(card.querySelectorAll<HTMLElement>(".t-line")).map((p) => ({
         typed: p.querySelector<HTMLElement>(".t-typed")!,
@@ -45,134 +59,164 @@ export default function Testimonials({ title, projectLabel, items }: Props) {
       return { card, paras, total, shown: -1 };
     });
 
-    const write = (w: (typeof writers)[number], count: number) => {
-      if (count <= w.shown) return; // never un-write
-      w.shown = count;
-      let left = count;
+    const write = (w: (typeof writers)[number], amount: number) => {
+      if (amount <= w.shown) return; // never un-write
+      w.shown = amount;
+      let left = amount;
       w.paras.forEach((p) => {
         const k = Math.max(0, Math.min(p.text.length, left));
         left -= p.text.length;
         p.typed.textContent = p.text.slice(0, k);
         p.rest.textContent = p.text.slice(k);
-        p.typed.classList.toggle("t-writing", k > 0 && k < p.text.length);
       });
-      // Cursor sits at the end of the paragraph currently being written.
-      const active = w.paras.find((p) => p.typed.textContent!.length < p.text.length);
-      w.paras.forEach((p) => p.typed.classList.toggle("t-caret", p === active && count > 0));
-      if (count >= w.total) w.card.classList.add("t-done");
+      const current = w.paras.find((p) => p.typed.textContent!.length < p.text.length);
+      w.paras.forEach((p) => p.typed.classList.toggle("t-caret", p === current && amount > 0));
+      w.card.classList.toggle("t-done", amount >= w.total);
     };
 
-    if (reduce.matches || !("IntersectionObserver" in window)) {
+    if (!motion) {
       writers.forEach((w) => {
-        w.card.classList.add("t-in");
+        w.shown = -1;
         write(w, w.total);
-        w.paras.forEach((p) => p.typed.classList.remove("t-caret"));
+      });
+      cards.forEach((c) => {
+        c.style.transform = "";
+        c.style.opacity = "";
+        c.style.filter = "";
+        c.style.zIndex = "";
       });
       return;
     }
-    writers.forEach((w) => write(w, 0));
+    writers.forEach((w) => {
+      w.shown = -1;
+      write(w, 0);
+    });
 
-    const seen = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("t-in");
-            seen.unobserve(e.target);
-          }
-        });
-      },
-      { threshold: 0.18, rootMargin: "0px 0px -8% 0px" },
-    );
-    cards.forEach((c) => seen.observe(c));
-
-    const wide = window.matchMedia("(min-width: 768px)");
     let raf = 0;
-    const drift = () => {
+    let lastActive = -1;
+    const frame = () => {
       raf = 0;
       const vh = window.innerHeight;
-      // Writing: starts when a card's top passes 80% down the screen and finishes
-      // by the time it reaches 20%.
-      writers.forEach((w) => {
-        const top = w.card.getBoundingClientRect().top;
-        const progress = Math.max(0, Math.min(1, (vh * 0.8 - top) / (vh * 0.6)));
+      const step = vh * STEP_VH;
+      const t = -section.getBoundingClientRect().top / step; // cards scrolled
+      const x = Math.max(0, Math.min(count - 1, t - HOLD)); // track position
+
+      const cardW = cards[0]?.offsetWidth ?? 800;
+      const gap = cardW * 1.02;
+      cards.forEach((card, i) => {
+        const d = i - x;
+        const a = Math.abs(d);
+        const tx = d * gap;
+        const ry = Math.max(-60, Math.min(60, -d * 34));
+        const tz = -Math.min(a, 1.5) * 120;
+        card.style.transform = `translate3d(calc(-50% + ${tx.toFixed(1)}px), 0, ${tz.toFixed(1)}px) rotateY(${ry.toFixed(2)}deg)`;
+        card.style.opacity = a > 2.2 ? "0" : "1";
+        card.style.filter = `brightness(${(1 - Math.min(a, 1) * 0.12).toFixed(3)})`;
+        card.style.zIndex = String(100 - Math.round(a * 10));
+      });
+
+      // Writing: card 0 writes while the section arrives; each later card writes as it
+      // turns to the front.
+      writers.forEach((w, i) => {
+        const start = i === 0 ? -0.6 : i + HOLD - 0.7;
+        const span = i === 0 ? 1.0 : 0.7;
+        const progress = Math.max(0, Math.min(1, (t - start) / span));
         write(w, Math.round(progress * w.total));
       });
-      const mid = vh / 2;
-      drifters.forEach((d, i) => {
-        if (!wide.matches) {
-          d.style.transform = "";
-          return;
-        }
-        const r = d.getBoundingClientRect();
-        const offset = (r.top + r.height / 2 - mid) * (DRIFT[i % DRIFT.length] ?? 0.05);
-        d.style.transform = `translate3d(0, ${offset.toFixed(1)}px, 0)`;
-      });
+
+      const now = Math.round(x);
+      if (now !== lastActive) {
+        lastActive = now;
+        setActive(now);
+      }
     };
     const onScroll = () => {
-      if (!raf) raf = requestAnimationFrame(drift);
+      if (!raf) raf = requestAnimationFrame(frame);
     };
-    drift();
+    frame();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
     return () => {
-      seen.disconnect();
       if (raf) cancelAnimationFrame(raf);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };
-  }, [items.length]);
+  }, [motion, count]);
+
+  const pad = (n: number) => String(n).padStart(2, "0");
+  const current = items[active] ?? items[0];
 
   return (
     <section
       ref={sectionRef}
       id="testimonials"
-      className="pb-20 sm:pb-32 px-5 sm:px-8 max-w-[1400px] mx-auto"
+      className={`t3d ${motion ? "t3d-on" : ""}`}
+      style={{ "--t3d-steps": count - 1 + HOLD + 0.35 } as CSSProperties}
     >
-      <h2 className="t-title text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-12 sm:mb-16">
-        {title}
-      </h2>
-      <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 items-start">
-        {items.map((item, i) => (
-          <div key={item.from + item.project} className="t-drift will-change-transform">
-            <figure
-              className="t-card flex flex-col gap-6 rounded-2xl bg-foreground text-background p-6 sm:p-10"
-              style={
-                {
-                  "--t-delay": `${i * 0.15}s`,
-                  "--t-tilt": `${TILTS[i % TILTS.length]}deg`,
-                } as CSSProperties
-              }
+      <div className="t3d-sticky">
+        <div className="t3d-head px-5 sm:px-8 max-w-[1400px] mx-auto w-full flex items-end justify-between gap-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">{title}</h2>
+          {motion && (
+            <span
+              dir="ltr"
+              className="font-mono text-xs sm:text-sm tracking-[0.2em] text-muted-foreground pb-1 sm:pb-2"
             >
-              <span
-                aria-hidden="true"
-                className="t-mark text-6xl leading-none font-bold text-[#CDE600]"
-              >
-                &ldquo;
-              </span>
-              <blockquote
-                lang="en"
-                dir="ltr"
-                className="-mt-6 space-y-4 text-base leading-relaxed text-background/85"
-              >
-                {item.quote.map((para) => (
-                  <p key={para.slice(0, 24)} className="t-line" data-text={para}>
-                    <span className="sr-only">{para}</span>
-                    <span aria-hidden="true">
-                      <span className="t-typed" />
-                      <span className="t-rest">{para}</span>
-                    </span>
+              {pad(active + 1)} / {pad(count)}
+            </span>
+          )}
+        </div>
+
+        <div className="t3d-stage" dir="ltr">
+          {items.map((item, i) => (
+            <figure
+              key={item.from + item.project}
+              className={`t3d-card t3d-${item.theme ?? "dark"}`}
+              aria-current={motion && i === active ? "true" : undefined}
+            >
+              <div className="t3d-text">
+                <span aria-hidden="true" className="t3d-mark">
+                  &ldquo;
+                </span>
+                <blockquote lang="en" className="t3d-quote">
+                  {item.quote.map((para) => (
+                    <p key={para.slice(0, 24)} className="t-line" data-text={para}>
+                      <span className="sr-only">{para}</span>
+                      <span aria-hidden="true">
+                        <span className="t-typed" />
+                        <span className="t-rest">{para}</span>
+                      </span>
+                    </p>
+                  ))}
+                </blockquote>
+                <figcaption className="t3d-caption">
+                  <p className="t3d-from">{item.from}</p>
+                  <p className="t3d-project">
+                    {projectLabel}: {item.project}
                   </p>
-                ))}
-              </blockquote>
-              <figcaption className="t-caption relative mt-auto pt-5">
-                <p className="font-semibold">{item.from}</p>
-                <p className="text-sm text-background/60">
-                  {projectLabel}: <span dir="ltr">{item.project}</span>
-                </p>
-              </figcaption>
+                </figcaption>
+              </div>
+              {item.image && (
+                <div className="t3d-shot">
+                  <img
+                    src={assetUrl(item.image)}
+                    alt={`${item.project} screenshot`}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              )}
             </figure>
+          ))}
+        </div>
+
+        {motion && current && (
+          <div className="t3d-label text-center px-5" aria-live="polite">
+            <p className="font-bold text-sm sm:text-base">{current.project}</p>
+            <p className="text-[11px] sm:text-xs tracking-[0.25em] uppercase text-muted-foreground mt-1">
+              {current.from}
+            </p>
           </div>
-        ))}
+        )}
       </div>
     </section>
   );

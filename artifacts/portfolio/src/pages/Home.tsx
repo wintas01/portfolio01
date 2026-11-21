@@ -21,7 +21,7 @@ import LanguageSwitcher from "@/components/LanguageSwitcher";
 import VenomButton from "@/components/VenomButton";
 import ToolsMarquee from "@/components/ToolsMarquee";
 import CursorCTA from "@/components/CursorCTA";
-import Testimonials from "@/components/Testimonials";
+import Testimonials, { type Testimonial } from "@/components/Testimonials";
 import { useI18n } from "@/i18n";
 import projectsData from "@/data/projects.json";
 
@@ -56,10 +56,12 @@ const SERVICE_EXAMPLES = [
 ];
 
 // Client testimonials, quoted exactly as given (kept in English in every language).
-const TESTIMONIALS = [
+const TESTIMONIALS: Testimonial[] = [
   {
     from: "Kingsley Ozumba Mbadiwe University (KOMU)",
     project: "KOMU E-Library",
+    image: "testimonials/komu-elibrary.jpg",
+    theme: "dark",
     quote: [
       "We commend the dedication, creativity, and technical expertise demonstrated in the development and redesign of the Kingsley Ozumba University digital platform.",
       "The contribution to this project reflects a strong commitment to innovation, effective website development, and improving the university's digital presence. The work has helped provide a more organised, accessible, and user-friendly online platform for the university community.",
@@ -69,6 +71,8 @@ const TESTIMONIALS = [
   {
     from: "Cathedral Church of Ss Peter and John the Divine, Nkwerre",
     project: "Church Auto Bot",
+    image: "testimonials/church-bot.jpg",
+    theme: "lime",
     quote: [
       "The Facebook automation platform has provided a more efficient and convenient approach to managing our church's social media activities. Its automated content generation, scheduling, and publishing capabilities have helped simplify the process of sharing updates and information on our Facebook page.",
       "We appreciate the technical creativity, dedication, and effort invested in developing a solution that supports our digital communication and online engagement.",
@@ -77,6 +81,8 @@ const TESTIMONIALS = [
   {
     from: "Kingsley Ozumba Mbadiwe University (KOMU)",
     project: "KOMU Website",
+    image: "testimonials/komu-website.jpg",
+    theme: "light",
     quote: [
       "We appreciate the valuable contributions made towards the development and redesign of the Kingsley Ozumba Mbadiwe University website. The project involved technical collaboration, creativity, and dedication towards improving the university's digital presence and online information delivery.",
       "The commitment and technical input demonstrated throughout the process contributed to the development of a more organised and accessible digital platform for the university community.",
@@ -222,7 +228,7 @@ export default function Home() {
       : `${import.meta.env.BASE_URL}cv/${cvFileName}?v=${cvVersion}`;
 
   return (
-    <div className="min-h-screen bg-background text-foreground selection:bg-foreground selection:text-background font-sans overflow-x-hidden">
+    <div className="min-h-screen bg-background text-foreground selection:bg-foreground selection:text-background font-sans overflow-x-clip">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/40">
         <div className="max-w-[1400px] mx-auto px-5 max-[359px]:px-3 sm:px-8 py-4 flex items-center justify-between">
@@ -659,6 +665,7 @@ export default function Home() {
         title={t.testimonials.title}
         projectLabel={t.testimonials.project}
         items={TESTIMONIALS}
+        assetUrl={publicPath}
       />
 
       {/* Contact Section */}
