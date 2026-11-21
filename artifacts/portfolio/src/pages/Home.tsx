@@ -21,6 +21,7 @@ import LanguageSwitcher from "@/components/LanguageSwitcher";
 import VenomButton from "@/components/VenomButton";
 import ToolsMarquee from "@/components/ToolsMarquee";
 import CursorCTA from "@/components/CursorCTA";
+import Testimonials from "@/components/Testimonials";
 import { useI18n } from "@/i18n";
 import projectsData from "@/data/projects.json";
 
@@ -52,6 +53,35 @@ const SERVICE_EXAMPLES = [
   ["Tixora", "VTU Platform"],
   ["Church Auto Bot"],
   ["Church Auto Bot"],
+];
+
+// Client testimonials, quoted exactly as given (kept in English in every language).
+const TESTIMONIALS = [
+  {
+    from: "Kingsley Ozumba Mbadiwe University (KOMU)",
+    project: "KOMU E-Library",
+    quote: [
+      "We commend the dedication, creativity, and technical expertise demonstrated in the development and redesign of the Kingsley Ozumba University digital platform.",
+      "The contribution to this project reflects a strong commitment to innovation, effective website development, and improving the university's digital presence. The work has helped provide a more organised, accessible, and user-friendly online platform for the university community.",
+      "We appreciate the professionalism, teamwork, and effort invested in bringing this project to life.",
+    ],
+  },
+  {
+    from: "Cathedral Church of Ss Peter and John the Divine, Nkwerre",
+    project: "Church Auto Bot",
+    quote: [
+      "The Facebook automation platform has provided a more efficient and convenient approach to managing our church's social media activities. Its automated content generation, scheduling, and publishing capabilities have helped simplify the process of sharing updates and information on our Facebook page.",
+      "We appreciate the technical creativity, dedication, and effort invested in developing a solution that supports our digital communication and online engagement.",
+    ],
+  },
+  {
+    from: "Kingsley Ozumba Mbadiwe University (KOMU)",
+    project: "KOMU Website",
+    quote: [
+      "We appreciate the valuable contributions made towards the development and redesign of the Kingsley Ozumba Mbadiwe University website. The project involved technical collaboration, creativity, and dedication towards improving the university's digital presence and online information delivery.",
+      "The commitment and technical input demonstrated throughout the process contributed to the development of a more organised and accessible digital platform for the university community.",
+    ],
+  },
 ];
 
 const navLinks = ["home", "about", "projects", "services", "contact"] as const;
@@ -623,6 +653,13 @@ export default function Home() {
           })}
         </motion.div>
       </section>
+
+      {/* Testimonials Section */}
+      <Testimonials
+        title={t.testimonials.title}
+        projectLabel={t.testimonials.project}
+        items={TESTIMONIALS}
+      />
 
       {/* Contact Section */}
       <section

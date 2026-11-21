@@ -101,6 +101,10 @@ const en = {
       { title: "AI bots and automation", text: "AI that writes and posts content, answers customer questions, or takes repetitive work off your team." },
     ],
   },
+  testimonials: {
+    title: "What clients say",
+    project: "Project",
+  },
   projects: {
     title: "Projects",
     subtitle: "Things I've built and places you can find my work.",
@@ -210,6 +214,10 @@ const fr: Dictionary = {
       { title: "Bots IA et automatisation", text: "Une IA qui rédige et publie du contenu, répond aux questions des clients ou décharge votre équipe des tâches répétitives." },
     ],
   },
+  testimonials: {
+    title: "Ce que disent mes clients",
+    project: "Projet",
+  },
   projects: {
     title: "Projets",
     subtitle: "Ce que j'ai construit et où trouver mon travail.",
@@ -316,6 +324,10 @@ const es: Dictionary = {
       { title: "Sitios para iglesias", text: "Horarios de culto, sermones, eventos y ofrendas en línea, además de publicación automática en la página de Facebook de tu iglesia." },
       { title: "Bots de IA y automatización", text: "IA que escribe y publica contenido, responde preguntas de clientes o quita trabajo repetitivo a tu equipo." },
     ],
+  },
+  testimonials: {
+    title: "Lo que dicen mis clientes",
+    project: "Proyecto",
   },
   projects: {
     title: "Proyectos",
@@ -424,6 +436,10 @@ const pt: Dictionary = {
       { title: "Bots de IA e automação", text: "IA que escreve e publica conteúdo, responde dúvidas de clientes ou tira trabalho repetitivo da sua equipe." },
     ],
   },
+  testimonials: {
+    title: "O que dizem meus clientes",
+    project: "Projeto",
+  },
   projects: {
     title: "Projetos",
     subtitle: "O que construí e onde encontrar meu trabalho.",
@@ -530,6 +546,10 @@ const de: Dictionary = {
       { title: "Websites für Kirchen", text: "Gottesdienstzeiten, Predigten, Veranstaltungen und Online-Spenden, dazu automatische Beiträge auf der Facebook-Seite Ihrer Kirche." },
       { title: "KI-Bots und Automatisierung", text: "KI, die Inhalte schreibt und veröffentlicht, Kundenfragen beantwortet oder Ihrem Team wiederkehrende Arbeit abnimmt." },
     ],
+  },
+  testimonials: {
+    title: "Was Kunden sagen",
+    project: "Projekt",
   },
   projects: {
     title: "Projekte",
@@ -638,6 +658,10 @@ const ar: Dictionary = {
       { title: "روبوتات ذكاء اصطناعي وأتمتة", text: "ذكاء اصطناعي يكتب المحتوى وينشره، ويجيب عن أسئلة العملاء، أو يرفع عن فريقك الأعمال المتكررة." },
     ],
   },
+  testimonials: {
+    title: "ماذا يقول العملاء",
+    project: "المشروع",
+  },
   projects: {
     title: "المشاريع",
     subtitle: "ما بنيته وأين تجد أعمالي.",
@@ -742,6 +766,10 @@ const zh: Dictionary = {
       { title: "教会网站", text: "礼拜时间、讲道、活动和在线奉献，并可自动发布到教会的 Facebook 主页。" },
       { title: "AI 机器人与自动化", text: "用 AI 撰写和发布内容、回答客户问题，或替团队完成重复性工作。" },
     ],
+  },
+  testimonials: {
+    title: "客户评价",
+    project: "项目",
   },
   projects: {
     title: "项目",
@@ -848,6 +876,10 @@ const ja: Dictionary = {
       { title: "AIボット・自動化", text: "コンテンツの作成と投稿、お客様の質問への回答、チームの繰り返し作業をAIが引き受けます。" },
     ],
   },
+  testimonials: {
+    title: "お客様の声",
+    project: "プロジェクト",
+  },
   projects: {
     title: "プロジェクト",
     subtitle: "これまでに作ったものと、作品を見られる場所です。",
@@ -953,6 +985,10 @@ const ko: Dictionary = {
       { title: "AI 봇·자동화", text: "콘텐츠를 작성해 게시하고, 고객 질문에 답하고, 팀의 반복 업무를 덜어 주는 AI." },
     ],
   },
+  testimonials: {
+    title: "고객 후기",
+    project: "프로젝트",
+  },
   projects: {
     title: "프로젝트",
     subtitle: "제가 만든 것들과 작업을 볼 수 있는 곳입니다.",
@@ -1057,6 +1093,10 @@ const hi: Dictionary = {
       { title: "चर्च वेबसाइट", text: "आराधना का समय, उपदेश, कार्यक्रम और ऑनलाइन दान, साथ ही चर्च के Facebook पेज पर अपने-आप पोस्टिंग।" },
       { title: "AI बॉट और ऑटोमेशन", text: "AI जो कंटेंट लिखे और पोस्ट करे, ग्राहकों के सवालों के जवाब दे, या आपकी टीम का दोहराव वाला काम संभाले।" },
     ],
+  },
+  testimonials: {
+    title: "क्लाइंट क्या कहते हैं",
+    project: "प्रोजेक्ट",
   },
   projects: {
     title: "प्रोजेक्ट्स",
