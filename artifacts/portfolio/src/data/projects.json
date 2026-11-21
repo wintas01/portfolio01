@@ -148,93 +148,93 @@
       "cvRank": 1,
       "text": {
         "en": {
-          "description": "University e-library with student and staff sign-in, an admin panel that lets library staff edit the whole site, and 19+ research databases. I built the frontend and backend.",
+          "description": "University e-library used by 5,000 students and staff, and for the university's accreditation exam. It has student and staff sign-in, an admin panel for library staff and 19+ research databases. I built the frontend and backend.",
           "cvKicker": "Full-stack  ·  Node.js  ·  SQLite",
           "cvTitle": "KOMU E-Library",
           "cvBullets": [
             "Built the frontend and backend of the university's e-library for e-books, journals, and theses.",
-            "Search across 19+ research databases, available on campus and remotely, 24/7."
+            "Used by 5,000 students and staff, and for the university's accreditation exam; 19+ research databases, 24/7."
           ]
         },
         "fr": {
-          "description": "Bibliothèque numérique universitaire avec connexion étudiants et personnel, un panneau d'administration qui permet au personnel de modifier tout le site, et plus de 19 bases de données de recherche. J'ai développé le frontend et le backend.",
+          "description": "Bibliothèque numérique universitaire utilisée par 5 000 étudiants et membres du personnel, ainsi que pour l'examen d'accréditation de l'université. Connexion étudiants et personnel, panneau d'administration et plus de 19 bases de données de recherche. J'ai développé le frontend et le backend.",
           "cvKicker": "Full-stack  ·  Node.js  ·  SQLite",
           "cvTitle": "Bibliothèque numérique KOMU",
           "cvBullets": [
             "Frontend et backend de la bibliothèque numérique : e-books, revues et thèses.",
-            "Plus de 19 bases de données de recherche, sur le campus et à distance, 24 h/24."
+            "Utilisée par 5 000 étudiants et membres du personnel, et pour l'examen d'accréditation ; plus de 19 bases de recherche, 24 h/24."
           ]
         },
         "es": {
-          "description": "Biblioteca digital universitaria con acceso para estudiantes y personal, un panel de administración con el que el personal edita todo el sitio y más de 19 bases de datos de investigación. Desarrollé el frontend y el backend.",
+          "description": "Biblioteca digital universitaria usada por 5.000 estudiantes y miembros del personal, y en el examen de acreditación de la universidad. Acceso para estudiantes y personal, panel de administración y más de 19 bases de datos de investigación. Desarrollé el frontend y el backend.",
           "cvKicker": "Full-stack  ·  Node.js  ·  SQLite",
           "cvTitle": "Biblioteca digital KOMU",
           "cvBullets": [
             "Frontend y backend de la biblioteca digital: e-books, revistas y tesis.",
-            "Más de 19 bases de datos de investigación, en el campus y en remoto, 24/7."
+            "Usada por 5.000 estudiantes y personal, y en el examen de acreditación; más de 19 bases de investigación, 24/7."
           ]
         },
         "pt": {
-          "description": "Biblioteca digital universitária com login para estudantes e funcionários, um painel de administração em que a equipe edita todo o site e mais de 19 bases de dados de pesquisa. Desenvolvi o frontend e o backend.",
+          "description": "Biblioteca digital universitária usada por 5.000 alunos e funcionários, e no exame de acreditação da universidade. Login para alunos e funcionários, painel de administração e mais de 19 bases de dados de pesquisa. Desenvolvi o frontend e o backend.",
           "cvKicker": "Full-stack  ·  Node.js  ·  SQLite",
           "cvTitle": "Biblioteca digital KOMU",
           "cvBullets": [
             "Frontend e backend da biblioteca digital: e-books, periódicos e teses.",
-            "Busca em mais de 19 bases de dados de pesquisa, no campus e remotamente, 24/7."
+            "Usada por 5.000 alunos e funcionários, e no exame de acreditação; mais de 19 bases de pesquisa, 24/7."
           ]
         },
         "de": {
-          "description": "Digitale Hochschulbibliothek mit Anmeldung für Studierende und Personal, einem Admin-Bereich, in dem das Bibliotheksteam die ganze Website bearbeitet, und über 19 Forschungsdatenbanken. Ich habe Frontend und Backend entwickelt.",
+          "description": "Digitale Hochschulbibliothek, genutzt von 5.000 Studierenden und Mitarbeitenden sowie für die Akkreditierungsprüfung der Universität. Anmeldung für Studierende und Personal, Admin-Bereich und über 19 Forschungsdatenbanken. Ich habe Frontend und Backend entwickelt.",
           "cvKicker": "Full-Stack  ·  Node.js  ·  SQLite",
           "cvTitle": "Digitale Bibliothek KOMU",
           "cvBullets": [
             "Frontend & Backend der digitalen Bibliothek: E-Books, Journale, Abschlussarbeiten.",
-            "Über 19 Forschungsdatenbanken, auf dem Campus und von unterwegs, rund um die Uhr."
+            "Genutzt von 5.000 Studierenden und Mitarbeitenden und für die Akkreditierungsprüfung; über 19 Datenbanken, rund um die Uhr."
           ]
         },
         "ar": {
-          "description": "مكتبة إلكترونية جامعية مع تسجيل دخول للطلاب والموظفين، ولوحة إدارة تتيح لموظفي المكتبة تعديل الموقع بالكامل، وأكثر من 19 قاعدة بيانات بحثية. بنيتُ الواجهتين الأمامية والخلفية.",
+          "description": "مكتبة إلكترونية جامعية يستخدمها 5000 طالب وموظف، واستُخدمت في امتحان اعتماد الجامعة. تضم تسجيل دخول للطلاب والموظفين ولوحة إدارة لموظفي المكتبة وأكثر من 19 قاعدة بيانات بحثية. بنيتُ الواجهتين الأمامية والخلفية.",
           "cvKicker": "Full-Stack  ·  Node.js  ·  SQLite",
           "cvTitle": "المكتبة الإلكترونية لجامعة KOMU",
           "cvBullets": [
             "بنيتُ الواجهتين الأمامية والخلفية للمكتبة الإلكترونية للجامعة، للكتب الإلكترونية والمجلات العلمية والرسائل الجامعية.",
-            "بحث في أكثر من 19 قاعدة بيانات بحثية، داخل الحرم الجامعي وعن بُعد، على مدار الساعة."
+            "يستخدمها 5000 طالب وموظف، واستُخدمت في امتحان اعتماد الجامعة؛ أكثر من 19 قاعدة بيانات بحثية، على مدار الساعة."
           ]
         },
         "zh": {
-          "description": "大学电子图书馆：学生和教职工登录、可让图书馆员工编辑整个网站的管理后台，以及 19 个以上的研究数据库。前端和后端均由我开发。",
+          "description": "大学电子图书馆，有 5,000 名师生使用，并用于学校的认证考试。具备师生登录、图书馆管理后台和 19 个以上研究数据库。前端和后端均由我开发。",
           "cvKicker": "全栈  ·  Node.js  ·  SQLite",
           "cvTitle": "KOMU 电子图书馆",
           "cvBullets": [
             "开发了大学电子图书馆的前端和后端，涵盖电子书、期刊和学位论文。",
-            "可检索 19 个以上科研数据库，校内外均可 24 小时访问。"
+            "5,000 名师生使用，并用于学校认证考试；19 个以上研究数据库，24 小时可用。"
           ]
         },
         "ja": {
-          "description": "学生・職員ログイン、図書館スタッフがサイト全体を編集できる管理画面、19以上の研究データベースを備えた大学電子図書館。フロントエンドとバックエンドを開発しました。",
+          "description": "5,000人の学生・職員が利用し、大学の認定審査試験にも使われた大学電子図書館。学生・職員ログイン、図書館スタッフ用の管理画面、19以上の研究データベースを備えています。フロントエンドとバックエンドを開発しました。",
           "cvKicker": "フルスタック  ·  Node.js  ·  SQLite",
           "cvTitle": "KOMU電子図書館",
           "cvBullets": [
             "大学電子図書館（電子書籍・学術誌・論文）を一貫して開発。",
-            "19以上の研究データベースを横断検索でき、学内外から24時間利用可能。"
+            "学生・職員5,000人が利用し、大学の認定審査試験にも活用。19以上の研究データベースを24時間利用可能。"
           ]
         },
         "ko": {
-          "description": "학생·교직원 로그인, 도서관 직원이 사이트 전체를 편집할 수 있는 관리자 페이지, 19개 이상의 연구 데이터베이스를 갖춘 대학 전자도서관. 프론트엔드와 백엔드를 개발했습니다.",
+          "description": "학생과 교직원 5,000명이 사용하고 대학 인증 평가 시험에도 쓰인 대학 전자도서관. 학생·교직원 로그인, 도서관 직원용 관리자 페이지, 19개 이상의 연구 데이터베이스를 갖추고 있습니다. 프론트엔드와 백엔드를 개발했습니다.",
           "cvKicker": "풀스택  ·  Node.js  ·  SQLite",
           "cvTitle": "KOMU 전자도서관",
           "cvBullets": [
             "전자책, 학술지, 학위논문을 제공하는 대학 전자도서관의 프런트엔드와 백엔드를 개발했습니다.",
-            "19개 이상의 연구 데이터베이스를 교내외에서 24시간 검색할 수 있습니다."
+            "학생·교직원 5,000명이 사용하며 대학 인증 평가 시험에도 활용; 19개 이상 연구 데이터베이스 24시간 이용."
           ]
         },
         "hi": {
-          "description": "विश्वविद्यालय ई-लाइब्रेरी: छात्र और स्टाफ़ साइन-इन, एक एडमिन पैनल जिससे लाइब्रेरी स्टाफ़ पूरी साइट बदल सकता है, और 19+ शोध डेटाबेस। फ्रंटएंड और बैकएंड मैंने बनाए।",
+          "description": "यूनिवर्सिटी ई-लाइब्रेरी जिसे 5,000 छात्र और स्टाफ़ इस्तेमाल करते हैं, और जो यूनिवर्सिटी की मान्यता (accreditation) परीक्षा में भी इस्तेमाल हुई। इसमें छात्र और स्टाफ़ साइन-इन, लाइब्रेरी स्टाफ़ के लिए एडमिन पैनल और 19+ शोध डेटाबेस हैं। फ्रंटएंड और बैकएंड मैंने बनाए।",
           "cvKicker": "फुल-स्टैक  ·  Node.js  ·  SQLite",
           "cvTitle": "KOMU ई-लाइब्रेरी",
           "cvBullets": [
             "ई-बुक्स, जर्नल्स और थीसिस के लिए यूनिवर्सिटी की ई-लाइब्रेरी का फ्रंटएंड और बैकएंड बनाया।",
-            "19+ रिसर्च डेटाबेस में खोज, कैंपस में और रिमोट से, 24/7।"
+            "5,000 छात्र और स्टाफ़ इस्तेमाल करते हैं, और यूनिवर्सिटी की मान्यता परीक्षा में भी इस्तेमाल हुई; 19+ शोध डेटाबेस, 24/7।"
           ]
         }
       },
