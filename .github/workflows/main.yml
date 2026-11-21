@@ -43,6 +43,15 @@ jobs:
           BASE_PATH: /portfolio01/
           VITE_CV_VERSION: ${{ github.sha }}
           VITE_GITHUB_CONTRIBUTIONS_API_URL: ${{ vars.PORTFOLIO_API_BASE_URL }}
+      # Link preview (what WhatsApp, Facebook, LinkedIn and X show when the site
+      # is shared): a fresh screenshot of the homepage on every deploy. If it
+      # fails, the site still deploys with the previous preview picture.
+      - name: Make link preview image
+        continue-on-error: true
+        timeout-minutes: 4
+        run: |
+          pip install --quiet --timeout 30 playwright
+          CHROME_PATH="$(command -v google-chrome || command -v google-chrome-stable)" timeout 120 python scripts/og/make_preview.py artifacts/portfolio/dist/public https://wintas01.github.io/portfolio01/ ${{ github.sha }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: artifacts/portfolio/dist/public
