@@ -8,6 +8,10 @@ import {
   Menu,
   Twitter,
   X,
+  GraduationCap,
+  Store,
+  Church,
+  Bot,
 } from "lucide-react";
 
 import myPhoto from "@/assets/wintas-photo.png";
@@ -40,7 +44,17 @@ const staggerContainer = {
   },
 };
 
-const navLinks = ["home", "about", "projects", "contact"] as const;
+// One icon and real example projects per service, in the same order as
+// t.services.items in i18n.tsx.
+const SERVICE_ICONS = [GraduationCap, Store, Church, Bot];
+const SERVICE_EXAMPLES = [
+  ["KOMU E-Library", "KOMU Website"],
+  ["Tixora", "VTU Platform"],
+  ["Church Auto Bot"],
+  ["Church Auto Bot"],
+];
+
+const navLinks = ["home", "about", "projects", "services", "contact"] as const;
 
 function LaptopPreview({ src, alt }: { src: string; alt: string }) {
   return (
@@ -383,11 +397,18 @@ export default function Home() {
               </div>
               <div>
                 <h3 className="font-semibold text-base sm:text-lg mb-3 border-b border-border pb-2">
-                  {t.about.focus}
+                  {t.services.title}
                 </h3>
                 <ul className="space-y-2 sm:space-y-3 text-muted-foreground text-sm sm:text-base">
-                  {t.about.focusItems.map((item) => (
-                    <li key={item}>{item}</li>
+                  {t.services.items.map((item) => (
+                    <li key={item.title}>
+                      <a
+                        href="#services"
+                        className="hover:text-foreground transition-colors"
+                      >
+                        {item.title}
+                      </a>
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -533,6 +554,74 @@ export default function Home() {
 
           <GitHubShowcase />
         </div>
+      </section>
+
+      {/* Services Section */}
+      <section
+        id="services"
+        className="py-20 sm:py-32 px-5 sm:px-8 max-w-[1400px] mx-auto"
+      >
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+          className="mb-12 sm:mb-16"
+        >
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-3">
+            {t.services.title}
+          </h2>
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl">
+            {t.services.subtitle}
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          variants={staggerContainer}
+          className="grid sm:grid-cols-2 gap-4 sm:gap-6"
+        >
+          {t.services.items.map((item, i) => {
+            const Icon = SERVICE_ICONS[i] ?? Bot;
+            const quoteHref = `https://wa.me/2347083066127?text=${encodeURIComponent(
+              `${t.services.quoteMessage} ${item.title}`,
+            )}`;
+            return (
+              <motion.article
+                key={item.title}
+                variants={fadeInUp}
+                className="flex flex-col gap-4 rounded-2xl border border-border bg-card p-6 sm:p-8"
+              >
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-foreground text-background">
+                  <Icon className="h-6 w-6" />
+                </div>
+                <h3 className="text-xl sm:text-2xl font-bold tracking-tight">
+                  {item.title}
+                </h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  {item.text}
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  <span className="font-semibold text-foreground">
+                    {t.services.example}:
+                  </span>{" "}
+                  <span dir="ltr">{SERVICE_EXAMPLES[i]?.join(", ")}</span>
+                </p>
+                <a
+                  href={quoteHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-auto inline-flex items-center gap-2 self-start rounded-full border border-foreground/20 px-5 py-2.5 text-sm font-semibold transition-colors hover:border-foreground hover:bg-foreground hover:text-background"
+                >
+                  {t.services.quote}
+                  <ArrowUpRight className="h-4 w-4 rtl:-scale-x-100" />
+                </a>
+              </motion.article>
+            );
+          })}
+        </motion.div>
       </section>
 
       {/* Contact Section */}
